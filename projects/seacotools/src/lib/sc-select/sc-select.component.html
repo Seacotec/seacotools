@@ -1,0 +1,46 @@
+<div class="mb-5 w-full">
+  <!-- Label Section -->
+  <div class="flex items-center mb-1" *ngIf="label">
+    <label
+      [for]="id"
+      class="flex items-center text-sm font-medium text-gray-900 dark:text-white"
+    >
+      <span *ngIf="required" class="text-red-700 mr-1">*</span>
+      {{ label }}
+    </label>
+    <sc-icon
+      *ngIf="questionMark"
+      name="question-mark-circle"
+      [tp]="questionMark"
+      class="text-green-700 ml-1"
+    ></sc-icon>
+  </div>
+
+  <!-- Select Dropdown -->
+  <select
+    [formControl]="control"
+    [class]="selectClasses"
+    [attr.aria-required]="required ? 'true' : null"
+    [attr.aria-label]="label"
+    [id]="id"
+    class="w-full px-2 py-1 text-sm text-gray-700 bg-white border border-gray-400 rounded-lg focus:ring focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+  >
+    <!-- Placeholder Option -->
+    <option value="" disabled *ngIf="firstEmpty">Select...</option>
+
+    <!-- Rendered Options -->
+    <option
+      *ngFor="let option of options"
+      [value]="option"
+      [innerHTML]="displayValue(option)"
+    ></option>
+  </select>
+
+  <!-- Error Messages -->
+  <div
+    class="text-xs font-medium text-red-700 mt-1"
+    *ngIf="errors?.['required'] && (submitted || control.touched)"
+  >
+    Required!
+  </div>
+</div>

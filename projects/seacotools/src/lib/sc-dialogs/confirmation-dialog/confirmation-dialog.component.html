@@ -1,0 +1,28 @@
+<div class='px-6 py-4'>
+  <!-- Modal header -->
+  <div class='flex items-center border-b border-gray-400 py-1'>
+    <sc-icon name='question-mark-circle' class='mr-1 text-red-700 w-7 h-7'></sc-icon>
+    <h3 class='text-xl font-medium text-gray-900'>
+      {{ title }}
+    </h3>
+  </div>
+
+
+  <!-- Modal body -->
+  <div class='py-5 text-left'>
+    <p class='text-base leading-relaxed' [innerHTML]='message'></p>
+  </div>
+
+  <!-- Modal footer -->
+  <div class='flex justify-between my-2'>
+    <sc-button (buttonClick)='close(false)'
+                color='red'
+                appearance='outline'
+                class='mr-10'
+    >{{declineButton || 'Cancel'}}</sc-button>
+    <sc-button (buttonClick)='close(true);'
+                appearance='outline'
+    >{{acceptButton || 'Okay'}}</sc-button>
+  </div>
+</div>
+

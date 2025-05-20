@@ -1,0 +1,23 @@
+<div class="px-6 py-4">
+  <!-- Modal header -->
+  <div class="flex items-center border-b border-gray-400 py-1">
+    <sc-icon name='exclamation-circle' class='mr-1 text-red-600 w-7'></sc-icon>
+    <h3 class="text-xl font-medium text-gray-900">
+      Whoops, looks like something went wrong!
+    </h3>
+  </div>
+
+
+  <!-- Modal body -->
+  <div class="py-5 text-left">
+    <p class="text-base leading-relaxed">
+      {{ error }}
+    </p>
+  </div>
+
+  <div class='flex justify-end mr-5'>
+    <sc-button (buttonClick)='ref.close(true);'
+                appearance='outline'
+    >Okay</sc-button>
+  </div>
+</div>

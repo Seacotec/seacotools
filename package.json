@@ -1,15 +1,16 @@
 {
-  "name": "seacotools-main",
-  "version": "0.0.0",
+  "name": "seacotools-lib",
+  "version": "0.0.1-alpha.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build": "ng build seacotools",
+    "watch": "ng build --watch",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
+    "@angular/animations": "^19.2.11",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
@@ -17,7 +18,15 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@ngneat/dialog": "^5.1.2",
+    "@ngneat/helipopper": "^9.2.1",
+    "@tailwindcss/postcss": "^4.1.7",
+    "flowbite": "^3.1.2",
+    "ngx-spinner": "^19.0.0",
+    "ngx-toastr": "^19.0.0",
+    "postcss": "^8.5.3",
     "rxjs": "~7.8.0",
+    "tailwindcss": "^4.1.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
@@ -32,6 +41,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^19.2.0",
     "typescript": "~5.7.2"
   }
 }

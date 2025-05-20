@@ -1,0 +1,76 @@
+<div [class]="cssClass">
+  <!-- Label and Optional Question Mark -->
+  <div class="flex items-center mb-1" *ngIf="label && variant === 'default'">
+    <label
+      [for]="id"
+      class="flex items-center text-sm font-medium text-gray-900 dark:text-white"
+    >
+      <span *ngIf="required" class="text-red-700 mr-1">*</span>
+      {{ label }}
+    </label>
+    <sc-icon
+      *ngIf="questionMark"
+      name="question-mark-circle"
+      [tp]="questionMark"
+      class="text-green-700 ml-1"
+    ></sc-icon>
+  </div>
+
+  <!-- Input Field -->
+  <div *ngIf="variant === 'default'; else floatingLabelTemplate">
+    <input
+      [placeholder]="placeholder"
+      [id]="id"
+      [name]="name"
+      [type]="inputType"
+      [formControl]="control"
+      (blur)="onTouch()"
+      class="outline-none disabled:bg-gray-300 w-full px-3 py-1 border border-gray-400 rounded-lg focus:ring focus:ring-indigo-500 focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70"
+      [ngClass]="{
+        'text-gray-600 bg-stone-300': control.disabled,
+        'h-9': defaultHeight
+      }"
+    />
+  </div>
+
+  <!-- Floating Label Variant -->
+  <ng-template #floatingLabelTemplate>
+    <div class="relative">
+      <input
+        [placeholder]="placeholder"
+        [id]="id"
+        [name]="name"
+        [type]="inputType"
+        [formControl]="control"
+        (blur)="onTouch()"
+        class="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-transparent border border-gray-400 appearance-none focus:ring focus:ring-indigo-500 focus:border-indigo-500 peer"
+        [ngClass]="{
+          'bg-gray-50 dark:bg-gray-700': !floatingOutline,
+          'h-12': variant === 'floatingLabel' || !defaultHeight,
+          'h-9': defaultHeight && variant !== 'floatingLabel'
+        }"
+      />
+      <label
+        [for]="id"
+        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+        [ngClass]="{
+          'bg-white dark:bg-gray-900': floatingOutline
+        }"
+      >
+        {{ label }}
+      </label>
+    </div>
+  </ng-template>
+
+  <!-- Error Handling -->
+  <div
+    class="text-xs font-medium text-red-700 mt-1"
+    *ngIf="errors && (!control.untouched || submitted)"
+  >
+    <ng-container *ngFor="let errorKey of errorKeys(errors)">
+      <div *ngIf="errors[errorKey]">
+        {{ getErrorMessage(errorKey, errors[errorKey]) }}
+      </div>
+    </ng-container>
+  </div>
+</div>

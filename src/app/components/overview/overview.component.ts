@@ -1,0 +1,47 @@
+import {Component, inject} from '@angular/core';
+import {ScButtonComponent} from '../../../../projects/seacotools/src/lib/sc-button/sc-button.component';
+import {SeacotoolsHelperService} from '../../../../projects/seacotools/src/lib/sc-helper-service/seacotools-helper.service';
+
+@Component({
+  selector: 'app-overview',
+  imports: [ScButtonComponent],
+  templateUrl: './overview.component.html',
+})
+export class OverviewComponent {
+
+  helper = inject(SeacotoolsHelperService);
+
+  infoDialog() {
+    this.helper.dialogInfo({
+      title: 'Info',
+      message: 'This is an info dialog'
+    });
+  }
+
+  alertDialog() {
+    this.helper.dialogWarning({
+      title: 'Warning',
+      message: 'This is a warning dialog'
+    });
+  }
+
+  successDialog() {
+    this.helper.dialogSuccess({
+      title: 'Success',
+      message: 'This is a Success dialog'
+    });
+  }
+
+  errorDialog() {
+    this.helper.dialogError({
+      message: 'This is an Error dialog'
+    });
+  }
+
+  confirmationDialog() {
+    this.helper.dialogConfirmation({
+      title: 'Do you accept this?',
+      message: 'This is a Confirmation dialog'
+    });
+  }
+}

@@ -1,0 +1,23 @@
+<div class='w-full overflow-hidden'>
+
+  <label *ngIf='label' class='flex items-center mb-1'>
+    <span *ngIf='required' class='text-red-700 mr-1'>*</span>
+    <span>{{ label }}</span>
+  </label>
+
+  <input #myDatepicker
+         type="text"
+         placeholder="Click to select a date"
+         class="outline-none bg-gray-50 bg-input-field w-full px-3 py-1 border rounded focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70"
+         [ngClass]="{
+            'border-gray-400': !(submitted && required && !date),
+            'border-red-500':  submitted && required && !date,
+            'text-gray-600 bg-stone-300': isDisabled
+         }"
+  >
+
+  <div *ngIf='submitted && required && !date' class='text-red-700 text-xs font-medium'>
+    Required!
+  </div>
+
+</div>

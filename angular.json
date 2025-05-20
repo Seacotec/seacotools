@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "seacotools-main": {
+    "seacotools-lib": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/seacotools-main",
+            "outputPath": "dist/seacotools-lib",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "seacotools-main:build:production"
+              "buildTarget": "seacotools-lib:build:production"
             },
             "development": {
-              "buildTarget": "seacotools-main:build:development"
+              "buildTarget": "seacotools-lib:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,6 +88,39 @@
               "src/styles.css"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "seacotools": {
+      "projectType": "library",
+      "root": "projects/seacotools",
+      "sourceRoot": "projects/seacotools/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/seacotools/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/seacotools/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/seacotools/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/seacotools/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }

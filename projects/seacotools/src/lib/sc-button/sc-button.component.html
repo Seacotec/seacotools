@@ -1,0 +1,18 @@
+<button
+  [ngClass]="[
+       appearance === 'outline' ? (outlineClasses[color] || '') : (colorClasses[color] || ''),
+       sizeClasses[size],
+       appearance === 'pills' ? 'rounded-full' : 'rounded-lg',
+       'font-medium inline-flex items-center',
+       !disabled ? 'cursor-pointer' : 'cursor-not-allowed'
+     ]"
+  [disabled]="disabled"
+  [type]="type"
+  (click)="buttonClick.emit()"
+>
+  <!-- Render icon only if the 'iconName' is available -->
+  <sc-icon *ngIf="iconName" [name]="iconName" class="me-2 w-3.5 h-3.5"></sc-icon>
+
+  <!-- Render content inside the sc-button -->
+  <ng-content></ng-content>
+</button>

@@ -5,6 +5,13 @@
 **SeacoTools** is an Angular library that provides a collection of reusable UI components and services. The library is built for modern Angular applications, improving development efficiency and maintainability.
 
 ---
+## Installation
+
+Install the **SeacoTools** library in your Angular project.
+
+- **npm**: `npm install seacotools`
+- **yarn**: `yarn add seacotools`
+- **pnpm**: `pnpm add seacotools`
 
 ## Components & Services
 
@@ -35,6 +42,8 @@ The library includes the following reusable components and services:
 
 Install the **SeacoTools** library in your Angular project:
 
+## Usage Instructions
+
 ### Peer Dependencies
 
 Ensure the following **peer dependencies** are installed in your project:
@@ -50,9 +59,17 @@ Ensure the following **peer dependencies** are installed in your project:
 
 Add the `SeacoToolsModule` to your application or feature module:
 
----
+### Step 2: Configure TailwindCSS for Your Application
 
-### Step 2: Use the Components in Templates
+Since **SeacoTools** uses TailwindCSS as a peer dependency, you need to ensure that your project is properly configured to include the required Tailwind styles. Add the Tailwind source styles to your application's primary stylesheet file.
+
+### Step 3: Update Your `styles.css` file
+
+Make sure you specify the paths for the library in your `styles.css`:
+
+- `@source "./node_modules/your-library/**/*.{html,js,ts}"`
+
+### Step 4: Use the Components in Templates
 
 #### `<sc-icon>` Component
 
