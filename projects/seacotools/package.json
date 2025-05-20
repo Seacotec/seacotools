@@ -1,6 +1,6 @@
 {
   "name": "seacotools",
-  "version": "0.0.3-alpha.0",
+  "version": "0.0.4-alpha.0",
   "main": "dist/seacotools",
   "author": "Dagistan Tuncbilek",
   "license": "MIT",
@@ -18,7 +18,6 @@
     "@ngneat/helipopper": "^9.0.0",
     "tailwindcss": "^4.0.0",
     "postcss": "^8.0.0",
-    "flowbite": "^3.0.0",
     "rxjs": "^7.8.0"
   },
   "dependencies": {

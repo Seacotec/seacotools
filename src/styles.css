@@ -1,12 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
-@import "flowbite/src/themes/default.css";
+
 @import 'ngx-toastr/toastr';
 @import 'tippy.js/dist/tippy.css';
 @import 'tippy.js/themes/light.css';
 @import 'tippy.js/animations/scale.css';
-
-@plugin "flowbite/plugin";
 
 @source "../node_modules/flowbite";
 @source "../projects/seacotools/src/lib/**/*.{html,ts}";

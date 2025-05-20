@@ -7,4 +7,29 @@
     <sc-button color="yellow" (buttonClick)="errorDialog()">Error Dialog</sc-button>
     <sc-button color="blue" (buttonClick)="confirmationDialog()">Confirmation Dialog</sc-button>
   </div>
+
+  <div class="mt-10 grid grid-cols-5">
+    <div>
+      <sc-dropdown
+        [options]="dropdownOptions"
+        placeholder="Select Item"
+        [changePlaceholderOnSelect]="false"
+        [buttonClasses]="'bg-red-500 text-white'"
+        [optionClasses]="'hover:bg-red-100'"
+        (selectionChange)="handleSelection($event)"
+      ></sc-dropdown>
+    </div>
+
+    <div>
+      <sc-dropdown
+        [options]="dropdownOptions"
+        placeholder="Select Item"
+        [changePlaceholderOnSelect]="true"
+        optionsWidthClass = 'w-32'
+        [buttonClasses]="'text-white rounded-full'"
+        [optionClasses]="'hover:bg-yellow-100'"
+        (selectionChange)="handleSelection($event)"
+      ></sc-dropdown>
+    </div>
+  </div>
 </div>

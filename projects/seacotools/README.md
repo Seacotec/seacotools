@@ -22,6 +22,7 @@ The library includes the following reusable components and services:
 - **`<sc-button>`**: A reusable button component with flexible styling, multiple appearances, and size options.
 - **`<sc-select>`**: A dynamic select dropdown component for choosing values from customizable options.
 - **`<sc-input>`**: A flexible input field with support for various input types, validation, and styling.
+- **`<app-dropdown>`**: A simplified wrapper dropdown component for easily selecting values from a list of options.
 
 ### **Services**
 - **`SeacotoolsHelperService`**: A general-purpose helper service that provides reusable dialog, toast, spinner, and navigation utilities.
@@ -87,6 +88,27 @@ The `<sc-icon>` component is used to render customizable SVG icons. Customize th
 
 The `<sc-button>` component provides customizable buttons styled to work seamlessly with existing styles or Tailwind CSS. Example usage:
 
+#### `<app-dropdown>` Component
+
+The `<app-dropdown>` component is designed as a wrapper around the more feature-rich `sc-dropdown`. It provides a highly customizable and simplified interface for developers who require quick integration with minimal configuration.
+
+**Inputs**:
+| **Input**             | **Type**                     | **Required** | **Default**         | **Description**                                                                 |
+|-----------------------|------------------------------|--------------|---------------------|---------------------------------------------------------------------------------|
+| `options`            | `{ label: string, value: any }[]` | Yes          | `[]`                | The list of options to display in the dropdown. Each option has a `label` and `value`. |
+| `placeholder`         | `string`                     | No           | `'Select option'`   | The placeholder text displayed on the button when no option is selected.        |
+| `changePlaceholderOnSelect` | `boolean`              | No           | `false`             | Whether to replace the placeholder with the selected option's label.            |
+| `buttonClasses`       | `string`                     | No           | `''`                | Custom CSS classes for the dropdown button (e.g., colors, sizes).               |
+| `optionClasses`       | `string`                     | No           | `''`                | Custom CSS classes for the options list (e.g., hover states, padding).          |
+| `buttonType`          | `string`                     | No           | `'button'`          | Defines the button's type attribute.                                            |
+| `optionsWidthClass`   | `string`                     | No           | `'w-44'`            | Defines the width of the dropdown menu (via Tailwind CSS classes).              |
+
+**Outputs**:
+| **Output**            | **Type**         | **Description**                                                             |
+|-----------------------|------------------|-----------------------------------------------------------------------------|
+| `selectionChange`     | `EventEmitter<any>` | Emits the value of the option selected by the user.                         |
+
+---
 
 ---
 
