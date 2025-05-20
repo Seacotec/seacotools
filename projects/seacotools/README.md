@@ -1,4 +1,4 @@
-⚠️ **Pre-release Version**: This is a testing release (`v0.0.1-alpha.0`) and may be unstable or incomplete. Please report any issues you encounter.
+⚠️ **Pre-release Version**: This is a testing release and may be unstable or incomplete. Please report any issues you encounter.
 
 # SeacoTools Library
 

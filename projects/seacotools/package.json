@@ -2,6 +2,12 @@
   "name": "seacotools",
   "version": "0.0.3-alpha.0",
   "main": "dist/seacotools",
+  "author": "Dagistan Tuncbilek",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Seacotec/seacotools.git"
+  },
   "peerDependencies": {
     "@angular/animations":  ">=19.0.0 <20.0.0",
     "@angular/common": ">=19.0.0 <20.0.0",
