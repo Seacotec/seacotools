@@ -1,6 +1,6 @@
 {
   "name": "seacotools",
-  "version": "0.0.4-alpha.0",
+  "version": "1.0.0-beta.0",
   "main": "dist/seacotools",
   "author": "Dagistan Tuncbilek",
   "license": "MIT",
@@ -8,6 +8,10 @@
     "type": "git",
     "url": "https://github.com/Seacotec/seacotools.git"
   },
+  "bugs": {
+    "url": "https://github.com/Seacotec/seacotools/issues"
+  },
+  "homepage": "https://github.com/Seacotec/seacotools#readme",
   "peerDependencies": {
     "@angular/animations":  ">=19.0.0 <20.0.0",
     "@angular/common": ">=19.0.0 <20.0.0",
