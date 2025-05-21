@@ -5,6 +5,8 @@
 @import 'tippy.js/dist/tippy.css';
 @import 'tippy.js/themes/light.css';
 @import 'tippy.js/animations/scale.css';
+@import '@ng-select/ng-select/themes/default.theme.css';
+
 
 @source "../node_modules/flowbite";
 @source "../projects/seacotools/src/lib/**/*.{html,ts}";

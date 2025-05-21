@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@ng-select/ng-select": "^14.8.0",
     "@ngneat/dialog": "^5.1.2",
     "@ngneat/helipopper": "^9.2.1",
     "@tailwindcss/postcss": "^4.1.7",

@@ -25,17 +25,14 @@
       [type]="inputType"
       [formControl]="control"
       (blur)="onTouch()"
-      class="outline-none disabled:bg-gray-300 w-full px-3 py-1 border border-gray-400 rounded-lg focus:ring focus:ring-indigo-500 focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70"
-      [ngClass]="{
-        'text-gray-600 bg-stone-300': control.disabled,
-        'h-9': defaultHeight
-      }"
+      class="outline-none bg-gray-50 dark:bg-gray-700 disabled:bg-gray-300 w-full px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-lg focus:ring focus:ring-indigo-500 focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70"
     />
   </div>
 
   <!-- Floating Label Variant -->
   <ng-template #floatingLabelTemplate>
     <div class="relative">
+      <!-- Input Field -->
       <input
         [placeholder]="placeholder"
         [id]="id"
@@ -43,24 +40,20 @@
         [type]="inputType"
         [formControl]="control"
         (blur)="onTouch()"
-        class="outline-none block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-transparent border border-gray-400 appearance-none focus:ring focus:ring-indigo-500 focus:border-indigo-500 peer"
-        [ngClass]="{
-          'bg-gray-50 dark:bg-gray-700': !floatingOutline,
-          'h-12': variant === 'floatingLabel' || !defaultHeight,
-          'h-9': defaultHeight && variant !== 'floatingLabel'
-        }"
+        class="peer border border-gray-400 dark:border-gray-600 focus:ring focus:ring-indigo-500 focus:border-indigo-500 block rounded-lg px-2.5 pb-[6px] pt-[22px] text-sm bg-gray-50 dark:bg-gray-700 text-gray-900dark:text-white appearance-none w-full outline-none"
       />
+
+      <!-- Label -->
       <label
         [for]="id"
-        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-        [ngClass]="{
-          'bg-white dark:bg-gray-900': floatingOutline
-        }"
+        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform scale-75 -translate-y-[14px] top-[14px] origin-[0] left-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[14px]"
       >
         {{ label }}
       </label>
     </div>
   </ng-template>
+
+
 
   <!-- Error Handling -->
   <div

@@ -44,10 +44,8 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
   @Input() name = '';
   @Input() placeholder = '';
   @Input() submitted = false;
-  @Input() defaultHeight = true;
   @Input() questionMark = '';
   @Input() variant: 'default' | 'floatingLabel' = 'default';
-  @Input() floatingOutline = false;
 
   onChange: (value: any) => void = () => {};
   onTouch: () => void = () => {};

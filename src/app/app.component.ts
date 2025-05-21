@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {HeaderComponent} from './shared/partials/header/header.component';
-import {SideBarComponent} from './shared/partials/side-bar/side-bar.component';
+import {HeaderComponent} from './partials/header/header.component';
+import {SideBarComponent} from './partials/side-bar/side-bar.component';
 
 
 @Component({

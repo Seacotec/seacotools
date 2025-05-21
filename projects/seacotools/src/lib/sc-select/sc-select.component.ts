@@ -31,8 +31,6 @@ export class ScSelectComponent implements ControlValueAccessor, OnInit {
   @Input() keys?: string[];
   @Input() required = false;
   @Input() firstEmpty = false;
-  @Input() submitted = false;
-  @Input() defaultHeight = true;
 
   onChange: any = () => {};
   onTouch: any = () => {};
@@ -53,7 +51,6 @@ export class ScSelectComponent implements ControlValueAccessor, OnInit {
       'w-full px-2 py-2 mb-2 bg-gray-50 placeholder-gray-500 dark:bg-gray-700',
       this.errors && !this.control.untouched ? 'border-red-500' : 'border-gray-400',
       this.control.disabled ? 'text-gray-600 bg-stone-300' : '',
-      this.defaultHeight ? 'h-9' : '',
     ].join(' ');
   }
 
