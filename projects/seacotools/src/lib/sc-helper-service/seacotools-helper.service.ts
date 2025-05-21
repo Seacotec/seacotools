@@ -4,7 +4,7 @@ import {AlertDialogComponent} from '../sc-dialogs/alert-dialog/alert-dialog.comp
 import {InfoDialogComponent} from '../sc-dialogs/info-dialog/info-dialog.component';
 import {ErrorDialogComponent} from '../sc-dialogs/error-dialog/error-dialog.component';
 import {SuccessDialogComponent} from '../sc-dialogs/success-dialog/success-dialog.component';
-import {Observable, take} from 'rxjs';
+import {Observable, Subject, take} from 'rxjs';
 import {ConfirmationDialogComponent} from '../sc-dialogs/confirmation-dialog/confirmation-dialog.component';
 import {ToastrService} from 'ngx-toastr';
 import {NgxSpinnerService} from 'ngx-spinner';
@@ -22,6 +22,17 @@ export class SeacotoolsHelperService {
   private spinner = inject(NgxSpinnerService);
   private router = inject(Router);
   private static idCounter = 0;
+
+  // Observable for components to subscribe to
+  private clickSubject = new Subject<HTMLElement | null>();
+  public clicks$ = this.clickSubject.asObservable();
+
+  constructor() {
+    // Listen to the document click event (only one listener)
+    document.addEventListener('click', (event: Event) => {
+      this.clickSubject.next(event.target as HTMLElement);
+    });
+  }
 
   private generateId(): string {
     return `dialog-${SeacotoolsHelperService.idCounter++}`;

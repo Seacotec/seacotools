@@ -2,9 +2,8 @@
   <!-- Dropdown Button -->
   <button
     (click)="toggleDropdown()"
-    [type]="buttonType"
-    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    [ngClass]="buttonClasses"
+    type="button"
+    [class]="dropdownButtonClasses"
   >
     {{ selectedOption?.label || placeholder }}
     <svg
@@ -25,18 +24,11 @@
   </button>
 
   <!-- Dropdown Menu -->
-  @if (isDropdownOpen){
-    <div
-      class="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700"
-      [ngClass]="optionsWidthClass"
-    >
+  @if (isDropdownOpen) {
+    <div class="z-10 absolute mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700">
       <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-        @for (option of options; track option.value){
-          <li
-            (click)="selectOption(option)"
-            [ngClass]="optionClasses"
-            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >
+        @for (option of options; track option.value) {
+          <li (click)="selectOption(option)" [class]="dropdownOptionClasses">
             {{ option.label }}
           </li>
         }

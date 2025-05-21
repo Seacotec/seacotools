@@ -2,10 +2,11 @@ import {Component, inject} from '@angular/core';
 import {ScButtonComponent} from '../../../../projects/seacotools/src/lib/sc-button/sc-button.component';
 import {SeacotoolsHelperService} from '../../../../projects/seacotools/src/lib/sc-helper-service/seacotools-helper.service';
 import {ScDropdownComponent} from '../../../../projects/seacotools/src/lib/sc-dropdown/sc-dropdown.component';
+import {ScIconComponent} from 'seacotools';
 
 @Component({
   selector: 'app-overview',
-  imports: [ScButtonComponent, ScDropdownComponent],
+  imports: [ScButtonComponent, ScDropdownComponent, ScIconComponent],
   templateUrl: './overview.component.html',
 })
 export class OverviewComponent {

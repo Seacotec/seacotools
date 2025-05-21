@@ -1,6 +1,6 @@
 {
   "name": "seacotools",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.1-beta.0",
   "main": "dist/seacotools",
   "author": "Dagistan Tuncbilek",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "@angular/animations":  ">=19.0.0 <20.0.0",
     "@angular/common": ">=19.0.0 <20.0.0",
     "@angular/core": ">=19.0.0 <20.0.0",
+    "@angular/router": ">=19.0.0 <20.0.0",
     "@ngneat/dialog": "^5.0.0",
     "ngx-spinner": "^19.0.0",
     "ngx-toastr": "^19.0.0",

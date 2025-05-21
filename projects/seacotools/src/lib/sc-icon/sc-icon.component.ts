@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
@@ -9,6 +9,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
       [attr.class]="computedClass">
     </svg>
   `,
+  encapsulation: ViewEncapsulation.None
 })
 export class ScIconComponent implements OnChanges {
 

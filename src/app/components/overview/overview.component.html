@@ -1,6 +1,7 @@
 <div class="p-5">
 
-  <div class="grid grid-cols-5">
+  <div class="text-center font-bold pt-5">DIALOGS</div>
+  <div class="grid grid-cols-5 mt-5">
     <sc-button color="light" (buttonClick)="infoDialog()">Info Dialog</sc-button>
     <sc-button color="red" (buttonClick)="alertDialog()">Alert Dialog</sc-button>
     <sc-button color="green" (buttonClick)="successDialog()">Success Dialog</sc-button>
@@ -8,7 +9,8 @@
     <sc-button color="blue" (buttonClick)="confirmationDialog()">Confirmation Dialog</sc-button>
   </div>
 
-  <div class="mt-10 grid grid-cols-5">
+  <div class="text-center mt-10 pt-5 border-t border-b-gray-400 font-bold">DROPDOWN MENU</div>
+  <div class="grid grid-cols-5 mt-5">
     <div>
       <sc-dropdown
         [options]="dropdownOptions"
@@ -25,11 +27,69 @@
         [options]="dropdownOptions"
         placeholder="Select Item"
         [changePlaceholderOnSelect]="true"
-        optionsWidthClass = 'w-32'
-        [buttonClasses]="'text-white rounded-full'"
+        optionsWidthClass='w-32'
+        [buttonClasses]="'text-yellow-300 bg-green-800 rounded-full'"
         [optionClasses]="'hover:bg-yellow-100'"
         (selectionChange)="handleSelection($event)"
       ></sc-dropdown>
+    </div>
+
+    <div>
+      <sc-dropdown
+        [options]="dropdownOptions"
+        placeholder="Choose an option"
+        [type]="'text'"
+        buttonClasses="text-sm"
+        (selectionChange)="handleSelection($event)"
+      ></sc-dropdown>
+    </div>
+
+    <div>
+      <sc-dropdown
+        [options]="dropdownOptions"
+        placeholder="Navigation Menu"
+        type="text"
+        buttonClasses="text-xl text-red-900 font-bold"
+        (selectionChange)="handleSelection($event)"
+      ></sc-dropdown>
+    </div>
+
+  </div>
+
+  <div class="text-center mt-10 pt-5 border-t border-b-gray-400 font-bold">ICONS</div>
+  <div class="grid grid-cols-4 mt-5 w-5">
+    <div class="flex flex-col items-center">
+      <div class="mb-10">DEFAULT (20px width/height)</div>
+      <sc-icon name="calculator"></sc-icon>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div>Size is flexible</div>
+      <div class="flex gap-2 items-center justify-center">
+        <sc-icon name="calculator" class="w-32"></sc-icon>
+        <sc-icon name="calculator" class="w-14"></sc-icon>
+        <sc-icon name="calculator" class="w-6"></sc-icon>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div>Colorful</div>
+      <div class="flex gap-2 items-center justify-center">
+        <sc-icon name="calculator" class="w-14 text-blue-700"></sc-icon>
+        <sc-icon name="calculator" class="w-14 text-red-700"></sc-icon>
+        <sc-icon name="calculator" class="w-14 text-green-700"></sc-icon>
+        <sc-icon name="calculator" class="w-14 text-yellow-700"></sc-icon>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div>Solid</div>
+      <div class="flex gap-2 items-center justify-center">
+        <sc-icon name="calculator" appearance="solid" class="w-14 text-blue-700"></sc-icon>
+        <sc-icon name="camera" appearance="solid" class="w-14 text-red-700"></sc-icon>
+        <sc-icon name="credit-card" appearance="solid" class="w-14 text-green-700"></sc-icon>
+        <sc-icon name="gift" appearance="solid" class="w-14 text-yellow-700"></sc-icon>
+      </div>
     </div>
   </div>
 </div>

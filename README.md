@@ -22,7 +22,7 @@ The library includes the following reusable components and services:
 - **`<sc-button>`**: A reusable button component with flexible styling, multiple appearances, and size options.
 - **`<sc-select>`**: A dynamic select dropdown component for choosing values from customizable options.
 - **`<sc-input>`**: A flexible input field with support for various input types, validation, and styling.
-- **`<app-dropdown>`**: A simplified wrapper dropdown component for easily selecting values from a list of options.
+- **`<sc-dropdown>`**: A simplified wrapper dropdown component for easily selecting values from a list of options.
 
 ### **Services**
 - **`SeacotoolsHelperService`**: A general-purpose helper service that provides reusable dialog, toast, spinner, and navigation utilities.
@@ -88,9 +88,9 @@ The `<sc-icon>` component is used to render customizable SVG icons. Customize th
 
 The `<sc-button>` component provides customizable buttons styled to work seamlessly with existing styles or Tailwind CSS. Example usage:
 
-#### `<app-dropdown>` Component
+#### `<sc-dropdown>` Component
 
-The `<app-dropdown>` component is designed as a wrapper around the more feature-rich `sc-dropdown`. It provides a highly customizable and simplified interface for developers who require quick integration with minimal configuration.
+The `<sc-dropdown>` component is designed as a wrapper around the more feature-rich `sc-dropdown`. It provides a highly customizable and simplified interface for developers who require quick integration with minimal configuration.
 
 **Inputs**:
 | **Input**             | **Type**                     | **Required** | **Default**         | **Description**                                                                 |

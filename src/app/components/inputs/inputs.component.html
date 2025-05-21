@@ -1,15 +1,4 @@
 <div class="p-5 flex">
-  <div class="w-64 mx-5">
-    <sc-select label="Select your vehicle" [options]="['Mercedes', 'Audi', 'WW', 'Ford', 'Train']" questionMark="Select if you have, if not train"></sc-select>
-  </div>
-
-  <div class="w-64 mx-5">
-    <sc-select label="Select another option" [keys]="['label']" [options]="selectOptions"></sc-select>
-  </div>
-
-</div>
-
-<div class="p-5 flex">
 
   <div class="mx-5">
     <sc-input
@@ -22,6 +11,20 @@
       [errors]="null"
     ></sc-input>
   </div>
+
+  <div class="w-64 mx-5">
+    <sc-select label="Select your vehicle" [options]="['Mercedes', 'Audi', 'WW', 'Ford', 'Train']" questionMark="Select if you have, if not train"></sc-select>
+  </div>
+
+  <div class="w-64 mx-5">
+    <sc-select label="Select another option" [keys]="['label']" [options]="selectOptions"></sc-select>
+  </div>
+
+</div>
+
+<div class="p-5 flex">
+
+
 
   <div class="w-64 mx-5">
     <sc-input
