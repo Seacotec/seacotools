@@ -39,7 +39,7 @@ export class TablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.columns = [
-      { label: 'Product Name', field: 'product', headerClass: 'text-center', cellClass: 'text-center' },
+      { label: 'Product Name', field: 'product'},
       { label: 'Color', field: 'color' },
       { label: 'Category', field: 'category', sortable: true, sortType: 'text'  },
       { label: 'Price', field: 'price', sortable: true, sortType: 'number' },
