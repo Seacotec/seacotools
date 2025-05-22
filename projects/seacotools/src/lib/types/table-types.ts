@@ -6,7 +6,10 @@ export interface TableColumn {
   headerClass?: string; // Optional CSS classes for header (th)
   cellClass?: string; // Optional CSS classes for cell (td)
   template?: TemplateRef<any>; // Custom template for column
+  sortable?: boolean; // Enable/disable sorting for the column
+  sortType?: 'text' | 'number' | 'boolean'; // Type of data for sorting
 }
+
 
 export interface TableConfig {
   containerClass?: string; // Optional tailwind CSS class for container div

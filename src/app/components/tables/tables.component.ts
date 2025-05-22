@@ -13,10 +13,17 @@ export class TablesComponent implements OnInit {
 
   columns: TableColumn[] = [];
   data = [
-    { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: '$2999' },
-    { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: '$1999' },
-    { product: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: '$99' },
-    { product: 'HP Monitor', color: 'Black', category: 'Accessories', price: '$299' },
+    { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
+    { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
+    { product: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: 99 },
+    { product: 'HP Monitor', color: 'Black', category: 'Accessories', price: 299 },
+  ];
+
+  data2 = [
+    { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
+    { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
+    { product: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: 99 },
+    { product: 'HP Monitor', color: 'Black', category: 'Accessories', price: 299 },
   ];
 
   // Configuration with and without row highlighting
@@ -34,13 +41,13 @@ export class TablesComponent implements OnInit {
     this.columns = [
       { label: 'Product Name', field: 'product', headerClass: 'text-center', cellClass: 'text-center' },
       { label: 'Color', field: 'color' },
-      { label: 'Category', field: 'category' },
-      { label: 'Price', field: 'price' },
+      { label: 'Category', field: 'category', sortable: true, sortType: 'text'  },
+      { label: 'Price', field: 'price', sortable: true, sortType: 'number' },
       {
         label: 'Actions (Centered style)',
         field: '',
         cellClass: 'text-center',
-        headerClass: 'text-center',
+        headerClass: 'justify-center',
         template: this.actionCell,
       },
     ];
