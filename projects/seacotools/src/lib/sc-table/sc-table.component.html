@@ -1,0 +1,57 @@
+<div class="relative overflow-x-auto" [ngClass]="config.containerClass">
+  <table
+    [class]="textClass + ' w-full text-sm text-left rtl:text-right'"
+    [ngClass]="{
+      'text-gray-600 dark:text-gray-300': !config.textClass
+    }"
+  >
+    <!-- Header Section -->
+    <thead
+      class="text-xs uppercase"
+      [ngClass]="headerClass"
+    >
+    <tr>
+      <th
+        *ngFor="let column of columns"
+        scope="col"
+        class="px-6 py-3"
+        [ngClass]="column.headerClass"
+      >
+        {{ column.label }}
+      </th>
+    </tr>
+    </thead>
+
+    <!-- Body Section -->
+    <tbody>
+    <ng-container *ngIf="data?.length; else noDataTemplate">
+      <tr
+        *ngFor="let row of data; let i = index"
+        [class]="rowClass + ' ' + rowBorderClass"
+        [ngClass]="{ 'border-b': true }"
+      >
+        <td
+          *ngFor="let column of columns"
+          class="px-6 py-4"
+          [ngClass]="column.cellClass || ''"
+        >
+          <ng-container *ngIf="column.template">
+            <ng-container
+              *ngTemplateOutlet="column.template; context: { $implicit: row, index: i }"
+            ></ng-container>
+          </ng-container>
+          <ng-container *ngIf="!column.template">{{ row[column.field] }}</ng-container>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noDataTemplate>
+  <div
+    [class]="config.noDataClass || 'py-4 text-center text-sm text-gray-500 dark:text-gray-400'"
+  >
+    {{ config.noDataMessage || 'No data available' }}
+  </div>
+</ng-template>

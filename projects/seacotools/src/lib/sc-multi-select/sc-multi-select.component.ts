@@ -40,6 +40,8 @@ export class ScMultiSelectComponent implements ControlValueAccessor {
   @Input() disableClear: boolean = false; // Whether to show the clear option
   @Input() displayKey: string = '';
   @Input() addTag = false;
+  @Input() customHeight: 'md' | 'lg' | 'xl' = 'md'; // Default
+
 
   onChange = (value: any) => {};
   onTouch = () => {};

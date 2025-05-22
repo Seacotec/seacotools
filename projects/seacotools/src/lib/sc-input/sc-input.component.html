@@ -25,7 +25,9 @@
       [type]="inputType"
       [formControl]="control"
       (blur)="onTouch()"
-      class="outline-none bg-gray-50 dark:bg-gray-700 disabled:bg-gray-300 w-full px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-lg focus:ring focus:ring-indigo-500 focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70"
+      class="outline-none bg-gray-50 dark:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed w-full
+      px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-lg focus:ring focus:ring-indigo-500
+      focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70 dark:disabled:bg-gray-600"
     />
   </div>
 
@@ -40,7 +42,9 @@
         [type]="inputType"
         [formControl]="control"
         (blur)="onTouch()"
-        class="peer border border-gray-400 dark:border-gray-600 focus:ring focus:ring-indigo-500 focus:border-indigo-500 block rounded-lg px-2.5 pb-[6px] pt-[22px] text-sm bg-gray-50 dark:bg-gray-700 text-gray-900dark:text-white appearance-none w-full outline-none"
+        class="peer border border-gray-400 dark:border-gray-600 disabled:bg-gray-300 disabled:cursor-not-allowed focus:ring
+          focus:ring-indigo-500 focus:border-indigo-500 block rounded-lg px-2.5 pb-[6px] pt-[22px] dark:disabled:bg-gray-600
+          text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white appearance-none w-full outline-none"
       />
 
       <!-- Label -->

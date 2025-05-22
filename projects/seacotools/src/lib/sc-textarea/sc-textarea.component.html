@@ -1,0 +1,30 @@
+<div class="">
+
+  <label *ngIf="label" class="flex items-center mb-1">
+    <span *ngIf="required" class="text-red-700 dark:text-red-400 mr-1">*</span>
+    <span class="text-gray-900 dark:text-gray-200">{{ label }}</span>
+  </label>
+
+  <textarea
+    [rows]="rows"
+    [placeholder]="placeholder"
+    [name]="name"
+    [formControl]="control"
+    (blur)='onTouch()'
+    class="outline-none bg-gray-50 dark:bg-gray-700 bg-input-field w-full px-3 py-1 border rounded
+    focus:border-indigo-500 dark:focus:border-indigo-400 placeholder-gray-500 dark:placeholder-gray-400
+    placeholder-opacity-70 disabled:bg-gray-300 dark:disabled:bg-gray-600"
+    [ngClass]="{
+      'border-gray-400 dark:border-gray-600': !errors || control.untouched,
+      'border-red-500 dark:border-red-400':  errors && !control.untouched,
+    }"
+  ></textarea>
+
+  <div class="text-xs font-medium text-red-700 dark:text-red-400" *ngIf="errors && !control.untouched">
+    <div *ngIf="errors['maxlength']">
+      Maximum length is {{ errors['maxlength']['requiredLength']  }}, actual length
+      is {{ errors['maxlength']['actualLength'] }}
+    </div>
+    <div *ngIf="errors['required']">Required!</div>
+  </div>
+</div>

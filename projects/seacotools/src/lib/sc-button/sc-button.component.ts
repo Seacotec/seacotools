@@ -16,6 +16,7 @@ export class ScButtonComponent implements OnInit {
   @Input() size: 'xs' | 'sm' | 'base' | 'lg' | 'xl' = 'base';
   @Input() type: 'submit' | 'button' = 'button';
   @Input() iconName = ''; // Optional SVG icon name
+  @Input() cssClass: string = '';
 
   @Output() buttonClick = new EventEmitter();
 

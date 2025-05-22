@@ -68,7 +68,7 @@ Since **SeacoTools** uses TailwindCSS as a peer dependency, you need to ensure t
 
 Make sure you specify the paths for the library in your `styles.css`:
 
-- `@source "./node_modules/seacotools/**/*.{html,js,ts}"`
+- `@source "../node_modules/seacotools";`
 
 ### Step 4: Use the Components in Templates
 

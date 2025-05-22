@@ -1,7 +1,10 @@
+<div class="text-center text-2xl font-semibold mt-3">INPUTS</div>
+
 <div class="p-5 flex justify-between">
 
   <div class="mx-5">
     <sc-input
+      [formControl]="enabledControl"
       label="Default input"
       [inputType]="'text'"
       name="first_name"
@@ -12,84 +15,169 @@
     ></sc-input>
   </div>
 
-  <div class="w-64 mx-5">
-    <sc-select label="Select in string array" [options]="['Mercedes', 'Audi', 'WW', 'Ford', 'Train']" questionMark="Select if you have, if not train"></sc-select>
+
+  <div class="mx-5">
+    <sc-input
+      [formControl]="disabledControl"
+      label="Disabled input"
+      [inputType]="'text'"
+      name="first_name"
+      placeholder="Disabled input"
+      [variant]="'default'"
+      [required]="true"
+      [errors]="null"
+    ></sc-input>
   </div>
 
-  <div class="w-64 mx-5">
-    <sc-select label="Select in object with keys" [keys]="['label']" [options]="selectOptions"></sc-select>
+  <div class="w-64 mx-5 pt-2">
+    <sc-input
+      [formControl]="enabledControl"
+      label="Floating label input"
+      inputType="text"
+      name="first_name"
+      placeholder=" "
+      [variant]="'floatingLabel'"
+      [required]="true"
+      [errors]="[]"
+    ></sc-input>
   </div>
 
-  <div class="w-64 mx-5">
-    <sc-select label="Select in object with key" key="label" [options]="selectOptions"></sc-select>
+  <div class="w-64 mx-5 pt-2">
+    <sc-input
+      [formControl]="disabledControl"
+      label="Disabled floating label input"
+      inputType="text"
+      name="first_name"
+      placeholder=" "
+      [variant]="'floatingLabel'"
+      [required]="true"
+      [errors]="[]"
+    ></sc-input>
   </div>
 
 </div>
 
+<div class="text-center text-2xl font-semibold mt-3">SELECTS</div>
+
+<div class="p-5 flex justify-between">
+
+  <div class="w-64 mx-5">
+    <sc-select [formControl]="enabledControl"
+               label="Select in string array"
+               [options]="['Mercedes', 'Audi', 'WW', 'Ford', 'Train']"
+               questionMark="Select if you have, if not train"
+    ></sc-select>
+  </div>
+
+  <div class="w-64 mx-5">
+    <sc-select [formControl]="enabledControl" label="Select in object with keys" [keys]="['label']"
+               [options]="selectOptions"></sc-select>
+  </div>
+
+  <div class="w-64 mx-5">
+    <sc-select label="Select in object with key" key="label" [formControl]="enabledControl"
+               [options]="selectOptions"></sc-select>
+  </div>
+
+  <div class="w-64 mx-5">
+    <sc-select label="Disabled Select"
+               key="label"
+               [formControl]="disabledControl"
+               [options]="selectOptions"
+    ></sc-select>
+  </div>
+
+</div>
+
+<div class="text-center text-2xl font-semibold mt-3">SELECT SEARCHABLE AND MULTI SELECT</div>
+
 <div class="p-5 flex justify-between mt-10">
 
-  <div class="w-64 mx-5">
+  <div class="w-64 mx-2">
     <sc-multi-select label="Multi Select in string[]"
+                     [formControl]="enabledControl"
                      [options]="selectOptions"
     ></sc-multi-select>
   </div>
 
-  <div class="w-64 mx-5">
-    <sc-multi-select label="Multi Select in object[] with key"
-                     [options]="selectOptions"
-    ></sc-multi-select>
-  </div>
+<!--  <div class="w-64 mx-5">-->
+<!--    <sc-multi-select label="Multi Select in object[] with key"-->
+<!--                     [formControl]="enabledControl"-->
+<!--                     [options]="selectOptions"-->
+<!--                     customHeight="lg"-->
+<!--    ></sc-multi-select>-->
+<!--  </div>-->
 
-  <div class="w-64 mx-5">
+  <div class="w-64 mx-2">
     <sc-multi-select label="Multi Select searchable"
+                     [formControl]="enabledControl"
                      [options]="selectOptions"
                      [searchable]="true"
+                     customHeight="lg"
     ></sc-multi-select>
   </div>
 
-  <div class="w-64 mx-5">
+
+  <div class="w-64 mx-2">
+    <sc-multi-select label="Disabled Multi Select"
+                     [formControl]="disabledControl"
+                     [options]="selectOptions"
+    ></sc-multi-select>
+  </div>
+
+  <div class="w-64 mx-2">
     <sc-searchable-select
+      [formControl]="enabledControl"
       label="Search in string[]"
       [options]="options"
     ></sc-searchable-select>
   </div>
 
-  <div class="w-64 mx-5">
+<!--  <div class="w-64 mx-5">-->
+<!--    <sc-searchable-select-->
+<!--      [formControl]="enabledControl"-->
+<!--      label="Search in object[] with key"-->
+<!--      [options]="selectOptions"-->
+<!--      displayKey="label"-->
+<!--    ></sc-searchable-select>-->
+<!--  </div>-->
+
+  <div class="w-64 mx-2">
     <sc-searchable-select
-      label="Search in object[] with key"
-      [options]="selectOptions"
-      displayKey="label"
+      [formControl]="disabledControl"
+      label="Disabled search"
+      [options]="options"
     ></sc-searchable-select>
   </div>
 
-
-
 </div>
 
-<div class="p-5 flex mt-10">
 
-  <div class="w-64 mx-5">
-    <sc-input
-      label="Floating label input"
-      inputType="text"
-      name="first_name"
-      placeholder=" "
-      [variant]="'floatingLabel'"
-      [required]="true"
-      [errors]="[]"
-    ></sc-input>
+<div class="text-center text-2xl font-semibold mt-3">TEXT AREA</div>
+
+<div class="p-3 grid grid-cols-4 gap-8">
+  <div>
+    <sc-textarea [formControl]="enabledControl" placeholder="Placeholder ..." [rows]="2" label="2 Line text area" [required]="true"></sc-textarea>
   </div>
 
-  <div class="w-64 mx-5">
-    <sc-input
-      label="Floating label input"
-      inputType="text"
-      name="first_name"
-      placeholder=" "
-      [variant]="'floatingLabel'"
-      [required]="true"
-      [errors]="[]"
-    ></sc-input>
+  <div>
+    <sc-textarea [formControl]="enabledControl" [rows]="3" label="3 Line text area"></sc-textarea>
+  </div>
+
+  <div>
+    <sc-textarea [formControl]="disabledControl" [rows]="3" label="Disabled text area"></sc-textarea>
+  </div>
+</div>
+
+<div class="text-center text-2xl font-semibold mt-3">CHECKBOX</div>
+
+<div class="p-3 grid grid-cols-4 gap-8">
+  <div>
+    <sc-checkbox [formControl]="enabledControl" label="Default checkbox"></sc-checkbox>
+  </div>
+
+  <div>
+    <sc-checkbox [formControl]="disabledControl" label="Disabled checkbox"></sc-checkbox>
   </div>
 
 </div>

@@ -1,35 +1,39 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-checkbox',
-    templateUrl: './checkbox.component.html',
+    selector: 'sc-textarea',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './sc-textarea.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => CheckboxComponent),
-            multi: true,
-        },
-    ],
-    imports: [
-        ReactiveFormsModule
+            useExisting: forwardRef(() => ScTextareaComponent),
+            multi: true
+        }
     ]
 })
-export class CheckboxComponent implements ControlValueAccessor{
+export class ScTextareaComponent implements ControlValueAccessor, OnInit {
 
-  control = new FormControl<boolean>(false);
-  @Input() label: string = '';
-  checkboxId = (Math.random() + 1).toString(36).substring(7);
+  control = new FormControl<string | null>('');
   destroyRef = inject(DestroyRef);
+  @Input() label: string = '';
+  @Input() required = false;
+  @Input() errors: any = null;
+  @Input() cssClass = '';
+  @Input() name = '';
+  @Input() placeholder = '';
+  @Input() rows = 3;
 
   onChange: any = () => {};
   onTouch: any = () => {};
 
   ngOnInit(): void {
     this.control.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
-      this.onChange(value);
+      this.onChange(value || '');
     });
   }
 
@@ -48,5 +52,4 @@ export class CheckboxComponent implements ControlValueAccessor{
   setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.control.disable() : this.control.enable();
   }
-
 }

@@ -1,39 +1,35 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input, OnInit} from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-textarea',
-    imports: [CommonModule, ReactiveFormsModule],
-    templateUrl: './textarea.component.html',
+    selector: 'sc-checkbox',
+    templateUrl: './sc-checkbox.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => TextareaComponent),
-            multi: true
-        }
+            useExisting: forwardRef(() => ScCheckboxComponent),
+            multi: true,
+        },
+    ],
+    imports: [
+        ReactiveFormsModule
     ]
 })
-export class TextareaComponent implements ControlValueAccessor, OnInit {
+export class ScCheckboxComponent implements ControlValueAccessor, OnInit{
 
-  control = new FormControl<string | null>('');
-  destroyRef = inject(DestroyRef);
+  control = new FormControl<boolean>(false);
   @Input() label: string = '';
-  @Input() required = false;
-  @Input() errors: any = null;
-  @Input() cssClass = '';
-  @Input() name = '';
-  @Input() placeholder = '';
-  @Input() rows = 3;
+  checkboxId = (Math.random() + 1).toString(36).substring(7);
+  destroyRef = inject(DestroyRef);
 
   onChange: any = () => {};
   onTouch: any = () => {};
 
   ngOnInit(): void {
     this.control.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
-      this.onChange(value || '');
+      this.onChange(value);
     });
   }
 
@@ -52,4 +48,5 @@ export class TextareaComponent implements ControlValueAccessor, OnInit {
   setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.control.disable() : this.control.enable();
   }
+
 }

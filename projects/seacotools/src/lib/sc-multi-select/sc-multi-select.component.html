@@ -1,4 +1,10 @@
-<div class="ng-select-custom-container">
+<div class="ng-select-custom-container"
+     [ngClass]="{
+      'md-height': customHeight === 'md',
+      'lg-height': customHeight === 'lg',
+      'xl-height': customHeight === 'xl',
+    }"
+>
 
   <label *ngIf="label" class="flex items-center mb-1 text-sm font-medium">
     <span>{{ label }}</span>

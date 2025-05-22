@@ -68,7 +68,7 @@ Since **SeacoTools** uses TailwindCSS as a peer dependency, you need to ensure t
 
 Make sure you specify the paths for the library in your `styles.css`:
 
-- `@source "./node_modules/your-library/**/*.{html,js,ts}"`
+- `@source "../node_modules/seacotools";`
 
 ### Step 4: Use the Components in Templates
 
@@ -139,6 +139,14 @@ Planned features for future releases:
 - New Material Design icon support.
 - Enhanced button variants with animations and states.
 - Advanced utility services for state management and API handling.
+
+---
+
+## Deployment
+
+- cd dist/seacotools/
+- npm publish --tag beta
+- npm dist-tag add seacotools@1.0.1-beta.0 latest
 
 ---
 

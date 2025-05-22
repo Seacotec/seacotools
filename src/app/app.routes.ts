@@ -11,7 +11,7 @@ export const routes: Routes = [
   {path: 'tables', component: TablesComponent},
   {path: 'overview', component: OverviewComponent},
   // {path: 'sc-dialogs', component: DialogsComponent},
-  // {path: 'custom-table', component: CustomTableComponent},
+  // {path: 'custom-table-types.ts', component: CustomTableComponent},
   // {path: 'search-bar', component: SearchBarComponent},
   // {path: 'password-reset', component: PasswordResetComponent},
   // {path: 'login', component: LoginComponent},
