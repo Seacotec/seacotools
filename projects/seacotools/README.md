@@ -23,6 +23,7 @@ The library includes the following reusable components and services:
 - **`<sc-select>`**: A dynamic select dropdown component for choosing values from customizable options.
 - **`<sc-input>`**: A flexible input field with support for various input types, validation, and styling.
 - **`<sc-dropdown>`**: A simplified wrapper dropdown component for easily selecting values from a list of options.
+- **`<sc-checkbox>`**: A basic usage of a checkbox element.
 
 ### **Services**
 - **`SeacotoolsHelperService`**: A general-purpose helper service that provides reusable dialog, toast, spinner, and navigation utilities.
@@ -110,8 +111,6 @@ The `<sc-dropdown>` component is designed as a wrapper around the more feature-r
 
 ---
 
----
-
 ## Custom Icon Sets
 
 The `<sc-icon>` component allows you to extend the default library by adding custom icons.
@@ -121,6 +120,16 @@ The `<sc-icon>` component allows you to extend the default library by adding cus
 2. Import and register the icon set in your module or component:
 
 ---
+## Custom Table
+
+The `<sc-table>` component is a highly customizable reusable table component that supports features like sorting, pagination, and styling.
+**Inputs**: | **Input** | **Type** | **Required** | **Default** | **Description** | |---------------|---------------------|--------------|-------------------------|---------------------------------------------------------------------------------| | `columns` | | Yes | `[]` | Defines the columns of the table with properties like `label`, `field`, `sortable`, etc. | | `data` | | Yes | `[]` | The data array to populate the table rows. Each item in the array represents a row. | | `pageSize` | `number` | No | `10` | Number of rows per page. Set to `0` to disable pagination and show all rows. | | `config` | `TableConfig` | No | `{}` | Provides additional configuration for table styling like `headerClass`, `rowClass`, etc. | `TableColumn[]``any[]`
+**Outputs**: Currently, no event emitters are implemented.
+**Features**:
+- **Sorting**: Add sorting functionality to columns using the `sortable` property in `columns`.
+- **Pagination**: Automatically paginates data based on the `pageSize` input.
+- **Custom Templates**: Allows you to define custom templates for columns by providing a `template`.
+
 
 ## Testing & Development
 

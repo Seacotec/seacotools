@@ -12,5 +12,6 @@ export * from './lib/sc-textarea/sc-textarea.component';
 export * from './lib/sc-checkbox/sc-checkbox.component';
 export * from './lib/sc-dropdown/sc-dropdown.component';
 export * from './lib/sc-helper-service/seacotools-helper.service';
-export type {DialogData} from './lib/types/dialog-data';
-export * from './lib/types/table-types';
+export type {DialogData} from './lib/core/types/dialog-data';
+export * from './lib/core/types/table-types';
+export * from './lib/core/pipes/number-to-array.pipe';

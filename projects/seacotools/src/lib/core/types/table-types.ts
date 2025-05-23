@@ -17,6 +17,7 @@ export interface TableConfig {
   headerClass?: string; // Optional CSS classes for header row
   rowClass?: string; // Optional CSS classes for row styling
   rowBorderClass?: string; // Optional CSS classes for row borders
+  globalCellClass?: string; // Will apply if cell class not exist
   noDataMessage?: string; // Message to show when no data is available
   noDataClass?: string; // CSS classes for the no-data message
   highlightRows?: boolean; // Enable/disable row highlighting (default: false)

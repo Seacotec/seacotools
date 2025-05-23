@@ -1,5 +1,5 @@
 import { Component, TemplateRef, ViewChild, OnInit } from '@angular/core';
-import { TableColumn } from '../../../../projects/seacotools/src/lib/types/table-types';
+import { TableColumn } from '../../../../projects/seacotools/src/lib/core/types/table-types';
 import { ScTableComponent } from '../../../../projects/seacotools/src/lib/sc-table/sc-table.component';
 import {ScIconComponent} from 'seacotools';
 
@@ -34,6 +34,7 @@ export class TablesComponent implements OnInit {
   customStylingConfig = {
     containerClass: 'shadow-md sm:rounded-lg',
     headerClass: 'bg-green-100 dark:bg-green-800 text-blue-600 dark:text-yellow-500',
+    globalCellClass: 'px-6 py-4 whitespace-nowrap',
   };
 
   ngOnInit(): void {

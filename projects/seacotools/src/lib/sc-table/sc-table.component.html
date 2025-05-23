@@ -14,9 +14,9 @@
       <th
         *ngFor="let column of columns"
         scope="col"
-        class="px-6 py-3"
+        [ngClass]="column.headerClass || 'p-2'"
       >
-        <div class="" [ngClass]="column.headerClass">
+        <div class="">
           <span>{{ column.label }}</span>
           @if (column.sortable) {
             @if (currentSortField !== column.field || currentSortDirection === 'asc') {
@@ -45,16 +45,15 @@
 
     <!-- Body Section -->
     <tbody>
-    <ng-container *ngIf="data?.length; else noDataTemplate">
+    <ng-container *ngIf="paginatedData.length; else noDataTemplate">
       <tr
-        *ngFor="let row of data; let i = index"
+        *ngFor="let row of paginatedData; let i = index"
         [class]="rowClass + ' ' + rowBorderClass"
         [ngClass]="{ 'border-b': true }"
       >
         <td
           *ngFor="let column of columns"
-          class="px-6 py-4"
-          [ngClass]="column.cellClass || ''"
+          [ngClass]="column.cellClass || config.globalCellClass || 'p-2'"
         >
           <ng-container *ngIf="column.template">
             <ng-container
@@ -68,6 +67,63 @@
     </tbody>
   </table>
 </div>
+
+<!-- Pagination Controls -->
+@if (pageSize > 0) {
+  <div class="flex justify-center items-center mt-4">
+    <nav aria-label="Table pagination">
+      <!-- Help text -->
+
+      <div class="flex items-center justify-center mb-1">
+        <span class="text-sm text-gray-700 dark:text-gray-400">
+          Showing
+          <span class="font-semibold text-gray-900 dark:text-white">{{ startIndex + 1 }}</span>
+          to
+          <span class="font-semibold text-gray-900 dark:text-white">{{ endIndex }}</span>
+          of
+          <span class="font-semibold text-gray-900 dark:text-white">{{ data.length }}</span>
+          entries
+        </span>
+      </div>
+
+      <ul class="inline-flex -space-x-px text-sm">
+        <li>
+          <button
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+            class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border
+            border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800
+            dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Previous
+          </button>
+        </li>
+        <li *ngFor="let page of totalPages | numberToArray">
+          <button
+            (click)="goToPage(page + 1)"
+            [ngClass]="{
+            'text-blue-600 dark:text-blue-100 bg-blue-50 hover:bg-blue-100 hover:text-blue-700': page + 1 === currentPage,
+            'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700': page + 1 !== currentPage
+          }"
+            class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 dark:bg-gray-800
+            dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            {{ page + 1 }}
+          </button>
+        </li>
+        <li>
+          <button
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+}
 
 <ng-template #noDataTemplate>
   <div

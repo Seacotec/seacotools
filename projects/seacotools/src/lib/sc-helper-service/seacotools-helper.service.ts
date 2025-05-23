@@ -9,7 +9,7 @@ import {ConfirmationDialogComponent} from '../sc-dialogs/confirmation-dialog/con
 import {ToastrService} from 'ngx-toastr';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {NavigationExtras, Router} from '@angular/router';
-import {DialogData} from '../types/dialog-data';
+import {DialogData} from '../core/types/dialog-data';
 
 
 @Injectable({

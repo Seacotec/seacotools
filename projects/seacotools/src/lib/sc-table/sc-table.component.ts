@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TableColumn, TableConfig } from '../types/table-types';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TableColumn, TableConfig} from '../core/types/table-types';
 import {ScIconComponent} from '../sc-icon/sc-icon.component';
 import {TippyDirective} from '@ngneat/helipopper';
+import {NumberToArrayPipe} from '../core/pipes/number-to-array.pipe';
 
 type SortDirection = 'asc' | 'desc';
 
 @Component({
   selector: 'sc-table',
   templateUrl: './sc-table.component.html',
-  imports: [CommonModule, ScIconComponent, TippyDirective],
+  imports: [CommonModule, ScIconComponent, TippyDirective, NumberToArrayPipe],
 })
 export class ScTableComponent {
   @Input() columns: TableColumn[] = []; // Column definitions
@@ -19,6 +20,33 @@ export class ScTableComponent {
   // Sorting state
   currentSortField: string | null = null;
   currentSortDirection: SortDirection = 'asc';
+
+  // Pagination
+  @Input() pageSize: number = 0; // Number of rows per page
+  currentPage: number = 1; // Current page index
+  get paginatedData(): any[] {
+    if (this.pageSize === 0) {
+      return this.data;
+    }
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.data.slice(startIndex, endIndex);
+  }
+
+  get totalPages(): number {
+    // If pageSize is 0, there's only one "page", showing all data
+    return this.pageSize === 0 ? 1 : Math.ceil(this.data.length / this.pageSize);
+  }
+
+  get startIndex(): number {
+    return this.pageSize === 0 ? 0 : (this.currentPage - 1) * this.pageSize;
+  }
+
+  get endIndex(): number {
+    return this.pageSize === 0
+      ? this.data.length
+      : Math.min(this.startIndex + this.pageSize, this.data.length);
+  }
 
 
   // Get classes with proper fallback values
@@ -91,5 +119,25 @@ export class ScTableComponent {
       }
     });
   }
+
+  // Pagination Methods
+  goToPage(page: number): void {
+    if (page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
 
 }
