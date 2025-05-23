@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seacollect-web
+    image: dtuncbilek/seacotools:1.0.2
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+
+
+# build app
+# docker compose build
+# docker push dtuncbilek/seacotools:1.0.2
