@@ -4,17 +4,27 @@
   <sc-table
     [columns]="columns"
     [data]="data"
-    [config]="defaultConfig"
+    [config]="{highlightRows: false}"
   ></sc-table>
 </div>
 
 <div>
   <!-- Table with row highlighting -->
-  <div class="my-5 text-center font-bold">Custom Table (Row Highlighting Enabled)</div>
+  <div class="my-5 text-center font-bold">Row Highlighting Enabled</div>
   <sc-table
     [columns]="columns"
     [data]="data2"
-    [config]="highlightConfig"
+    [config]="{highlightRows: true}"
+  ></sc-table>
+</div>
+
+<div>
+  <!-- Table with row highlighting -->
+  <div class="my-5 text-center font-bold">Custom Style Table</div>
+  <sc-table
+    [columns]="customColumns"
+    [data]="data3"
+    [config]="customStylingConfig"
   ></sc-table>
 </div>
 

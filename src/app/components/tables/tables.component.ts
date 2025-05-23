@@ -12,6 +12,7 @@ export class TablesComponent implements OnInit {
   @ViewChild('actionCell', { static: true }) actionCell!: TemplateRef<any>;
 
   columns: TableColumn[] = [];
+  customColumns: TableColumn[] = [];
   data = [
     { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
     { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
@@ -23,34 +24,45 @@ export class TablesComponent implements OnInit {
     { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
     { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
     { product: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: 99 },
-    { product: 'HP Monitor', color: 'Black', category: 'Accessories', price: 299 },
   ];
 
-  // Configuration with and without row highlighting
-  defaultConfig = {
-    highlightRows: false, // Default table
-  };
+  data3 = [
+    { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
+    { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
+  ];
 
-  highlightConfig = {
-    highlightRows: true, // Table with row highlighting
+  customStylingConfig = {
     containerClass: 'shadow-md sm:rounded-lg',
-    headerClass: 'bg-gray-50 dark:bg-gray-700 dark:text-gray-300',
+    headerClass: 'bg-green-100 dark:bg-green-800 text-blue-600 dark:text-yellow-500',
   };
 
   ngOnInit(): void {
     this.columns = [
       { label: 'Product Name', field: 'product'},
-      { label: 'Color', field: 'color' },
+      { label: 'Color', field: 'color', sortable: true, sortType: 'text' },
       { label: 'Category', field: 'category', sortable: true, sortType: 'text'  },
       { label: 'Price', field: 'price', sortable: true, sortType: 'number' },
       {
         label: 'Actions (Centered style)',
         field: '',
         cellClass: 'text-center',
-        headerClass: 'justify-center',
+        headerClass: 'text-center',
         template: this.actionCell,
       },
     ];
+    this.customColumns = [
+      { label: 'Product Name', field: 'product'},
+      { label: 'Color', field: 'color', cellClass: 'text-red-500' },
+      { label: 'Category', field: 'category', sortable: true, sortType: 'text'  },
+      { label: 'Price', field: 'price', sortable: true, sortType: 'number' },
+      {
+        label: 'Actions (Centered style)',
+        field: '',
+        cellClass: 'text-center',
+        headerClass: 'text-center',
+        template: this.actionCell,
+      },
+    ]
   }
 
   onEdit(row: any): void {

@@ -16,23 +16,23 @@
         scope="col"
         class="px-6 py-3"
       >
-        <div class="flex items-center" [ngClass]="column.headerClass">
-          {{ column.label }}
+        <div class="" [ngClass]="column.headerClass">
+          <span>{{ column.label }}</span>
           @if (column.sortable) {
             @if (currentSortField !== column.field || currentSortDirection === 'asc') {
               <sc-icon name="arrow-down-circle"
                        appearance="outline"
-                       class="ml-1 w-5 "
+                       class="ml-1 w-5 inline-block"
                        [tp]="currentSortField !== column.field ? 'Sort ascending' : 'Sort descending'"
-                       [ngClass]="currentSortField === column.field ? 'text-blue-800' : 'text-blue-300'"
+                       [ngClass]="currentSortField === column.field ? 'text-blue-800 dark:text-yellow-200' : 'text-gray-400 dark:text-gray-500'"
                        (click)="sortData(column)"
               ></sc-icon>
             } @else {
               <sc-icon name="arrow-up-circle"
                        appearance="outline"
-                       class="ml-1 w-5"
+                       class="ml-1 w-5 inline-block"
                        tp="Sort ascending"
-                       [ngClass]="currentSortField === column.field ? 'text-blue-800' : 'text-blue-300'"
+                       [ngClass]="currentSortField === column.field ? 'text-blue-800 dark:text-yellow-200' : 'text-gray-400 dark:text-gray-500'"
                        (click)="sortData(column)"
               ></sc-icon>
             }

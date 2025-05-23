@@ -1,6 +1,5 @@
 import {Component, ElementRef, EventEmitter, HostListener, inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SeacotoolsHelperService} from '../sc-helper-service/seacotools-helper.service';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'sc-dropdown',
@@ -25,7 +24,7 @@ export class ScDropdownComponent implements OnInit, OnDestroy{
   selectedOption: { label: string; value: any } | null = null; // Tracks selected option
 
   // Dynamic styles
-  dropdownButtonClasses = 'inline-flex items-center ';
+  dropdownButtonClasses = 'inline-flex items-center cursor-pointer';
   dropdownOptionClasses = '';
 
   // Subscription to the dropdown service
@@ -41,7 +40,7 @@ export class ScDropdownComponent implements OnInit, OnDestroy{
       ? ` text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
          focus:outline-none focus:ring-blue-300 px-5 py-2.5 text-center dark:bg-blue-600
          dark:hover:bg-blue-700 dark:focus:ring-blue-800`
-      : `bg-transparent text-gray-700 hover:text-gray-900`;
+      : ` bg-transparent text-gray-700 hover:text-gray-900 dark:hover:text-gray-200`;
 
     // Append user-defined button classes if provided
     if (this.buttonClasses) {

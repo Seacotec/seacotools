@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {NgClass} from '@angular/common';
 import {ScIconComponent} from '../sc-icon/sc-icon.component';
 
 @Component({
   selector: 'sc-button',
-  imports: [CommonModule, ScIconComponent],
+  imports: [ScIconComponent, NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sc-button.component.html'
 })
