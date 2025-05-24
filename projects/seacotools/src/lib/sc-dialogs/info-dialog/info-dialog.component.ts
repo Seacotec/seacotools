@@ -5,7 +5,7 @@ import {ScButtonComponent} from '../../sc-button/sc-button.component';
 import {ScIconComponent} from '../../sc-icon/sc-icon.component';
 
 @Component({
-    selector: 'app-info-sc-dialogs',
+    selector: 'sc-info-dialog',
     templateUrl: './info-dialog.component.html',
   imports: [
     ScButtonComponent,

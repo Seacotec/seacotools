@@ -1,23 +1,27 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
-    selector: 'sc-textarea',
-    imports: [CommonModule, ReactiveFormsModule],
-    templateUrl: './sc-textarea.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ScTextareaComponent),
-            multi: true
-        }
-    ]
+  selector: 'sc-textarea',
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './sc-textarea.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScTextareaComponent),
+      multi: true
+    }
+  ],
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  }
 })
 export class ScTextareaComponent implements ControlValueAccessor, OnInit {
-
+  id = createId();
   control = new FormControl<string | null>('');
   destroyRef = inject(DestroyRef);
   @Input() label: string = '';

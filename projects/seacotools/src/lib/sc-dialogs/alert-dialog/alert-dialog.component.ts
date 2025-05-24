@@ -6,7 +6,7 @@ import {ScIconComponent} from '../../sc-icon/sc-icon.component';
 
 
 @Component({
-    selector: 'app-alert-sc-dialogs',
+    selector: 'sc-alert-dialog',
     templateUrl: './alert-dialog.component.html',
   imports: [
     ScButtonComponent,

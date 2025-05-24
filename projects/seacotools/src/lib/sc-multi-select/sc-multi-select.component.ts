@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-multi-select',
@@ -28,8 +29,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  }
 })
 export class ScMultiSelectComponent implements ControlValueAccessor {
+  id = createId();
   control = new FormControl<any[]>([]);
 
   @Input() options: any[] = [];

@@ -5,7 +5,7 @@ import {ScButtonComponent} from '../../sc-button/sc-button.component';
 import {ScIconComponent} from '../../sc-icon/sc-icon.component';
 
 @Component({
-    selector: 'app-confirmation-sc-dialogs',
+    selector: 'sc-confirmation-dialog',
     templateUrl: './confirmation-dialog.component.html',
   imports: [
     ScButtonComponent,

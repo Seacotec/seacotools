@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TippyDirective} from '@ngneat/helipopper';
 import {ScIconComponent} from '../sc-icon/sc-icon.component';
+import {createId} from '@paralleldrive/cuid2';
 
 
 @Component({
@@ -17,12 +18,16 @@ import {ScIconComponent} from '../sc-icon/sc-icon.component';
       useExisting: forwardRef(() => ScSelectComponent),
       multi: true
     }
-  ]
+  ],
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  }
 })
 export class ScSelectComponent implements ControlValueAccessor, OnInit {
+  id = createId();
   control = new FormControl(null);
   destroyRef = inject(DestroyRef);
-  id = `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 5)}`;
+
   @Input() options: Array<Record<string, any> | string | number> = [];
   @Input() label?: string;
   @Input() questionMark?: string;

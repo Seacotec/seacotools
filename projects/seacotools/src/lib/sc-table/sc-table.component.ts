@@ -4,6 +4,7 @@ import {TableColumn, TableConfig} from '../core/types/table-types';
 import {ScIconComponent} from '../sc-icon/sc-icon.component';
 import {TippyDirective} from '@ngneat/helipopper';
 import {NumberToArrayPipe} from '../core/pipes/number-to-array.pipe';
+import {createId} from '@paralleldrive/cuid2';
 
 type SortDirection = 'asc' | 'desc';
 
@@ -11,8 +12,12 @@ type SortDirection = 'asc' | 'desc';
   selector: 'sc-table',
   templateUrl: './sc-table.component.html',
   imports: [CommonModule, ScIconComponent, TippyDirective, NumberToArrayPipe],
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  }
 })
 export class ScTableComponent {
+  id = createId();
   @Input() columns: TableColumn[] = []; // Column definitions
   @Input() data: any[] = []; // Table data
   @Input() config: TableConfig = {}; // Configuration for styling

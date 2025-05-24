@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-searchable-select',
@@ -27,8 +28,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
     }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  }
 })
 export class ScSearchableSelectComponent implements ControlValueAccessor {
+  id = createId();
   control = new FormControl<any>(null);
 
   @Input() options: any[] = [];

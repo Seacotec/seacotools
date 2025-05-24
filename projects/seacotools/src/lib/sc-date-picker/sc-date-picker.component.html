@@ -1,0 +1,32 @@
+<div class="w-full overflow-hidden">
+
+  <label *ngIf="label" class="form-label mt-1 mb-1 me-2 ">
+    <span *ngIf="required" class="text-red-700">*</span>
+    {{ label }}
+  </label>
+
+  <input #myDatepicker
+         type="text"
+         (blur)='onTouch(); touched = true;'
+         placeholder="Select Date..."
+         class="outline-none bg-gray-50 dark:bg-gray-600 disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300
+         dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 bg-input-field w-full px-3 border rounded-lg dark:border-gray-700
+         focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70"
+         [ngClass]="{
+            'border-gray-400': !errors || !touched,
+            'border-red-500':  errors && touched,
+         }"
+  >
+
+  <!-- Error Message -->
+  @if (errors){
+    <div [id]="errorId"  class="text-red-500 mt-1 text-sm" role="alert">
+      @for (errorKey of objectKeys(errors); track errorKey){
+        <div *ngIf="errors[errorKey]">
+          {{ getErrorMessage(errorKey) }}
+        </div>
+      }
+    </div>
+  }
+
+</div>

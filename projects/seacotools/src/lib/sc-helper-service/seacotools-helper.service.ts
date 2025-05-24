@@ -10,6 +10,7 @@ import {ToastrService} from 'ngx-toastr';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {NavigationExtras, Router} from '@angular/router';
 import {DialogData} from '../core/types/dialog-data';
+import {createId} from '@paralleldrive/cuid2';
 
 
 @Injectable({
@@ -21,7 +22,6 @@ export class SeacotoolsHelperService {
   private toaster = inject(ToastrService);
   private spinner = inject(NgxSpinnerService);
   private router = inject(Router);
-  private static idCounter = 0;
 
   // Observable for components to subscribe to
   private clickSubject = new Subject<HTMLElement | null>();
@@ -34,16 +34,11 @@ export class SeacotoolsHelperService {
     });
   }
 
-  private generateId(): string {
-    return `dialog-${SeacotoolsHelperService.idCounter++}`;
-    // return `sc-dialogs-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 5)}`;
-  }
-
   private createDialogConfig(config?: Partial<DialogConfig<any>>): Partial<DialogConfig<any>> {
     return {
       minHeight: 200,
       ...config,
-      id: this.generateId()
+      id: createId(),
     };
   }
 

@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-icon',
@@ -9,10 +10,12 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
       [attr.class]="computedClass">
     </svg>
   `,
-  encapsulation: ViewEncapsulation.None
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  }
 })
 export class ScIconComponent implements OnChanges {
-
+  id = createId();
   private sanitizer = inject(DomSanitizer);
   private changeDetector = inject(ChangeDetectorRef);
 

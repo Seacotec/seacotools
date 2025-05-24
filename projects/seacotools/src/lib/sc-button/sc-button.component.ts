@@ -1,14 +1,19 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {ScIconComponent} from '../sc-icon/sc-icon.component';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-button',
   imports: [ScIconComponent, NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './sc-button.component.html'
+  templateUrl: './sc-button.component.html',
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  }
 })
 export class ScButtonComponent implements OnInit {
+  id = createId();
 
   @Input() appearance: 'default' | 'pills' | 'outline' = 'default';
   @Input() disabled = false;
