@@ -24,6 +24,8 @@ The library includes the following reusable components and services:
 - **`<sc-input>`**: A flexible input field with support for various input types, validation, and styling.
 - **`<sc-dropdown>`**: A simplified wrapper dropdown component for easily selecting values from a list of options.
 - **`<sc-checkbox>`**: A basic usage of a checkbox element.
+- **`<sc-date-picker>`**: Date picker element.
+- **`<sc-table>`**: Reusable table element.
 
 ### **Services**
 - **`SeacotoolsHelperService`**: A general-purpose helper service that provides reusable dialog, toast, spinner, and navigation utilities.
@@ -155,7 +157,7 @@ Planned features for future releases:
 
 - cd dist/seacotools/
 - npm publish --tag beta
-- npm dist-tag add seacotools@1.0.1-beta.0 latest
+- npm dist-tag add seacotools@1.0.4-beta.0 latest
 
 ---
 
