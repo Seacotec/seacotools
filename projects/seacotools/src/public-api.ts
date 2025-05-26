@@ -11,7 +11,7 @@ export * from './lib/sc-searchable-select/sc-searchable-select.component';
 export * from './lib/sc-textarea/sc-textarea.component';
 export * from './lib/sc-checkbox/sc-checkbox.component';
 export * from './lib/sc-dropdown/sc-dropdown.component';
-export * from './lib/sc-date-picker/sc-date-picker.component';
+export * from './lib/sc-flatpicker/sc-flatpicker.component';
 export * from './lib/sc-helper-service/seacotools-helper.service';
 export type {DialogData} from './lib/core/types/dialog-data';
 export * from './lib/core/types/table-types';

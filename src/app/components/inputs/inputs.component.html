@@ -1,3 +1,4 @@
+
 <div class="text-center text-2xl font-semibold mt-3">INPUTS</div>
 
 <div class="p-5 flex justify-between">
@@ -57,10 +58,97 @@
 
 </div>
 
-<div class="grid grid-cols-3 gap-x-5">
+
+<div>
+  <div class="col-span-2">
+    <div class="text-center text-2xl font-semibold mt-3">FLAT PICKER</div>
+
+    <div class="p-5 flex justify-between">
+      <div class="w-60 mx-5">
+        <sc-flatpicker label="Date Picker"
+                       [required]="true"
+                       [formControl]="enabledDatePickerControl"
+        ></sc-flatpicker>
+      </div>
+
+      <div class="w-60 mx-5">
+        <sc-flatpicker
+          label="UTC Date/Time witn min/max"
+          timezone="utc"
+          [formControl]="enabledDatePickerControl"
+          [options]="{
+            enableTime: true,
+            defaultDate: '2025-05-02T09:00:00Z',
+            minDate: '2025-05-02T08:00:00Z',
+            maxDate: '2025-05-03T10:00:00Z',
+           }">
+        </sc-flatpicker>
+      </div>
+
+      <div class="w-60 mx-5">
+        <sc-flatpicker
+          label="Locale Date/Time Picker"
+          [formControl]="enabledDatePickerControl"
+          [options]="{ enableTime: true, defaultDate: '2025-05-02T07:00:00Z' }">
+        </sc-flatpicker>
+      </div>
+
+      <div class="w-60 mx-5">
+        <sc-flatpicker label="Date Picker disabled"
+                       [formControl]="disabledDatePickerControl"
+                       [options]="{enableTime: true, defaultDate: '2025-05-02T07:00:00Z'}"
+        ></sc-flatpicker>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="text-center text-2xl font-semibold mt-3">AIR-DATE-PICKER</div>
+
+  <div class="p-5 flex justify-between">
+    <div class="w-60 mx-5">
+      <sc-air-datepicker label="Date Picker"
+                         [required]="true"
+                         [formControl]="enabledDatePickerControl"
+      ></sc-air-datepicker>
+    </div>
+
+    <div class="w-60 mx-5">
+      <sc-air-datepicker
+        label="UTC Date/Time witn min/max"
+        timezone="utc"
+        [formControl]="enabledDatePickerControl"
+        [options]="{
+            selectedDates: ['2025-05-02T09:00:00Z'],
+            timepicker: true,
+            minDate: '2025-05-02T08:00:00Z',
+            maxDate: '2025-05-03T10:00:00Z',
+           }">
+      </sc-air-datepicker>
+    </div>
+
+    <div class="w-60 mx-5">
+      <sc-air-datepicker
+        label="Locale Date/Time Picker"
+        [formControl]="enabledDatePickerControl"
+        [options]="{timepicker: true, selectedDates: ['2025-05-02T07:00:00Z'] }">
+      </sc-air-datepicker>
+    </div>
+
+    <div class="w-60 mx-5">
+      <sc-air-datepicker label="Date Picker disabled"
+                         [formControl]="disabledDatePickerControl"
+                         [options]="{timepicker: true, selectedDates: ['2025-05-02T07:00:00Z']}"
+      ></sc-air-datepicker>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-2 gap-x-5 mt-3">
 
   <div>
-    <div class="text-center text-2xl font-semibold mt-3">SELECT</div>
+    <div class="text-center text-2xl font-semibold">DEFAULT SELECT</div>
 
     <div class="p-5 flex justify-between">
       <div class="w-64 mx-5">
@@ -81,40 +169,18 @@
     </div>
   </div>
 
-  <div class="col-span-2">
-    <div class="text-center text-2xl font-semibold mt-3">DATE-PICKER</div>
+  <div>
+    <div class="text-2xl font-semibold mb-3 ml-60">CHECKBOX</div>
 
-    <div class="p-5 flex justify-between">
-      <div class="w-40 mx-5">
-        <sc-date-picker label="Date Picker"
-                        [required]="true"
-                        [formControl]="enabledDatePickerControl"
-        ></sc-date-picker>
+    <div class="p-3 grid grid-cols-2 gap-8 mt-8">
+      <div>
+        <sc-checkbox [formControl]="enabledControl" label="Default checkbox"></sc-checkbox>
       </div>
 
-      <div class="w-40 mx-5">
-        <sc-date-picker
-          label="UTC Date/Time Picker"
-          timezone="utc"
-          [formControl]="enabledDatePickerControl"
-          [options]="{ enableTime: true, defaultDate: '2025-05-02T07:00:00Z' }">
-        </sc-date-picker>
+      <div>
+        <sc-checkbox [formControl]="disabledControl" label="Disabled checkbox"></sc-checkbox>
       </div>
 
-      <div class="w-40 mx-5">
-        <sc-date-picker
-          label="UTC Date/Time Picker"
-          [formControl]="enabledDatePickerControl"
-          [options]="{ enableTime: true, defaultDate: '2025-05-02T07:00:00Z' }">
-        </sc-date-picker>
-      </div>
-
-      <div class="w-40 mx-5">
-        <sc-date-picker label="Date Picker disabled"
-                        [formControl]="disabledDatePickerControl"
-                        [options]="{enableTime: true, defaultDate: '2025-05-02T07:00:00Z'}"
-        ></sc-date-picker>
-      </div>
     </div>
   </div>
 </div>
@@ -198,18 +264,5 @@
   <div>
     <sc-textarea [formControl]="disabledControl" [rows]="3" label="Disabled text area"></sc-textarea>
   </div>
-</div>
-
-<div class="text-center text-2xl font-semibold mt-3">CHECKBOX</div>
-
-<div class="p-3 grid grid-cols-4 gap-8">
-  <div>
-    <sc-checkbox [formControl]="enabledControl" label="Default checkbox"></sc-checkbox>
-  </div>
-
-  <div>
-    <sc-checkbox [formControl]="disabledControl" label="Disabled checkbox"></sc-checkbox>
-  </div>
-
 </div>
 

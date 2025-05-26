@@ -3,16 +3,17 @@ import {ScSelectComponent} from '../../../../projects/seacotools/src/lib/sc-sele
 import {ScInputComponent} from '../../../../projects/seacotools/src/lib/sc-input/sc-input.component';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ScDatePickerComponent} from '../../../../projects/seacotools/src/lib/sc-date-picker/sc-date-picker.component';
+import {ScFlatpickerComponent} from '../../../../projects/seacotools/src/lib/sc-flatpicker/sc-flatpicker.component';
 import {ScCheckboxComponent} from '../../../../projects/seacotools/src/lib/sc-checkbox/sc-checkbox.component';
 import {ScTextareaComponent} from '../../../../projects/seacotools/src/lib/sc-textarea/sc-textarea.component';
 import {ScMultiSelectComponent} from '../../../../projects/seacotools/src/lib/sc-multi-select/sc-multi-select.component';
 import {ScSearchableSelectComponent} from '../../../../projects/seacotools/src/lib/sc-searchable-select/sc-searchable-select.component';
+import {ScAirDatePickerComponent} from '../../../../projects/seacotools/src/lib/sc-airdatepicker/sc-air-date-picker.component';
 
 
 @Component({
   selector: 'app-inputs',
-  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScDatePickerComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent],
+  imports: [ScSelectComponent, ScAirDatePickerComponent, ScInputComponent, ReactiveFormsModule, ScFlatpickerComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent],
   templateUrl: './inputs.component.html',
 
 })

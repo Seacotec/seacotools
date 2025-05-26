@@ -3,21 +3,21 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@ang
 import flatpickr from 'flatpickr'; // Flatpickr package
 import {CommonModule} from '@angular/common';
 import {Instance} from 'flatpickr/dist/types/instance';
-import {Options} from 'flatpickr/dist/types/options';
+import {DateOption, Options} from 'flatpickr/dist/types/options';
 import confirmDatePlugin from 'flatpickr/dist/plugins/confirmDate/confirmDate';
 import {createId} from '@paralleldrive/cuid2';
 
 
 @Component({
-  selector: 'sc-date-picker',
-  templateUrl: './sc-date-picker.component.html',
+  selector: 'sc-flatpicker',
+  templateUrl: './sc-flatpicker.component.html',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScDatePickerComponent),
+      useExisting: forwardRef(() => ScFlatpickerComponent),
       multi: true,
     },
   ],
@@ -25,7 +25,7 @@ import {createId} from '@paralleldrive/cuid2';
     '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
   }
 })
-export class ScDatePickerComponent implements AfterViewInit, ControlValueAccessor {
+export class ScFlatpickerComponent implements AfterViewInit, ControlValueAccessor {
   id = createId();
   /** Whether the input is required. */
   @Input() required: boolean = false;
@@ -87,7 +87,10 @@ export class ScDatePickerComponent implements AfterViewInit, ControlValueAccesso
       ...this.options, // Keep user-provided options
       allowInput: true,
       dateFormat: this.options?.enableTime ? 'Y-m-d H:i' : 'Y-m-d',
-      defaultDate: this.getResolvedDefaultDate(), // Convert defaultDate to string
+      minDate: this.getResolvedDate(this.options?.minDate), // Convert minDate to string
+      maxDate: this.getResolvedDate(this.options?.maxDate), // Convert maxDate to string
+      defaultDate: this.getResolvedDate(this.options?.defaultDate), // Convert defaultDate to string
+      time_24hr: true,
       plugins: plugins,
       onChange: (value: Date[]) => {
         if (value && value.length) {
@@ -103,7 +106,7 @@ export class ScDatePickerComponent implements AfterViewInit, ControlValueAccesso
         }
       },
     };
-
+    console.log(formattedOptions)
     // Initialize Flatpickr
     this.datePicker = flatpickr(this.myDatepicker.nativeElement, formattedOptions);
 
@@ -117,8 +120,8 @@ export class ScDatePickerComponent implements AfterViewInit, ControlValueAccesso
   /**
    * Resolves the `defaultDate` option based on the timezone.
    */
-  private getResolvedDefaultDate(): Date | undefined {
-    const dateString = this.overrideDefaultDate(this.options?.defaultDate);
+  private getResolvedDate(date: DateOption | DateOption[] | undefined): Date | undefined {
+    const dateString = this.overrideDate(date);
     if (!dateString) return undefined;
     return this.handleTimeZone(dateString);
   }
@@ -174,7 +177,7 @@ export class ScDatePickerComponent implements AfterViewInit, ControlValueAccesso
   private handleTimeZone(dateString: string) {
     let date = new Date(dateString);
     if (isNaN(date.getTime())) {
-      console.error('Invalid default date:', dateString);
+      console.error('Invalid date:', dateString);
       return undefined;
     }
     if (this.timezone === 'utc') {
@@ -188,7 +191,7 @@ export class ScDatePickerComponent implements AfterViewInit, ControlValueAccesso
   /**
    * Ensures the defaultDate passed to Flatpickr is converted to a string.
    */
-  private overrideDefaultDate(defaultDate: any): string | undefined {
+  private overrideDate(defaultDate: any): string | undefined {
     if (!defaultDate) {
       return undefined;
     }
