@@ -8,12 +8,11 @@ import {ScCheckboxComponent} from '../../../../projects/seacotools/src/lib/sc-ch
 import {ScTextareaComponent} from '../../../../projects/seacotools/src/lib/sc-textarea/sc-textarea.component';
 import {ScMultiSelectComponent} from '../../../../projects/seacotools/src/lib/sc-multi-select/sc-multi-select.component';
 import {ScSearchableSelectComponent} from '../../../../projects/seacotools/src/lib/sc-searchable-select/sc-searchable-select.component';
-import {ScAirDatePickerComponent} from '../../../../projects/seacotools/src/lib/sc-airdatepicker/sc-air-date-picker.component';
 
 
 @Component({
   selector: 'app-inputs',
-  imports: [ScSelectComponent, ScAirDatePickerComponent, ScInputComponent, ReactiveFormsModule, ScFlatpickerComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent],
+  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScFlatpickerComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent],
   templateUrl: './inputs.component.html',
 
 })
