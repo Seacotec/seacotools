@@ -11,5 +11,6 @@
 
 
 @source "../projects/seacotools/src/lib/**/*.{html,ts}";
+/*@source "../node_modules/seacotools";*/
 
 @custom-variant dark (&:where(.dark, .dark *));
