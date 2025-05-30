@@ -14,11 +14,8 @@ export * from './lib/sc-dropdown/sc-dropdown.component';
 export * from './lib/sc-table/sc-table.component';
 export * from './lib/sc-flatpicker/sc-flat-picker.component';
 export * from './lib/sc-services/sc-helper.service';
-export type {DialogData} from './lib/core/types/dialog-data';
 export * from './lib/core/types/table-types';
 export * from './lib/core/pipes/number-to-array.pipe';
 export * from './lib/validators/custom-validators';
-// export * from './lib/validation/validator-error-message-helper';
 export * from './lib/validators/validator-helper.service';
-export * from './lib/directives/validation-error.directive';
-
+export type {DialogData} from './lib/core/types/dialog-data';

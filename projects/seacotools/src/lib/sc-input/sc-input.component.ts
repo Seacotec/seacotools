@@ -20,7 +20,8 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
     },
   ],
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"input"'
   }
 })
 export class ScInputComponent implements ControlValueAccessor, OnInit {
