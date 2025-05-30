@@ -8,7 +8,8 @@ import {createId} from '@paralleldrive/cuid2';
   templateUrl: './sc-checkbox.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"checkbox"'
   },
   providers: [
     {

@@ -1,19 +1,20 @@
 import {Component, ElementRef, EventEmitter, HostListener, inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {SeacotoolsHelperService} from '../sc-helper-service/seacotools-helper.service';
+import {ScHelperService} from '../sc-services/sc-helper.service';
 import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-dropdown',
   templateUrl: './sc-dropdown.component.html',
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id', // Add a unique attribute to each instance
+    '[attr.component-type]': '"dropdown"'
   },
   imports: [],
 })
 export class ScDropdownComponent implements OnInit, OnDestroy{
   id = createId();
   private elementRef = inject(ElementRef);
-  private helper = inject(SeacotoolsHelperService);
+  private helper = inject(ScHelperService);
 
   @Input() options: { label: string; value: any }[] = []; // Array of {label, value}
   @Input() placeholder: string = 'Select option'; // Customizable placeholder

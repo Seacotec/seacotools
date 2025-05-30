@@ -13,7 +13,8 @@ type SortDirection = 'asc' | 'desc';
   templateUrl: './sc-table.component.html',
   imports: [CommonModule, ScIconComponent, TippyDirective, NumberToArrayPipe],
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"table"'
   }
 })
 export class ScTableComponent {

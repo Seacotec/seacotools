@@ -9,7 +9,8 @@ import {createId} from '@paralleldrive/cuid2';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sc-button.component.html',
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"searchable-button"'
   }
 })
 export class ScButtonComponent implements OnInit {

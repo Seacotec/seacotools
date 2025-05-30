@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, ViewChild,} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, Input, ViewChild,} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import flatpickr from 'flatpickr'; // Flatpickr package
 import {CommonModule} from '@angular/common';
@@ -6,27 +6,32 @@ import {Instance} from 'flatpickr/dist/types/instance';
 import {DateOption, Options} from 'flatpickr/dist/types/options';
 import confirmDatePlugin from 'flatpickr/dist/plugins/confirmDate/confirmDate';
 import {createId} from '@paralleldrive/cuid2';
+import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 
 @Component({
   selector: 'sc-flatpicker',
-  templateUrl: './sc-flatpicker.component.html',
+  templateUrl: './sc-flat-picker.component.html',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScFlatpickerComponent),
+      useExisting: forwardRef(() => ScFlatPickerComponent),
       multi: true,
     },
   ],
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"flatpicker"'
   }
 })
-export class ScFlatpickerComponent implements AfterViewInit, ControlValueAccessor {
+export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccessor {
+
   id = createId();
+  errorMessageService = inject(ScErrorMessageService);
+
   /** Whether the input is required. */
   @Input() required: boolean = false;
 
@@ -106,7 +111,6 @@ export class ScFlatpickerComponent implements AfterViewInit, ControlValueAccesso
         }
       },
     };
-    console.log(formattedOptions)
     // Initialize Flatpickr
     this.datePicker = flatpickr(this.myDatepicker.nativeElement, formattedOptions);
 
@@ -157,17 +161,6 @@ export class ScFlatpickerComponent implements AfterViewInit, ControlValueAccesso
   }
 
   /**
-   * Get error message for a specific error key.
-   */
-  getErrorMessage(errorKey: string): string {
-    const errorMessages: Record<string, string> = {
-      required: 'This field is required.',
-      invalidDate: 'Invalid date selected.',
-    };
-    return errorMessages[errorKey] || 'Unknown error.';
-  }
-
-  /**
    * Utility to extract keys from an object.
    */
   objectKeys(obj: Record<string, any> | null): string[] {
@@ -208,6 +201,14 @@ export class ScFlatpickerComponent implements AfterViewInit, ControlValueAccesso
 
     console.error('Invalid defaultDate provided:', defaultDate);
     return undefined;
+  }
+
+  errorKeys(errors: Record<string, any> | null): string[] {
+    return errors ? Object.keys(errors) : [];
+  }
+
+  getErrorMessage(errorKey: string, errorValue: any): string {
+    return this.errorMessageService.getErrorMessage(errorKey, errorValue);
   }
 
 }

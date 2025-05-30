@@ -4,15 +4,16 @@ import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-icon',
+  host: {
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"searchable-icon"'
+  },
   template: `
     <svg
       [innerHTML]="safeSvgContent"
       [attr.class]="computedClass">
     </svg>
   `,
-  host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
-  }
 })
 export class ScIconComponent implements OnChanges {
   id = createId();
@@ -95,7 +96,6 @@ export class ScIconComponent implements OnChanges {
     // Sanitize the SVG content
     this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml(this.svgContent);
     this.changeDetector.markForCheck();
-
   }
 
   // Dynamically import the appropriate file based on the icon appearance

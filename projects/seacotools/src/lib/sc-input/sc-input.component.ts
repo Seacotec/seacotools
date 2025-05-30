@@ -1,23 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  forwardRef,
-  inject,
-  Input,
-  OnInit,
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TippyDirective } from '@ngneat/helipopper';
-import { ScIconComponent } from '../sc-icon/sc-icon.component';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, forwardRef, inject, Input, OnInit,} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule,} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {TippyDirective} from '@ngneat/helipopper';
+import {ScIconComponent} from '../sc-icon/sc-icon.component';
 import {createId} from '@paralleldrive/cuid2';
+import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 @Component({
   selector: 'sc-input',
@@ -39,12 +27,15 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
   id = createId();
   control = new FormControl<string | null>('');
   destroyRef = inject(DestroyRef);
+  errorMessageService = inject(ScErrorMessageService);
+
+  private cdr = inject(ChangeDetectorRef)
 
   @Input() label = '';
   @Input() required = false;
   @Input() errors: Record<string, any> | null = null;
   @Input() cssClass = '';
-  @Input() inputType: 'text' | 'number' | 'email' | 'password' | 'tel' = 'text';
+  @Input() inputType: 'text' | 'number' | 'email' | 'password' | 'tel' = 'password';
   @Input() name = '';
   @Input() placeholder = '';
   @Input() submitted = false;
@@ -58,6 +49,7 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
     this.control.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => this.onChange(value));
+    this.cdr.detectChanges();
   }
 
   writeValue(value: string | null): void {
@@ -81,16 +73,6 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
   }
 
   getErrorMessage(errorKey: string, errorValue: any): string {
-    const messages: Record<string, string> = {
-      email: 'Must be a valid email.',
-      minlength: `Minimum length is ${errorValue?.requiredLength}, actual length is ${errorValue?.actualLength}`,
-      maxlength: `Maximum length is ${errorValue?.requiredLength}, actual length is ${errorValue?.actualLength}`,
-      max: `Maximum value is ${errorValue?.max}`,
-      min: `Minimum value is ${errorValue?.min}`,
-      required: 'Required!',
-      numeric: errorValue,
-      password: errorValue,
-    };
-    return messages[errorKey] || 'Invalid input.';
+    return this.errorMessageService.getErrorMessage(errorKey, errorValue);
   }
 }

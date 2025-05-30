@@ -28,7 +28,7 @@ The library includes the following reusable components and services:
 - **`<sc-table>`**: Reusable table element.
 
 ### **Services**
-- **`SeacotoolsHelperService`**: A general-purpose helper service that provides reusable dialog, toast, spinner, and navigation utilities.
+- **`ScHelperService`**: A general-purpose helper service that provides reusable dialog, toast, spinner, and navigation utilities.
 
 ---
 

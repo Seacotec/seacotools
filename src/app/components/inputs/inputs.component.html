@@ -1,25 +1,24 @@
 
 <div class="text-center text-2xl font-semibold mt-3">INPUTS</div>
 
+
 <div class="p-5 flex justify-between">
 
   <div class="mx-5">
     <sc-input
-      [formControl]="enabledControl"
+      [formControl]="enabledFormArray.at(0)"
       label="Default input"
       [inputType]="'text'"
       name="first_name"
       placeholder="Enter your first name"
       [variant]="'default'"
       [required]="true"
-      [errors]="null"
     ></sc-input>
   </div>
 
-
   <div class="mx-5">
     <sc-input
-      [formControl]="disabledControl"
+      [formControl]="disabledFormArray.at(0)"
       label="Disabled input"
       [inputType]="'text'"
       name="first_name"
@@ -32,7 +31,7 @@
 
   <div class="w-64 mx-5 pt-2">
     <sc-input
-      [formControl]="enabledControl"
+      [formControl]="enabledFormArray.at(1)"
       label="Floating label input"
       inputType="text"
       name="first_name"
@@ -45,7 +44,7 @@
 
   <div class="w-64 mx-5 pt-2">
     <sc-input
-      [formControl]="disabledControl"
+      [formControl]="disabledFormArray.at(1)"
       label="Disabled floating label input"
       inputType="text"
       name="first_name"
@@ -67,7 +66,7 @@
       <div class="w-60 mx-5">
         <sc-flatpicker label="Date Picker"
                        [required]="true"
-                       [formControl]="enabledDatePickerControl"
+                       [formControl]="enabledFormArray.at(3)"
         ></sc-flatpicker>
       </div>
 
@@ -75,7 +74,7 @@
         <sc-flatpicker
           label="UTC Date/Time witn min/max"
           timezone="utc"
-          [formControl]="enabledDatePickerControl"
+          [formControl]="enabledFormArray.at(4)"
           [options]="{
             enableTime: true,
             defaultDate: '2025-05-02T09:00:00Z',
@@ -88,14 +87,14 @@
       <div class="w-60 mx-5">
         <sc-flatpicker
           label="Locale Date/Time Picker"
-          [formControl]="enabledDatePickerControl"
+          [formControl]="enabledFormArray.at(5)"
           [options]="{ enableTime: true, defaultDate: '2025-05-02T07:00:00Z' }">
         </sc-flatpicker>
       </div>
 
       <div class="w-60 mx-5">
         <sc-flatpicker label="Date Picker disabled"
-                       [formControl]="disabledDatePickerControl"
+                       [formControl]="disabledFormArray.at(3)"
                        [options]="{enableTime: true, defaultDate: '2025-05-02T07:00:00Z'}"
         ></sc-flatpicker>
       </div>
@@ -110,7 +109,7 @@
 
     <div class="p-5 flex justify-between">
       <div class="w-64 mx-5">
-        <sc-select [formControl]="enabledControl"
+        <sc-select [formControl]="enabledFormArray.at(6)"
                    label="Select in string array"
                    [options]="['Mercedes', 'Audi', 'WW', 'Ford', 'Train']"
                    questionMark="Select if you have, if not train"
@@ -119,7 +118,7 @@
       <div class="w-64 mx-5">
         <sc-select label="Disabled Select"
                    key="label"
-                   [formControl]="disabledControl"
+                   [formControl]="disabledFormArray.at(4)"
                    [options]="selectOptions"
         ></sc-select>
       </div>
@@ -132,11 +131,11 @@
 
     <div class="p-3 grid grid-cols-2 gap-8 mt-8">
       <div>
-        <sc-checkbox [formControl]="enabledControl" label="Default checkbox"></sc-checkbox>
+        <sc-checkbox [formControl]="enabledFormArray.at(7)" label="Default checkbox"></sc-checkbox>
       </div>
 
       <div>
-        <sc-checkbox [formControl]="disabledControl" label="Disabled checkbox"></sc-checkbox>
+        <sc-checkbox [formControl]="disabledFormArray.at(5)" label="Disabled checkbox"></sc-checkbox>
       </div>
 
     </div>
@@ -149,7 +148,7 @@
 
   <div class="w-64 mx-2">
     <sc-multi-select label="Multi Select in string[]"
-                     [formControl]="enabledControl"
+                     [formControl]="enabledFormArray.at(8)"
                      [options]="selectOptions"
     ></sc-multi-select>
   </div>
@@ -164,7 +163,7 @@
 
   <div class="w-64 mx-2">
     <sc-multi-select label="Multi Select searchable"
-                     [formControl]="enabledControl"
+                     [formControl]="enabledFormArray.at(9)"
                      [options]="selectOptions"
                      [searchable]="true"
                      customHeight="lg"
@@ -174,14 +173,14 @@
 
   <div class="w-64 mx-2">
     <sc-multi-select label="Disabled Multi Select"
-                     [formControl]="disabledControl"
+                     [formControl]="disabledFormArray.at(6)"
                      [options]="selectOptions"
     ></sc-multi-select>
   </div>
 
   <div class="w-64 mx-2">
     <sc-searchable-select
-      [formControl]="enabledControl"
+      [formControl]="enabledFormArray.at(10)"
       label="Search in string[]"
       [options]="options"
     ></sc-searchable-select>
@@ -198,7 +197,7 @@
 
   <div class="w-64 mx-2">
     <sc-searchable-select
-      [formControl]="disabledControl"
+      [formControl]="disabledFormArray.at(7)"
       label="Disabled search"
       [options]="options"
     ></sc-searchable-select>
@@ -211,16 +210,16 @@
 
 <div class="p-3 grid grid-cols-4 gap-8">
   <div>
-    <sc-textarea [formControl]="enabledControl" placeholder="Placeholder ..." [rows]="2" label="2 Line text area"
+    <sc-textarea [formControl]="enabledFormArray.at(11)" placeholder="Placeholder ..." [rows]="2" label="2 Line text area"
                  [required]="true"></sc-textarea>
   </div>
 
   <div>
-    <sc-textarea [formControl]="enabledControl" [rows]="3" label="3 Line text area"></sc-textarea>
+    <sc-textarea [formControl]="enabledFormArray.at(12)" [rows]="3" label="3 Line text area"></sc-textarea>
   </div>
 
   <div>
-    <sc-textarea [formControl]="disabledControl" [rows]="3" label="Disabled text area"></sc-textarea>
+    <sc-textarea [formControl]="enabledFormArray.at(13)" [rows]="3" label="Disabled text area"></sc-textarea>
   </div>
 </div>
 

@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { DialogRef } from '@ngneat/dialog';
-import { Data } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {DialogRef} from '@ngneat/dialog';
+import {Data} from '@angular/router';
 import {ScButtonComponent} from '../../sc-button/sc-button.component';
 import {ScIconComponent} from '../../sc-icon/sc-icon.component';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
-    selector: 'sc-confirmation-dialog',
-    templateUrl: './confirmation-dialog.component.html',
+  selector: 'sc-confirmation-dialog',
+  templateUrl: './confirmation-dialog.component.html',
   imports: [
     ScButtonComponent,
     ScIconComponent,
-  ]
+  ],
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  },
 })
 export class ConfirmationDialogComponent implements OnInit {
+  id = createId();
 
   constructor(public ref: DialogRef<Data, boolean>) {}
 
@@ -38,7 +43,7 @@ export class ConfirmationDialogComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  close(response: boolean){
+  close(response: boolean) {
     this.ref.close(response);
   }
 }

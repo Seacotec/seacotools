@@ -11,12 +11,12 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {NavigationExtras, Router} from '@angular/router';
 import {DialogData} from '../core/types/dialog-data';
 import {createId} from '@paralleldrive/cuid2';
-
+import {isEqual, cloneDeep} from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SeacotoolsHelperService {
+export class ScHelperService {
 
   private dialog = inject(DialogService);
   private toaster = inject(ToastrService);
@@ -46,7 +46,7 @@ export class SeacotoolsHelperService {
     return this.dialog.open(component, this.createDialogConfig(config)).afterClosed$.pipe(take(1));
   }
 
-  public dialogConfirmation (dialogData: DialogData, config?: Partial<DialogConfig<any>>) {
+  public dialogConfirmation(dialogData: DialogData, config?: Partial<DialogConfig<any>>) {
     config = {...config, data: dialogData};
     return <Observable<boolean>>this.dialog.open(ConfirmationDialogComponent, this.createDialogConfig(config)).afterClosed$;
   };
@@ -80,15 +80,19 @@ export class SeacotoolsHelperService {
   }
 
   // Unified Toast Utility
-  private readonly defaultToastConfig = { timeOut: 3000, progressBar: true, closeButton: true };
+  private readonly defaultToastConfig = {timeOut: 3000, progressBar: true, closeButton: true};
 
   private showToast(type: 'success' | 'warning' | 'error' | 'info', message: string, config = {}) {
-    const toastConfig = { ...this.defaultToastConfig, ...config };
+    const toastConfig = {...this.defaultToastConfig, ...config};
     switch (type) {
-      case 'success': return this.toaster.success(message, '', toastConfig);
-      case 'warning': return this.toaster.warning(message, '', toastConfig);
-      case 'error': return this.toaster.error(message, '', toastConfig);
-      case 'info': return this.toaster.info(message, '', toastConfig);
+      case 'success':
+        return this.toaster.success(message, '', toastConfig);
+      case 'warning':
+        return this.toaster.warning(message, '', toastConfig);
+      case 'error':
+        return this.toaster.error(message, '', toastConfig);
+      case 'info':
+        return this.toaster.info(message, '', toastConfig);
     }
   }
 
@@ -105,4 +109,21 @@ export class SeacotoolsHelperService {
   showSpinner = () => { this.spinner.show(); };
 
   hideSpinner = () => { this.spinner.hide(); };
+
+
+  getChangedProperties<T extends Record<string, any>>(updated: T, original: Record<string, any>): Partial<T> {
+    if (!original) return updated;
+    if (!updated) return {} as Partial<T>;
+    const result = cloneDeep(updated);
+    for (const key of Object.keys(result)) {
+      // Skip properties that don't exist in original
+      if (!Object.prototype.hasOwnProperty.call(original, key)) continue;
+      // Remove properties that are equal
+      if (isEqual(result[key], original[key])) {
+        delete result[key];
+      }
+    }
+    return result;
+  }
+
 }

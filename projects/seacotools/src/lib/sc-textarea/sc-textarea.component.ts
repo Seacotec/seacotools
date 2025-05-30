@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {createId} from '@paralleldrive/cuid2';
+import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 @Component({
   selector: 'sc-textarea',
@@ -17,16 +18,18 @@ import {createId} from '@paralleldrive/cuid2';
     }
   ],
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"textarea"'
   }
 })
 export class ScTextareaComponent implements ControlValueAccessor, OnInit {
   id = createId();
+  errorMessageService = inject(ScErrorMessageService);
   control = new FormControl<string | null>('');
   destroyRef = inject(DestroyRef);
   @Input() label: string = '';
   @Input() required = false;
-  @Input() errors: any = null;
+  @Input() errors: Record<string, any> | null = null;
   @Input() cssClass = '';
   @Input() name = '';
   @Input() placeholder = '';
@@ -55,5 +58,13 @@ export class ScTextareaComponent implements ControlValueAccessor, OnInit {
 
   setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.control.disable() : this.control.enable();
+  }
+
+  errorKeys(errors: Record<string, any> | null): string[] {
+    return errors ? Object.keys(errors) : [];
+  }
+
+  getErrorMessage(errorKey: string, errorValue: any): string {
+    return this.errorMessageService.getErrorMessage(errorKey, errorValue);
   }
 }

@@ -19,12 +19,12 @@
   >
 
   <!-- Error Message -->
-  @if (errors){
-    <div [id]="errorId"  class="text-red-500 mt-1 text-sm" role="alert">
-      @for (errorKey of objectKeys(errors); track errorKey){
-        <div *ngIf="errors[errorKey]">
-          {{ getErrorMessage(errorKey) }}
-        </div>
+  @if (errors) {
+    <div class="text-red-700 mt-1 text-sm">
+      @for (errorKey of errorKeys(errors); track errorKey) {
+        @if (errors[errorKey]) {
+          <div>{{ getErrorMessage(errorKey, errors[errorKey]) }}</div>
+        }
       }
     </div>
   }

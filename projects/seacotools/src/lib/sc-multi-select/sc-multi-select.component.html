@@ -27,4 +27,15 @@
     }
   </ng-select>
 
+  <!-- Error Message -->
+  @if (errors) {
+    <div class="text-red-700 mt-1 text-sm">
+      @for (errorKey of errorKeys(errors); track errorKey) {
+        @if (errors[errorKey]) {
+          <div>{{ getErrorMessage(errorKey, errors[errorKey]) }}</div>
+        }
+      }
+    </div>
+  }
+
 </div>

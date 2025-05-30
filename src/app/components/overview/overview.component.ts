@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {ScButtonComponent} from '../../../../projects/seacotools/src/lib/sc-button/sc-button.component';
-import {SeacotoolsHelperService} from '../../../../projects/seacotools/src/lib/sc-helper-service/seacotools-helper.service';
+import {ScHelperService} from '../../../../projects/seacotools/src/lib/sc-services/sc-helper.service';
 import {ScDropdownComponent} from '../../../../projects/seacotools/src/lib/sc-dropdown/sc-dropdown.component';
 import {ScIconComponent} from 'seacotools';
 
@@ -11,7 +11,7 @@ import {ScIconComponent} from 'seacotools';
 })
 export class OverviewComponent {
 
-  helper = inject(SeacotoolsHelperService);
+  helper = inject(ScHelperService);
 
   dropdownOptions = [
     { label: 'Dashboard', value: 'dashboard' },

@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  forwardRef,
+  forwardRef, inject,
   Input, ViewEncapsulation
 } from '@angular/core';
 import {
@@ -13,6 +13,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {createId} from '@paralleldrive/cuid2';
+import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 @Component({
   selector: 'sc-multi-select',
@@ -30,11 +31,13 @@ import {createId} from '@paralleldrive/cuid2';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+    '[attr.data-instance-id]': 'id',
+    '[attr.component-type]': '"multi-select"'
   }
 })
 export class ScMultiSelectComponent implements ControlValueAccessor {
   id = createId();
+  errorMessageService = inject(ScErrorMessageService);
   control = new FormControl<any[]>([]);
 
   @Input() options: any[] = [];
@@ -46,7 +49,7 @@ export class ScMultiSelectComponent implements ControlValueAccessor {
   @Input() displayKey: string = '';
   @Input() addTag = false;
   @Input() customHeight: 'md' | 'lg' | 'xl' = 'md'; // Default
-
+  @Input() errors: Record<string, any> | null = null;
 
   onChange = (value: any) => {};
   onTouch = () => {};
@@ -78,5 +81,13 @@ export class ScMultiSelectComponent implements ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     if (isDisabled) this.control.disable();
     else this.control.enable();
+  }
+
+  errorKeys(errors: Record<string, any> | null): string[] {
+    return errors ? Object.keys(errors) : [];
+  }
+
+  getErrorMessage(errorKey: string, errorValue: any): string {
+    return this.errorMessageService.getErrorMessage(errorKey, errorValue);
   }
 }

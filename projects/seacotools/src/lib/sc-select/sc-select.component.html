@@ -39,10 +39,14 @@
     ></option>
   </select>
 
-  <!-- Error Messages -->
-  @if (errors?.['required'] && control.touched) {
-    <div class="text-xs font-medium text-red-700 mt-1">
-      Required!
+  <!-- Error Message -->
+  @if (errors) {
+    <div class="text-red-700 mt-1 text-sm">
+      @for (errorKey of errorKeys(errors); track errorKey) {
+        @if (errors[errorKey]) {
+          <div>{{ getErrorMessage(errorKey, errors[errorKey]) }}</div>
+        }
+      }
     </div>
   }
 

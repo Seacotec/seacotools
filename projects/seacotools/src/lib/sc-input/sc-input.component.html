@@ -5,36 +5,32 @@
       [for]="id"
       class="flex items-center text-sm font-medium text-gray-900 dark:text-white"
     >
-      <span *ngIf="required" class="text-red-700 mr-1">*</span>
+      @if (required) {
+        <span class="text-red-700 mr-1">*</span>
+      }
       {{ label }}
     </label>
-    <sc-icon
-      *ngIf="questionMark"
-      name="question-mark-circle"
-      [tp]="questionMark"
-      class="text-green-700 ml-1"
-    ></sc-icon>
+    @if (questionMark) {
+      <sc-icon name="question-mark-circle" [tp]="questionMark" class="text-green-700 ml-1"></sc-icon>
+    }
   </div>
 
-  <!-- Input Field -->
-  <div *ngIf="variant === 'default'; else floatingLabelTemplate">
-    <input
-      [placeholder]="placeholder"
-      [id]="id"
-      [name]="name"
-      [type]="inputType"
-      [formControl]="control"
-      (blur)="onTouch()"
-      class="outline-none bg-gray-50 dark:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed w-full
+  @if (variant === 'default') {
+    <div>
+      <input
+        [placeholder]="placeholder"
+        [id]="id"
+        [name]="name"
+        [type]="inputType"
+        [formControl]="control"
+        (blur)="onTouch()"
+        class="outline-none bg-gray-50 dark:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed w-full
       px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-lg focus:ring focus:ring-indigo-500
       focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70 dark:disabled:bg-gray-600"
-    />
-  </div>
-
-  <!-- Floating Label Variant -->
-  <ng-template #floatingLabelTemplate>
+      />
+    </div>
+  } @else {
     <div class="relative">
-      <!-- Input Field -->
       <input
         [placeholder]="placeholder"
         [id]="id"
@@ -55,19 +51,16 @@
         {{ label }}
       </label>
     </div>
-  </ng-template>
+  }
 
-
-
-  <!-- Error Handling -->
-  <div
-    class="text-xs font-medium text-red-700 mt-1"
-    *ngIf="errors && (!control.untouched || submitted)"
-  >
-    <ng-container *ngFor="let errorKey of errorKeys(errors)">
-      <div *ngIf="errors[errorKey]">
-        {{ getErrorMessage(errorKey, errors[errorKey]) }}
-      </div>
-    </ng-container>
-  </div>
+  <!-- Error Message -->
+  @if (errors && !control.untouched) {
+    <div class="text-red-700 mt-1 text-sm">
+      @for (errorKey of errorKeys(errors); track errorKey) {
+        @if (errors[errorKey]) {
+          <div>{{ getErrorMessage(errorKey, errors[errorKey]) }}</div>
+        }
+      }
+    </div>
+  }
 </div>

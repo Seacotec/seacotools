@@ -3,6 +3,7 @@ import {DialogRef} from '@ngneat/dialog';
 import {Data} from '@angular/router';
 import {ScButtonComponent} from '../../sc-button/sc-button.component';
 import {ScIconComponent} from '../../sc-icon/sc-icon.component';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-success-dialog',
@@ -11,9 +12,13 @@ import {ScIconComponent} from '../../sc-icon/sc-icon.component';
     ScButtonComponent,
     ScIconComponent
   ],
+  host: {
+    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
+  },
   encapsulation: ViewEncapsulation.None,
 })
 export class SuccessDialogComponent {
+  id = createId();
 
   constructor(public ref: DialogRef<Data, boolean>) {}
 

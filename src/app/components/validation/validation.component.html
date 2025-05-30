@@ -1,0 +1,55 @@
+
+<div class="text-center text-2xl font-semibold mt-3">INPUTS</div>
+
+<div class="p-5 flex justify-between">
+
+  <div class="mx-5">
+    <sc-input
+      [formControl]="emailControl"
+      label="Email input"
+      [inputType]="'text'"
+      name="first_name"
+      placeholder="Enter your email"
+      [variant]="'default'"
+      [required]="true"
+      [errors]="emailControl.errors"
+    ></sc-input>
+  </div>
+
+  <div class="mx-5">
+    <sc-input
+      [formControl]="numericControl"
+      label="Numeric Input"
+      [inputType]="'text'"
+      name="first_name"
+      [variant]="'default'"
+      [required]="true"
+      [errors]="numericControl.errors"
+    ></sc-input>
+  </div>
+
+  <div class="mx-5">
+    <sc-input
+      [formControl]="formGroup.controls.passwordControl"
+      label="Password Input"
+      inputType="password"
+      name="first_name"
+      [variant]="'default'"
+      [required]="true"
+      [errors]="formGroup.controls.passwordControl.errors"
+    ></sc-input>
+  </div>
+
+  <div class="mx-5">
+    <sc-input
+      [formControl]="formGroup.controls.confirmPasswordControl"
+      label="Confirm password"
+      inputType="password"
+      name="first_name"
+      [variant]="'default'"
+      [required]="true"
+      [errors]="formGroup.controls.confirmPasswordControl.errors"
+    ></sc-input>
+  </div>
+</div>
+
