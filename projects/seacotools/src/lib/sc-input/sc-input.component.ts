@@ -36,7 +36,7 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
   @Input() required = false;
   @Input() errors: Record<string, any> | null = null;
   @Input() cssClass = '';
-  @Input() inputType: 'text' | 'number' | 'email' | 'password' | 'tel' = 'password';
+  @Input() inputType: 'text' | 'number' | 'email' | 'password' | 'tel' = 'text';
   @Input() name = '';
   @Input() placeholder = '';
   @Input() submitted = false;
