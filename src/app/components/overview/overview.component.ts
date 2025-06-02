@@ -3,6 +3,7 @@ import {ScButtonComponent} from '../../../../projects/seacotools/src/lib/sc-butt
 import {ScHelperService} from '../../../../projects/seacotools/src/lib/sc-services/sc-helper.service';
 import {ScDropdownComponent} from '../../../../projects/seacotools/src/lib/sc-dropdown/sc-dropdown.component';
 import {ScIconComponent} from 'seacotools';
+import {SampleDialogComponent} from '../sample-dialog/sample-dialog.component';
 
 @Component({
   selector: 'app-overview',
@@ -58,5 +59,12 @@ export class OverviewComponent {
       title: 'Do you accept this?',
       message: 'This is a Confirmation dialog'
     });
+  }
+
+  sampleForm() {
+    this.helper.dialogCommon(SampleDialogComponent, {
+      data: {},
+      width: '50rem'
+    })
   }
 }

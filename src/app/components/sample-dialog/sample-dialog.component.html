@@ -1,0 +1,49 @@
+<div class='form-dialog'>
+
+  <div class='border-b border-b-gray-500 pb-0.5'>
+    <span class='text-2xl font-medium tracking-wide'>Sample Form</span>
+  </div>
+
+  <form [formGroup]='form' (ngSubmit)='onSubmit()' class="grid grid-cols-1 gap-x-5 gap-y-2 p-2 mt-2">
+
+    <div class=''>
+      <sc-input label="Name"
+                formControlName='name'
+                [required]='true'
+                [showAllErrors]="showAllErrors"
+                [errors]="form.controls.name.errors"
+      ></sc-input>
+    </div>
+
+    <div class=''>
+      <sc-input label="Email"
+                formControlName='email'
+                [showAllErrors]="showAllErrors"
+                [errors]="form.controls.email.errors"
+      ></sc-input>
+    </div>
+
+    <div class=''>
+      <sc-input label="Phone"
+                formControlName='phone'
+                [showAllErrors]="showAllErrors"
+                [errors]="form.controls.phone.errors"
+      ></sc-input>
+    </div>
+
+
+    <div class=''>
+      <sc-input label="Address"
+                formControlName='address'
+                [errors]="form.controls.address.errors"
+      ></sc-input>
+    </div>
+
+
+    <div class='col-span-full flex justify-between mt-8'>
+      <sc-button type='button' color="yellow" (buttonClick)='cancel()'>Close</sc-button>
+      <sc-button type='submit'>Save</sc-button>
+    </div>
+  </form>
+
+</div>

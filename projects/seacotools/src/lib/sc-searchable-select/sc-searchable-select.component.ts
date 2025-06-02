@@ -46,6 +46,7 @@ export class ScSearchableSelectComponent implements ControlValueAccessor {
   @Input() displayKey: string = '';
   @Input() addTag = false;
   @Input() errors: Record<string, any> | null = null;
+  @Input() showAllErrors = false;
 
   onChange = (value: any) => {};
   onTouch = () => {};

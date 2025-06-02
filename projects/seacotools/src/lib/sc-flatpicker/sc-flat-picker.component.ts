@@ -49,6 +49,7 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
    * Default: 'local'
    */
   @Input() timezone: 'local' | 'utc' = 'local';
+  @Input() showAllErrors = false;
 
   /** Tracks whether the input field has been touched. */
   touched = false;

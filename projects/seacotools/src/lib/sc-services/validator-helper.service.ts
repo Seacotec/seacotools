@@ -1,7 +1,6 @@
-
-import { Injectable, inject } from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors} from '@angular/forms';
-import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
+import {inject, Injectable} from '@angular/core';
+import {AbstractControl, FormArray, FormGroup, ValidationErrors} from '@angular/forms';
+import {ScErrorMessageService} from './sc-error-message.service';
 
 
 @Injectable({
@@ -10,31 +9,6 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 export class ValidatorHelperService {
 
   private errorMessageService = inject(ScErrorMessageService);
-
-  /**
-   * Recursively mark all controls in a form as touched
-   * Works with nested FormGroups and FormArrays
-   *
-   * @param formGroup The form group or control to mark as touched
-   */
-  markAllAsTouched(formGroup: AbstractControl): void {
-    if (formGroup instanceof FormControl) {
-      formGroup.markAsTouched({ onlySelf: true });
-    } else if (formGroup instanceof FormGroup) {
-      Object.keys(formGroup.controls).forEach(key => {
-        const control = formGroup.get(key);
-        if (control) {
-          this.markAllAsTouched(control);
-        }
-      });
-      formGroup.markAsTouched({ onlySelf: true });
-    } else if (formGroup instanceof FormArray) {
-      formGroup.controls.forEach(control => {
-        this.markAllAsTouched(control);
-      });
-      formGroup.markAsTouched({ onlySelf: true });
-    }
-  }
 
   /**
    * Extract validation errors from a form control for use with ScInputComponent
@@ -59,15 +33,9 @@ export class ValidatorHelperService {
    * @returns A record mapping control names to their formatted errors
    */
   getFormErrors(form: FormGroup, markAsTouched = false): Record<string, ValidationErrors> {
-    if (markAsTouched) {
-      this.markAllAsTouched(form);
-    }
-
     const result: Record<string, ValidationErrors> = {};
-
     // Process all controls including nested ones
     this.processFormGroupErrors(form, '', result);
-
     return result;
   }
 
@@ -115,8 +83,6 @@ export class ValidatorHelperService {
       }
     });
   }
-
-
 
   /**
    * Check if a specific field has a specific error

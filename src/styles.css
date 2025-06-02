@@ -13,3 +13,7 @@
 /*@source "../node_modules/seacotools";*/
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+.form-dialog{
+  @apply p-5  bg-gray-50 dark:bg-gray-800 dark:text-gray-100;
+}

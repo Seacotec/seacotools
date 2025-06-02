@@ -39,6 +39,7 @@ export class ScSelectComponent implements ControlValueAccessor, OnInit {
   @Input() keys?: string[];
   @Input() required = false;
   @Input() firstEmpty = false;
+  @Input() showAllErrors = false;
 
   onChange: any = () => {};
   onTouch: any = () => {};

@@ -17,5 +17,5 @@ export * from './lib/sc-services/sc-helper.service';
 export * from './lib/core/types/table-types';
 export * from './lib/core/pipes/number-to-array.pipe';
 export * from './lib/validators/custom-validators';
-export * from './lib/validators/validator-helper.service';
+export * from './lib/sc-services/validator-helper.service';
 export type {DialogData} from './lib/core/types/dialog-data';

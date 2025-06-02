@@ -11,7 +11,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {NavigationExtras, Router} from '@angular/router';
 import {DialogData} from '../core/types/dialog-data';
 import {createId} from '@paralleldrive/cuid2';
-import {isEqual, cloneDeep} from 'lodash';
+import {cloneDeep, isEqual} from 'lodash';
 
 @Injectable({
   providedIn: 'root'

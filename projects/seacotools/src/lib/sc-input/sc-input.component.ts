@@ -42,6 +42,8 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
   @Input() submitted = false;
   @Input() questionMark = '';
   @Input() variant: 'default' | 'floatingLabel' = 'default';
+  @Input() showAllErrors = false;
+
 
   onChange: (value: any) => void = () => {};
   onTouch: () => void = () => {};
@@ -62,7 +64,11 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
   }
 
   registerOnTouched(fn: () => void): void {
-    this.onTouch = fn;
+    this.onTouch = () => {
+      this.control.markAsTouched();
+      console.log('touched')
+      fn();
+    };
   }
 
   setDisabledState(isDisabled: boolean): void {

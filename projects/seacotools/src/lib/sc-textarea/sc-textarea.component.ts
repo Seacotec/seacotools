@@ -34,6 +34,7 @@ export class ScTextareaComponent implements ControlValueAccessor, OnInit {
   @Input() name = '';
   @Input() placeholder = '';
   @Input() rows = 3;
+  @Input() showAllErrors = false;
 
   onChange: any = () => {};
   onTouch: any = () => {};
