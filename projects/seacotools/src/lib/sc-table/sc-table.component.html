@@ -7,14 +7,14 @@
   >
     <!-- Header Section -->
     <thead
-      class="text-xs uppercase"
+      class="text-xs capitalize"
       [ngClass]="headerClass"
     >
     <tr>
       <th
         *ngFor="let column of columns"
         scope="col"
-        class="px-6 py-3"
+        class="px-6 py-2.5"
       >
         <div class="" [ngClass]="column.headerClass">
           <span>{{ column.label }}</span>
@@ -22,7 +22,7 @@
             @if (currentSortField !== column.field || currentSortDirection === 'asc') {
               <sc-icon name="arrow-down-circle"
                        appearance="outline"
-                       class="ml-1 w-5 inline-block"
+                       class="ml-1 w-4 inline-block"
                        [tp]="currentSortField !== column.field ? 'Sort ascending' : 'Sort descending'"
                        [ngClass]="currentSortField === column.field ? 'text-blue-800 dark:text-yellow-200' : 'text-gray-400 dark:text-gray-500'"
                        (click)="sortData(column)"
@@ -30,7 +30,7 @@
             } @else {
               <sc-icon name="arrow-up-circle"
                        appearance="outline"
-                       class="ml-1 w-5 inline-block"
+                       class="ml-1 w-4 inline-block"
                        tp="Sort ascending"
                        [ngClass]="currentSortField === column.field ? 'text-blue-800 dark:text-yellow-200' : 'text-gray-400 dark:text-gray-500'"
                        (click)="sortData(column)"
@@ -53,7 +53,7 @@
       >
         <td
           *ngFor="let column of columns"
-          class="px-6 py-4"
+          class="px-6 py-2"
           [ngClass]="column.cellClass || ''"
         >
           <ng-container *ngIf="column.template">

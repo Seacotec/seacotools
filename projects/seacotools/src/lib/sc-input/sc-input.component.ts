@@ -34,7 +34,9 @@ import { ScIconComponent } from '../sc-icon/sc-icon.component';
 export class ScInputComponent implements ControlValueAccessor, OnInit {
   control = new FormControl<string | null>('');
   destroyRef = inject(DestroyRef);
-  id = `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 5)}`;
+  id = `${Date.now().toString(36)}-${Math.random()
+    .toString(36)
+    .substring(2, 5)}`;
 
   @Input() label = '';
   @Input() required = false;

@@ -1,13 +1,22 @@
-import {Component, ElementRef, EventEmitter, HostListener, inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {SeacotoolsHelperService} from '../sc-helper-service/seacotools-helper.service';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { SeacotoolsHelperService } from '../sc-helper-service/seacotools-helper.service';
 
 @Component({
   selector: 'sc-dropdown',
   templateUrl: './sc-dropdown.component.html',
   imports: [],
 })
-export class ScDropdownComponent implements OnInit, OnDestroy{
-
+export class ScDropdownComponent implements OnInit, OnDestroy {
   private elementRef = inject(ElementRef);
   private helper = inject(SeacotoolsHelperService);
 
@@ -16,7 +25,7 @@ export class ScDropdownComponent implements OnInit, OnDestroy{
   @Input() changePlaceholderOnSelect: boolean = false; // Flag to enforce default placeholder
   @Input() buttonClasses: string = ''; // Custom button classes
   @Input() optionClasses: string = ''; // Custom option classes
-  @Input() type: 'button'|'text' = 'button';
+  @Input() type: 'button' | 'text' = 'button';
   @Input() optionsWidthClass = 'w-44';
   @Output() selectionChange = new EventEmitter<any>(); // Emits selected value
 
@@ -29,25 +38,32 @@ export class ScDropdownComponent implements OnInit, OnDestroy{
 
   // Subscription to the dropdown service
   private clickSubscription = this.helper.clicks$.subscribe((target) => {
-    if (this.isDropdownOpen && !this.elementRef.nativeElement.contains(target)) {
+    if (
+      this.isDropdownOpen &&
+      !this.elementRef.nativeElement.contains(target)
+    ) {
       this.isDropdownOpen = false;
     }
   });
 
   ngOnInit(): void {
     // Dynamically set classes for the dropdown button
-    this.dropdownButtonClasses += this.type === 'button'
-      ? ` text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+    this.dropdownButtonClasses +=
+      this.type === 'button'
+        ? ` text-white bg-blue-900 opacity-95 hover:bg-blue-700 
          focus:outline-none focus:ring-blue-300 px-5 py-2.5 text-center dark:bg-blue-600
          dark:hover:bg-blue-700 dark:focus:ring-blue-800`
-      : ` bg-transparent text-gray-700 hover:text-gray-900 dark:hover:text-gray-200`;
+        : ` bg-transparent text-gray-700 hover:text-gray-900 dark:hover:text-gray-200`;
 
     // Append user-defined button classes if provided
     if (this.buttonClasses) {
       this.dropdownButtonClasses += ` ${this.buttonClasses}`;
     }
 
-    if (this.type === 'button' && !this.dropdownButtonClasses.includes('rounded')){
+    if (
+      this.type === 'button' &&
+      !this.dropdownButtonClasses.includes('rounded')
+    ) {
       this.dropdownButtonClasses += ' rounded-lg';
     }
 
