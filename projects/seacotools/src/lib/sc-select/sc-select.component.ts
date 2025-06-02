@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, forwardRef, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -25,11 +25,13 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
     '[attr.component-type]': '"select"'
   }
 })
-export class ScSelectComponent implements ControlValueAccessor, OnInit {
+export class ScSelectComponent implements ControlValueAccessor, OnInit, OnChanges {
   id = createId();
   errorMessageService = inject(ScErrorMessageService);
   control = new FormControl(null);
   destroyRef = inject(DestroyRef);
+
+  private cdr = inject(ChangeDetectorRef);
 
   @Input() options: Array<Record<string, any> | string | number> = [];
   @Input() label?: string;
@@ -69,6 +71,13 @@ export class ScSelectComponent implements ControlValueAccessor, OnInit {
       if (this.onChange) this.onChange(value);
     });
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options']) {
+      this.cdr.markForCheck();
+    }
+  }
+
 
   private initKeys(): void {
     if (!this.keys && this.key) {

@@ -36,6 +36,10 @@ export class InputsComponent implements OnInit {
     }
     this.enabledFormArray.at(6).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
       console.log(value);
-    })
+    });
+    setTimeout(() => {
+      this.options = [...this.options, 'BMW']
+      this.selectOptions = [...this.selectOptions, {label: 'BMV', value: 6} ]
+    }, 3000)
   }
 }
