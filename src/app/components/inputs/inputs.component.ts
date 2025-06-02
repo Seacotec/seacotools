@@ -8,6 +8,7 @@ import {ScTextareaComponent} from '../../../../projects/seacotools/src/lib/sc-te
 import {ScMultiSelectComponent} from '../../../../projects/seacotools/src/lib/sc-multi-select/sc-multi-select.component';
 import {ScSearchableSelectComponent} from '../../../../projects/seacotools/src/lib/sc-searchable-select/sc-searchable-select.component';
 import { FormBuilder } from '@angular/forms';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -33,5 +34,8 @@ export class InputsComponent implements OnInit {
       this.disabledFormArray.push(this.fb.control({value: null, disabled: true}));
       this.enabledFormArray.push(this.fb.control(null));
     }
+    this.enabledFormArray.at(6).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
+      console.log(value);
+    })
   }
 }

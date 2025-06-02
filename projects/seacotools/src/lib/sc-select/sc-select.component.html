@@ -27,16 +27,14 @@
     focus:ring focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
   >
     <!-- Placeholder Option -->
-    @if (firstEmpty){
-      <option value="" disabled *ngIf="firstEmpty"></option>
+    @if (firstEmpty) {
+      <option value="" disabled></option>
     }
 
     <!-- Rendered Options -->
-    <option
-      *ngFor="let option of options"
-      [value]="option"
-      [innerHTML]="displayValue(option)"
-    ></option>
+    @for (option of options; track option) {
+      <option [ngValue]="option" [innerHTML]="displayValue(option)"></option>
+    }
   </select>
 
   <!-- Error Message -->

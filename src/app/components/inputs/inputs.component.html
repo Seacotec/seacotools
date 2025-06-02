@@ -111,7 +111,8 @@
       <div class="w-64 mx-5">
         <sc-select [formControl]="enabledFormArray.at(6)"
                    label="Select in string array"
-                   [options]="['Mercedes', 'Audi', 'WW', 'Ford', 'Train']"
+                   [options]="selectOptions"
+                   key="label"
                    questionMark="Select if you have, if not train"
         ></sc-select>
       </div>
