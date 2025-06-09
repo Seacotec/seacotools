@@ -17,13 +17,8 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
       multi: true
     }
   ],
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"textarea"'
-  }
 })
 export class ScTextareaComponent implements ControlValueAccessor, OnInit {
-  id = createId();
   errorMessageService = inject(ScErrorMessageService);
   control = new FormControl<string | null>('');
   destroyRef = inject(DestroyRef);

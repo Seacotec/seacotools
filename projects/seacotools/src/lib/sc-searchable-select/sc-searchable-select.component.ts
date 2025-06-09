@@ -29,13 +29,9 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
     }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"searchable-select"'
-  }
 })
 export class ScSearchableSelectComponent implements ControlValueAccessor {
-  id = createId();
+
   errorMessageService = inject(ScErrorMessageService);
   control = new FormControl<any>(null);
 

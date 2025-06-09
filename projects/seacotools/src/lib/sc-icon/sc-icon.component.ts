@@ -4,10 +4,6 @@ import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-icon',
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"searchable-icon"'
-  },
   template: `
     <svg
       [innerHTML]="safeSvgContent"
@@ -16,7 +12,6 @@ import {createId} from '@paralleldrive/cuid2';
   `,
 })
 export class ScIconComponent implements OnChanges {
-  id = createId();
   private sanitizer = inject(DomSanitizer);
   private changeDetector = inject(ChangeDetectorRef);
 

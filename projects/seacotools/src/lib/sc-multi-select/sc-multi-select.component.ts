@@ -30,13 +30,8 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"multi-select"'
-  }
 })
 export class ScMultiSelectComponent implements ControlValueAccessor {
-  id = createId();
   errorMessageService = inject(ScErrorMessageService);
   control = new FormControl<any[]>([]);
 

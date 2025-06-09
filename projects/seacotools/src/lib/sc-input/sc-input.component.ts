@@ -19,10 +19,6 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
       multi: true,
     },
   ],
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"input"'
-  }
 })
 export class ScInputComponent implements ControlValueAccessor, OnInit {
   id = createId();

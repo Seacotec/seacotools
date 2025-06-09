@@ -20,10 +20,6 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
       multi: true
     }
   ],
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"select"'
-  }
 })
 export class ScSelectComponent implements ControlValueAccessor, OnInit {
   id = createId();

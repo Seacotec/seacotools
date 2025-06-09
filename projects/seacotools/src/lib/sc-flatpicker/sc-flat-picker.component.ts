@@ -22,14 +22,9 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
       multi: true,
     },
   ],
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"flatpicker"'
-  }
 })
 export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccessor {
 
-  id = createId();
   errorMessageService = inject(ScErrorMessageService);
 
   /** Whether the input is required. */

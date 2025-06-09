@@ -12,13 +12,8 @@ type SortDirection = 'asc' | 'desc';
   selector: 'sc-table',
   templateUrl: './sc-table.component.html',
   imports: [CommonModule, ScIconComponent, TippyDirective, NumberToArrayPipe],
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"table"'
-  }
 })
 export class ScTableComponent {
-  id = createId();
   @Input() columns: TableColumn[] = []; // Column definitions
   @Input() data: any[] = []; // Table data
   @Input() config: TableConfig = {}; // Configuration for styling
@@ -144,4 +139,12 @@ export class ScTableComponent {
       this.currentPage--;
     }
   }
+
+  // Handler for row click events
+  onRowClick(row: any): void {
+    if (this.config.onRowClick) {
+      this.config.onRowClick(row);
+    }
+  }
+
 }

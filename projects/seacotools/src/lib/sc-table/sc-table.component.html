@@ -45,25 +45,33 @@
 
     <!-- Body Section -->
     <tbody>
-    <ng-container *ngIf="paginatedData.length; else noDataTemplate">
-      <tr
-        *ngFor="let row of paginatedData; let i = index"
-        [class]="rowClass + ' ' + rowBorderClass"
-        [ngClass]="{ 'border-b': true }"
-      >
-        <td
-          *ngFor="let column of columns"
-          [ngClass]="column.cellClass || config.globalCellClass || 'p-2'"
+      @if (paginatedData.length) {
+        <tr
+          *ngFor="let row of paginatedData; let i = index"
+          [class]="rowClass + ' ' + rowBorderClass"
+          [ngClass]="{ 'border-b': true, 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700': config.onRowClick }"
+          (click)="config.onRowClick && onRowClick(row)"
         >
-          <ng-container *ngIf="column.template">
-            <ng-container
-              *ngTemplateOutlet="column.template; context: { $implicit: row, index: i }"
-            ></ng-container>
-          </ng-container>
-          <ng-container *ngIf="!column.template">{{ row[column.field] }}</ng-container>
-        </td>
-      </tr>
-    </ng-container>
+          <td
+            *ngFor="let column of columns"
+            [ngClass]="column.cellClass || config.globalCellClass || 'p-2'"
+          >
+            @if (column.template) {
+              <ng-container
+                *ngTemplateOutlet="column.template; context: { $implicit: row, index: i }"
+              ></ng-container>
+            } @else {
+              {{ row[column.field] }}
+            }
+          </td>
+        </tr>
+      } @else {
+        <div
+          [class]="config.noDataClass || 'py-4 text-center text-sm text-gray-500 dark:text-gray-400'"
+        >
+          {{ config.noDataMessage || 'No data available' }}
+        </div>
+      }
     </tbody>
   </table>
 </div>
@@ -124,11 +132,3 @@
     </nav>
   </div>
 }
-
-<ng-template #noDataTemplate>
-  <div
-    [class]="config.noDataClass || 'py-4 text-center text-sm text-gray-500 dark:text-gray-400'"
-  >
-    {{ config.noDataMessage || 'No data available' }}
-  </div>
-</ng-template>

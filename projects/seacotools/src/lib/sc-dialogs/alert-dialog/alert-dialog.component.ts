@@ -13,12 +13,8 @@ import {createId} from '@paralleldrive/cuid2';
     ScButtonComponent,
     ScIconComponent
   ],
-  host: {
-    '[attr.data-instance-id]': 'id' // Add a unique attribute to each instance
-  },
 })
 export class AlertDialogComponent{
-  id = createId();
 
   constructor(public ref: DialogRef<Data, boolean>) {}
 

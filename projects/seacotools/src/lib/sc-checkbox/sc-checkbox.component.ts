@@ -7,10 +7,6 @@ import {createId} from '@paralleldrive/cuid2';
   selector: 'sc-checkbox',
   templateUrl: './sc-checkbox.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"checkbox"'
-  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,7 +19,6 @@ import {createId} from '@paralleldrive/cuid2';
   ]
 })
 export class ScCheckboxComponent implements ControlValueAccessor, OnInit {
-  id = createId();
   control = new FormControl<boolean>(false);
   @Input() label: string = '';
   checkboxId = (Math.random() + 1).toString(36).substring(7);

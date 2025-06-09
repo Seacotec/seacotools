@@ -8,13 +8,8 @@ import {createId} from '@paralleldrive/cuid2';
   imports: [ScIconComponent, NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sc-button.component.html',
-  host: {
-    '[attr.data-instance-id]': 'id',
-    '[attr.component-type]': '"searchable-button"'
-  }
 })
 export class ScButtonComponent implements OnInit {
-  id = createId();
 
   @Input() appearance: 'default' | 'pills' | 'outline' = 'default';
   @Input() disabled = false;

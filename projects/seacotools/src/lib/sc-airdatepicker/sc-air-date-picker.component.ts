@@ -26,12 +26,8 @@
 //       multi: true,
 //     },
 //   ],
-//   host: {
-//     '[attr.data-instance-id]': 'id', // Add a unique attribute to each instance
-//   },
 // })
 // export class ScAirDatePickerComponent implements AfterViewInit, ControlValueAccessor {
-//   id = createId();
 //   /** Whether the input is required. */
 //   @Input() required: boolean = false;
 //
