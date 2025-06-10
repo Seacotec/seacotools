@@ -1,7 +1,8 @@
-<div>
+<div class="h-[500px] overflow-auto">
   <sc-table
     [columns]="columns"
     [data]="data"
-    [pageSize]="12"
+    [pageSize]="20"
+    [config]="{stickyHeader: true}"
   ></sc-table>
 </div>

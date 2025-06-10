@@ -1,4 +1,8 @@
-<div class="relative overflow-x-auto" [ngClass]="config.containerClass">
+<div class="relative overflow-x-auto"
+     [ngClass]="config.containerClass"
+     [class.overflow-y-auto]="config.stickyHeader"
+     [class.h-96]="config.stickyHeader"
+>
   <table
     [class]="textClass + ' w-full text-sm text-left rtl:text-right'"
     [ngClass]="{
@@ -9,6 +13,8 @@
     <thead
       class="text-xs uppercase"
       [ngClass]="headerClass"
+      [class.sticky]="config.stickyHeader"
+      [class.top-0]="config.stickyHeader"
     >
     <tr>
       <th

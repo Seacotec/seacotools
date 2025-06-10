@@ -21,5 +21,6 @@ export interface TableConfig {
   noDataMessage?: string; // Message to show when no data is available
   noDataClass?: string; // CSS classes for the no-data message
   highlightRows?: boolean; // Enable/disable row highlighting (default: false)
+  stickyHeader?: boolean; // Enable/disable sticky header (default: false)
   onRowClick?: (row: any) => void; // Handler function for row click events
 }

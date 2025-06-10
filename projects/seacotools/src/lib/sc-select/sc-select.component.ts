@@ -53,7 +53,7 @@ export class ScSelectComponent implements ControlValueAccessor, OnInit {
   get selectClasses(): string {
     return [
       'border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none',
-      'w-full px-2 py-2 mb-2 bg-gray-50 placeholder-gray-500 dark:bg-gray-700',
+      'w-full px-2 py-2 bg-gray-50 placeholder-gray-500 dark:bg-gray-700',
       this.errors && !this.control.untouched ? 'border-red-500' : 'border-gray-400',
       this.control.disabled ? 'text-gray-600 bg-gray-300 cursor-not-allowed' : '',
     ].join(' ');
