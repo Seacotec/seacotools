@@ -1,6 +1,47 @@
-import {ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {createId} from '@paralleldrive/cuid2';
+
+// Static cache for icon sets using specific cache keys
+class IconCache {
+  private static cache = new Map<string, Record<string, string>>();
+  private static loadingPromises = new Map<string, Promise<Record<string, string>>>();
+
+  static async getIcons(cacheKey: string): Promise<Record<string, string>> {
+    const appearance = cacheKey.split('-')[0]; // Extract appearance from cacheKey
+
+    if (this.cache.has(appearance)) {
+      return this.cache.get(appearance)!;
+    }
+
+    if (this.loadingPromises.has(appearance)) {
+      return this.loadingPromises.get(appearance)!;
+    }
+
+    const loadPromise = this.loadIconsFromFile(appearance);
+    this.loadingPromises.set(appearance, loadPromise);
+
+    try {
+      const icons = await loadPromise;
+      this.cache.set(appearance, icons);
+      this.loadingPromises.delete(appearance);
+      return icons;
+    } catch (error) {
+      this.loadingPromises.delete(appearance);
+      throw error;
+    }
+  }
+
+  private static async loadIconsFromFile(appearance: string): Promise<Record<string, string>> {
+    switch (appearance) {
+      case 'outline':
+        return (await import('./icon-store/outline-icons')).OUTLINE_ICONS;
+      case 'solid':
+        return (await import('./icon-store/solid-icons')).SOLID_ICONS;
+      default:
+        throw new Error(`Invalid icon appearance: "${appearance}"`);
+    }
+  }
+}
 
 @Component({
   selector: 'sc-icon',
@@ -15,94 +56,76 @@ export class ScIconComponent implements OnChanges {
   private sanitizer = inject(DomSanitizer);
   private changeDetector = inject(ChangeDetectorRef);
 
-  // Define sc-input properties
-  @Input({required: true}) name: string = ''; // The name of the icon (e.g., 'home', 'user').
-  @Input() appearance: 'outline' | 'solid' = 'outline'; // The style of the icon.
-  @Input() class: string = ''; // Additional classes for styling.
+  @Input({required: true}) name: string = '';
+  @Input() appearance: 'outline' | 'solid' = 'outline';
+  @Input() class: string = '';
 
-  // Holds the SVG content
-  svgContent: string = '';
-
-  // Holds the sanitized SVG content
   safeSvgContent: SafeHtml = '';
-
-  // Final computed class for the component
   computedClass: string = '';
 
+  // Cache for sanitized SVG content using specific icon keys
+  private static sanitizedCache = new Map<string, SafeHtml>();
 
-  // Process the sc-input classes: ensure w-* and h-* exist
-
-  // Detect changes to sc-input properties
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
-    this.computedClass = this.processClasses(this.class);
-    // React to changes in inputs (e.g., name or appearance)
+    if (changes['class']) {
+      this.computedClass = this.processClasses(this.class);
+    }
+
     if (changes['name'] || changes['appearance']) {
-      this.updateSvgContent();
+      await this.updateSvgContent();
     }
   }
 
   private processClasses(inputClass: string): string {
-    const hasWidth = inputClass.match(/w-\d+/); // Match width classes like w-10, w-16
-    const hasHeight = inputClass.match(/h-\d+/); // Match height classes like h-10, h-16
+    const hasWidth = inputClass.match(/w-\d+/);
+    const hasHeight = inputClass.match(/h-\d+/);
 
     let updatedClass = inputClass;
 
-    if (hasWidth) {
-      // If width exists but height doesn't, add matching height
-      const widthValue = hasWidth[0].split('-')[1]; // Extract the number
-      if (!hasHeight) {
-        updatedClass += ` h-${widthValue}`;
-      }
-    } else if (hasHeight) {
-      // If height exists but width doesn't, add matching width
+    if (hasWidth && !hasHeight) {
+      const widthValue = hasWidth[0].split('-')[1];
+      updatedClass += ` h-${widthValue}`;
+    } else if (hasHeight && !hasWidth) {
       const heightValue = hasHeight[0].split('-')[1];
       updatedClass += ` w-${heightValue}`;
-    } else {
-      // If neither width nor height exists, add the default classes
+    } else if (!hasWidth && !hasHeight) {
       updatedClass += ' w-5 h-5';
     }
 
-    return updatedClass.trim(); // Return the final processed class
+    return updatedClass.trim();
   }
 
-  // Method to asynchronously load SVG content
   private async updateSvgContent(): Promise<void> {
     const ERROR_SVG = '<svg aria-hidden="true"><text x="0" y="10" fill="red">Icon Not Found</text></svg>';
+
+    if (!this.name) {
+      this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml('');
+      return;
+    }
+
+    // Use the specific cacheKey that includes both appearance and name
+    const cacheKey = `${this.appearance}-${this.name}`;
+
+    // Check if we already have the sanitized version cached
+    if (ScIconComponent.sanitizedCache.has(cacheKey)) {
+      this.safeSvgContent = ScIconComponent.sanitizedCache.get(cacheKey)!;
+      return;
+    }
+
     try {
-      if (!this.name) {
-        this.svgContent = ''; // Set empty SVG content if no name
-        return;
-      }
+      // Pass the cacheKey to IconCache.getIcons
+      const icons = await IconCache.getIcons(cacheKey);
+      const svgContent = icons[this.name] || ERROR_SVG;
 
-      const icons = await this.loadIcons();
+      // Sanitize and cache using the specific cacheKey
+      this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml(svgContent);
+      ScIconComponent.sanitizedCache.set(cacheKey, this.safeSvgContent);
 
-      if (icons[this.name]) {
-        this.svgContent = icons[this.name];
-      } else {
-        console.error(`Icon "${this.name}" not found in appearance "${this.appearance}".`);
-        this.svgContent = ERROR_SVG; // Fallback SVG content
-      }
-    } catch (error: any) {
-      console.log('Inside catch block:', error.message); // Debug
+    } catch (error) {
       console.error(`Failed to load icons for appearance "${this.appearance}".`, error);
-      this.svgContent = ERROR_SVG;
+      this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml(ERROR_SVG);
     }
 
-    // Sanitize the SVG content
-    this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml(this.svgContent);
     this.changeDetector.markForCheck();
-  }
-
-  // Dynamically import the appropriate file based on the icon appearance
-  private async loadIcons(): Promise<Record<string, string>> {
-    switch (this.appearance) {
-      case 'outline':
-        return (await import('./icon-store/outline-icons')).OUTLINE_ICONS;
-      case 'solid':
-        return (await import('./icon-store/solid-icons')).SOLID_ICONS;
-      default:
-        console.error(`Invalid icon appearance: "${this.appearance}"`);
-        throw new Error(`Invalid icon appearance: "${this.appearance}"`); // Log and throw for invalid appearance
-    }
   }
 }

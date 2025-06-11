@@ -47,7 +47,6 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
     this.control.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => this.onChange(value));
-    this.cdr.detectChanges();
   }
 
   writeValue(value: string | null): void {
@@ -58,12 +57,8 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
-    this.onTouch = () => {
-      this.control.markAsTouched();
-      console.log('touched')
-      fn();
-    };
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {

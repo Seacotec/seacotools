@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-checkbox',
@@ -14,14 +13,14 @@ import {createId} from '@paralleldrive/cuid2';
       multi: true,
     },
   ],
-  imports: [
-    ReactiveFormsModule
-  ]
+  imports: [ReactiveFormsModule]
 })
 export class ScCheckboxComponent implements ControlValueAccessor, OnInit {
+  private static idCounter = 0;
+
   control = new FormControl<boolean>(false);
   @Input() label: string = '';
-  checkboxId = (Math.random() + 1).toString(36).substring(7);
+  checkboxId = `sc-checkbox-${++ScCheckboxComponent.idCounter}`;
   destroyRef = inject(DestroyRef);
 
   onChange: any = () => {};
@@ -34,7 +33,7 @@ export class ScCheckboxComponent implements ControlValueAccessor, OnInit {
   }
 
   writeValue(value: any): void {
-    this.control.setValue(value)
+    this.control.setValue(value);
   }
 
   registerOnChange(fn: any): void {

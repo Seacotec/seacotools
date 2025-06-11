@@ -1,8 +1,28 @@
 <div class="h-[500px] overflow-auto">
   <sc-table
     [columns]="columns"
-    [data]="data"
-    [pageSize]="20"
+    [data]="tableData"
     [config]="{stickyHeader: true}"
   ></sc-table>
 </div>
+
+<ng-template #actionCell let-row="row" let-index="index">
+  <div class="flex items-center space-x-2 justify-center">
+    <sc-icon name="check-circle" appearance="solid" class="text-green-700"/>
+  </div>
+</ng-template>
+
+<ng-template #ciiRatingCell let-row>
+  <div class="flex justify-center items-center">
+    <div class="flex justify-center rounded-xl w-10 text-white font-bold"
+         [ngClass]="{
+           'bg-green-700': row.ciiRating === 'A',
+           'bg-green-400': row.ciiRating === 'B',
+           'bg-orange-300': row.ciiRating === 'C',
+           'bg-orange-500': row.ciiRating === 'D',
+           'bg-red-500': row.ciiRating === 'E',
+         }">
+      {{ row.ciiRating }}
+    </div>
+  </div>
+</ng-template>
