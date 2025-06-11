@@ -1,25 +1,23 @@
 <div [class]="cssClass">
   <!-- Label and Optional Question Mark -->
-  <div class="flex items-center mb-1" *ngIf="label && variant === 'default'">
-    <label
-      [for]="id"
-      class="flex items-center text-sm font-medium text-gray-900 dark:text-white"
-    >
-      @if (required) {
-        <span class="text-red-700 mr-1">*</span>
+  @if (label && variant === 'default') {
+    <div class="flex items-center mb-1">
+      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+        @if (required) {
+          <span class="text-red-700 mr-1">*</span>
+        }
+        {{ label }}
+      </label>
+      @if (questionMark) {
+        <sc-icon name="question-mark-circle" [tp]="questionMark" class="text-green-700 ml-1"></sc-icon>
       }
-      {{ label }}
-    </label>
-    @if (questionMark) {
-      <sc-icon name="question-mark-circle" [tp]="questionMark" class="text-green-700 ml-1"></sc-icon>
-    }
-  </div>
+    </div>
+  }
 
   @if (variant === 'default') {
     <div>
       <input
         [placeholder]="placeholder"
-        [id]="id"
         [name]="name"
         [type]="inputType"
         [formControl]="control"
@@ -33,7 +31,6 @@
     <div class="relative">
       <input
         [placeholder]="placeholder"
-        [id]="id"
         [name]="name"
         [type]="inputType"
         [formControl]="control"
@@ -45,9 +42,7 @@
 
       <!-- Label -->
       <label
-        [for]="id"
-        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform scale-75 -translate-y-[14px] top-[14px] origin-[0] left-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[14px]"
-      >
+        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform scale-75 -translate-y-[14px] top-[14px] origin-[0] left-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[14px]">
         {{ label }}
       </label>
     </div>

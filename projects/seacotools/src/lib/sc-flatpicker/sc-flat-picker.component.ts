@@ -5,7 +5,6 @@ import {CommonModule} from '@angular/common';
 import {Instance} from 'flatpickr/dist/types/instance';
 import {DateOption, Options} from 'flatpickr/dist/types/options';
 import confirmDatePlugin from 'flatpickr/dist/plugins/confirmDate/confirmDate';
-import {createId} from '@paralleldrive/cuid2';
 import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 

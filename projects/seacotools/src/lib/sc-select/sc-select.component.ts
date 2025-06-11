@@ -22,7 +22,7 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
   ],
 })
 export class ScSelectComponent implements ControlValueAccessor, OnInit {
-  id = createId();
+
   errorMessageService = inject(ScErrorMessageService);
   control = new FormControl(null);
   destroyRef = inject(DestroyRef);
@@ -52,10 +52,10 @@ export class ScSelectComponent implements ControlValueAccessor, OnInit {
 
   get selectClasses(): string {
     return [
-      'border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none',
-      'w-full px-2 py-2 bg-gray-50 placeholder-gray-500 dark:bg-gray-700',
+      'w-full rounded-lg border bg-gray-50 px-3 py-2 outline-none placeholder-gray-500 focus:border-indigo-500',
+      'focus:ring focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:disabled:bg-gray-600',
       this.errors && !this.control.untouched ? 'border-red-500' : 'border-gray-400',
-      this.control.disabled ? 'text-gray-600 bg-gray-300 cursor-not-allowed' : '',
+      this.control.disabled ? 'cursor-not-allowed bg-gray-300 text-gray-600' : '',
     ].join(' ');
   }
 

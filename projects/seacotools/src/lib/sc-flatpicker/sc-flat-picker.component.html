@@ -1,9 +1,15 @@
 <div class="w-full overflow-hidden">
 
-  <label *ngIf="label" class="form-label mt-1 mb-1 me-2 ">
-    <span *ngIf="required" class="text-red-700">*</span>
-    {{ label }}
-  </label>
+  @if (label) {
+    <div class="flex items-center mb-1">
+      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+        @if (required) {
+          <span class="text-red-700 mr-1">*</span>
+        }
+        {{ label }}
+      </label>
+    </div>
+  }
 
   <input #myDatepicker
          type="text"

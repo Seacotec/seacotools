@@ -1,9 +1,15 @@
 <div class="">
 
-  <label *ngIf="label" class="flex items-center mb-1">
-    <span *ngIf="required" class="text-red-700 dark:text-red-400 mr-1">*</span>
-    <span class="text-gray-900 dark:text-gray-200">{{ label }}</span>
-  </label>
+  @if (label) {
+    <div class="flex items-center mb-1">
+      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+        @if (required) {
+          <span class="text-red-700 mr-1">*</span>
+        }
+        {{ label }}
+      </label>
+    </div>
+  }
 
   <textarea
     [rows]="rows"

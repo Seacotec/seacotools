@@ -1,20 +1,18 @@
 <div class="w-full">
   <!-- Label Section -->
-  <div class="flex items-center mb-1" *ngIf="label">
-    <label
-      [for]="id"
-      class="flex items-center text-sm font-medium text-gray-900 dark:text-white"
-    >
-      <span *ngIf="required" class="text-red-700 mr-1">*</span>
-      {{ label }}
-    </label>
-    <sc-icon
-      *ngIf="questionMark"
-      name="question-mark-circle"
-      [tp]="questionMark"
-      class="text-green-700 ml-1"
-    ></sc-icon>
-  </div>
+  @if (label) {
+    <div class="flex items-center mb-1">
+      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+        @if (required) {
+          <span class="text-red-700 mr-1">*</span>
+        }
+        {{ label }}
+      </label>
+      @if (questionMark) {
+        <sc-icon name="question-mark-circle" [tp]="questionMark" class="text-green-700 ml-1"></sc-icon>
+      }
+    </div>
+  }
 
   <!-- Select Dropdown -->
   <select
@@ -22,9 +20,6 @@
     [class]="selectClasses"
     [attr.aria-required]="required ? 'true' : null"
     [attr.aria-label]="label"
-    [id]="id"
-    class="w-full px-2 py-1 text-sm text-gray-700 bg-gray-50 border border-gray-400 rounded-lg dark:disabled:bg-gray-600
-    focus:ring focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
   >
     <!-- Placeholder Option -->
     @if (firstEmpty) {

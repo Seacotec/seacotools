@@ -1,18 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef, inject,
-  Input
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule
-} from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { NgSelectModule } from '@ng-select/ng-select';
-import {createId} from '@paralleldrive/cuid2';
+import {ChangeDetectionStrategy, Component, forwardRef, inject, Input} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {NgSelectModule} from '@ng-select/ng-select';
 import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 @Component({
@@ -43,6 +32,7 @@ export class ScSearchableSelectComponent implements ControlValueAccessor {
   @Input() addTag = false;
   @Input() errors: Record<string, any> | null = null;
   @Input() showAllErrors = false;
+  @Input() required = false;
 
   onChange = (value: any) => {};
   onTouch = () => {};

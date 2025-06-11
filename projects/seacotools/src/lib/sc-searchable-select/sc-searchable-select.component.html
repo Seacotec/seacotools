@@ -1,8 +1,15 @@
 <div class="searchable-select-container md-height">
 
-  <label *ngIf="label" class="flex items-center mb-1 text-sm font-medium">
-    <span>{{ label }}</span>
-  </label>
+  @if (label) {
+    <div class="flex items-center mb-1">
+      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+        @if (required) {
+          <span class="text-red-700 mr-1">*</span>
+        }
+        {{ label }}
+      </label>
+    </div>
+  }
 
   <ng-select
     [items]="options"

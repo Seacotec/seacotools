@@ -21,7 +21,6 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
   ],
 })
 export class ScInputComponent implements ControlValueAccessor, OnInit {
-  id = createId();
   control = new FormControl<string | null>('');
   destroyRef = inject(DestroyRef);
   errorMessageService = inject(ScErrorMessageService);

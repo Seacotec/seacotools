@@ -46,7 +46,7 @@ export class ScMultiSelectComponent implements ControlValueAccessor {
   @Input() customHeight: 'md' | 'lg' | 'xl' = 'md'; // Default
   @Input() errors: Record<string, any> | null = null;
   @Input() showAllErrors = false;
-
+  @Input() required = false;
   onChange = (value: any) => {};
   onTouch = () => {};
 

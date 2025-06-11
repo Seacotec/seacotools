@@ -2,7 +2,6 @@ import {ChangeDetectionStrategy, Component, DestroyRef, forwardRef, inject, Inpu
 import {CommonModule} from '@angular/common';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {createId} from '@paralleldrive/cuid2';
 import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 @Component({
