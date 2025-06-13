@@ -3,32 +3,49 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 // Static cache for icon sets using specific cache keys
 class IconCache {
-  private static cache = new Map<string, Record<string, string>>();
-  private static loadingPromises = new Map<string, Promise<Record<string, string>>>();
+  private static cache = new Map<string, SafeHtml>(); // Store sanitized directly
+  private static loadingPromises = new Map<string, Promise<SafeHtml>>();
+  private static iconSets = new Map<string, Record<string, string>>();
 
-  static async getIcons(cacheKey: string): Promise<Record<string, string>> {
-    const appearance = cacheKey.split('-')[0]; // Extract appearance from cacheKey
+  static async getSanitizedIcon(appearance: string, iconName: string, sanitizer: DomSanitizer): Promise<SafeHtml> {
+    const cacheKey = `${appearance}-${iconName}`;
 
-    if (this.cache.has(appearance)) {
-      return this.cache.get(appearance)!;
+    if (this.cache.has(cacheKey)) {
+      return this.cache.get(cacheKey)!;
     }
 
-    if (this.loadingPromises.has(appearance)) {
-      return this.loadingPromises.get(appearance)!;
+    if (this.loadingPromises.has(cacheKey)) {
+      return this.loadingPromises.get(cacheKey)!;
     }
 
-    const loadPromise = this.loadIconsFromFile(appearance);
-    this.loadingPromises.set(appearance, loadPromise);
+    const loadPromise = this.loadAndSanitizeIcon(appearance, iconName, sanitizer);
+    this.loadingPromises.set(cacheKey, loadPromise);
 
     try {
-      const icons = await loadPromise;
-      this.cache.set(appearance, icons);
-      this.loadingPromises.delete(appearance);
-      return icons;
+      const sanitizedIcon = await loadPromise;
+      this.cache.set(cacheKey, sanitizedIcon);
+      this.loadingPromises.delete(cacheKey);
+      return sanitizedIcon;
     } catch (error) {
-      this.loadingPromises.delete(appearance);
+      this.loadingPromises.delete(cacheKey);
       throw error;
     }
+  }
+
+  private static async loadAndSanitizeIcon(appearance: string, iconName: string, sanitizer: DomSanitizer): Promise<SafeHtml> {
+    if (!this.iconSets.has(appearance)) {
+      const iconSet = await this.loadIconsFromFile(appearance);
+      this.iconSets.set(appearance, iconSet);
+    }
+
+    const iconSet = this.iconSets.get(appearance)!;
+    const icon = iconSet[iconName];
+
+    if (!icon) {
+      throw new Error(`Icon "${iconName}" not found in ${appearance} set`);
+    }
+
+    return sanitizer.bypassSecurityTrustHtml(icon);
   }
 
   private static async loadIconsFromFile(appearance: string): Promise<Record<string, string>> {
@@ -63,9 +80,6 @@ export class ScIconComponent implements OnChanges {
   safeSvgContent: SafeHtml = '';
   computedClass: string = '';
 
-  // Cache for sanitized SVG content using specific icon keys
-  private static sanitizedCache = new Map<string, SafeHtml>();
-
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (changes['class']) {
       this.computedClass = this.processClasses(this.class);
@@ -96,36 +110,20 @@ export class ScIconComponent implements OnChanges {
   }
 
   private async updateSvgContent(): Promise<void> {
-    const ERROR_SVG = '<svg aria-hidden="true"><text x="0" y="10" fill="red">Icon Not Found</text></svg>';
-
     if (!this.name) {
       this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml('');
-      return;
-    }
-
-    // Use the specific cacheKey that includes both appearance and name
-    const cacheKey = `${this.appearance}-${this.name}`;
-
-    // Check if we already have the sanitized version cached
-    if (ScIconComponent.sanitizedCache.has(cacheKey)) {
-      this.safeSvgContent = ScIconComponent.sanitizedCache.get(cacheKey)!;
+      this.changeDetector.markForCheck();
       return;
     }
 
     try {
-      // Pass the cacheKey to IconCache.getIcons
-      const icons = await IconCache.getIcons(cacheKey);
-      const svgContent = icons[this.name] || ERROR_SVG;
-
-      // Sanitize and cache using the specific cacheKey
-      this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml(svgContent);
-      ScIconComponent.sanitizedCache.set(cacheKey, this.safeSvgContent);
-
+      this.safeSvgContent = await IconCache.getSanitizedIcon(this.appearance, this.name, this.sanitizer);
+      this.changeDetector.markForCheck(); // Only mark for check on success
     } catch (error) {
-      console.error(`Failed to load icons for appearance "${this.appearance}".`, error);
+      console.error(`Failed to load icon "${this.name}" with appearance "${this.appearance}".`, error);
+      const ERROR_SVG = '<svg aria-hidden="true"><text x="0" y="10" fill="red">Icon Not Found</text></svg>';
       this.safeSvgContent = this.sanitizer.bypassSecurityTrustHtml(ERROR_SVG);
+      this.changeDetector.markForCheck(); // Mark for check on error too
     }
-
-    this.changeDetector.markForCheck();
   }
 }

@@ -53,6 +53,7 @@ export class ScHelperService {
 
   public dialogDeleteConfirmation(modalName: string, config?: Partial<DialogConfig<any>>): Observable<boolean> {
     return this.dialogConfirmation({
+      title: 'Are you sure?',
       message: `Do you really want to delete the ${modalName}? This process cannot be undone.`
     }, config);
   }

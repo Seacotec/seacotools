@@ -67,4 +67,8 @@ export class OverviewComponent {
       width: '50rem'
     })
   }
+
+  deleteConfirmationDialog() {
+    this.helper.dialogDeleteConfirmation('emission')
+  }
 }
