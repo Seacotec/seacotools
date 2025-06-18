@@ -50,7 +50,7 @@ export class TablesComponent implements OnInit {
         label: 'Actions (Centered style)',
         field: '',
         cellClass: 'text-center',
-        headerClass: 'text-center',
+        headerClass: 'text-red-600 text-center',
         template: this.actionCell,
       },
     ];

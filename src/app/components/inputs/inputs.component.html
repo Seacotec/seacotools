@@ -76,11 +76,11 @@
           label="UTC Date/Time witn min/max"
           timezone="utc"
           [formControl]="enabledFormArray.at(4)"
+          [minDate]="minDate"
+          [maxDate]="maxDate"
           [options]="{
             enableTime: true,
             defaultDate: '2025-05-02T09:00:00Z',
-            minDate: '2025-05-02T08:00:00Z',
-            maxDate: '2025-05-03T10:00:00Z',
            }">
         </sc-flatpicker>
       </div>

@@ -26,6 +26,8 @@ export class InputsComponent implements OnInit {
 
   enabledFormArray = this.fb.array([]);
   disabledFormArray = this.fb.array([]);
+  minDate = '2025-06-02T08:00:00Z'
+  maxDate = '2025-06-20T10:00:00Z'
 
   // In ngOnInit:
   ngOnInit(): void {
@@ -37,9 +39,13 @@ export class InputsComponent implements OnInit {
       console.log(value);
     });
     this.enabledFormArray.at(3).setValue(new Date().toISOString());
+    this.enabledFormArray.at(3).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
+      console.log(value);
+    })
     setTimeout(() => {
       this.options = [...this.options, 'BMW']
       this.selectOptions = [...this.selectOptions, {label: 'BMV', value: 6} ]
+      this.maxDate = '2025-06-28T10:00:00Z'
     }, 3000)
   }
 }

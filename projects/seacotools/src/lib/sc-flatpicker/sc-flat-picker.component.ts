@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, Input, ViewChild,} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, Input, OnChanges, SimpleChanges, ViewChild,} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import flatpickr from 'flatpickr';
 import {CommonModule} from '@angular/common';
@@ -22,7 +22,7 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
     },
   ],
 })
-export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccessor {
+export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges {
 
   errorMessageService = inject(ScErrorMessageService);
 
@@ -37,6 +37,8 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
 
   /** Flatpickr options passed from the user. */
   @Input() options: Partial<Options> = {};
+  @Input() minDate = '';
+  @Input() maxDate = '';
 
   /**
    * Timezone handling: 'local' or 'utc'.
@@ -69,6 +71,20 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.datePicker) {
+      if (changes['minDate'] && changes['minDate'].currentValue !== undefined) {
+        const resolvedMinDate = this.getResolvedDate(this.minDate);
+        this.datePicker.set('minDate', resolvedMinDate);
+      }
+
+      if (changes['maxDate'] && changes['maxDate'].currentValue !== undefined) {
+        const resolvedMaxDate = this.getResolvedDate(this.maxDate);
+        this.datePicker.set('maxDate', resolvedMaxDate);
+      }
+    }
+  }
+
   ngAfterViewInit(): void {
     const plugins = [];
     // Add Plugin for "Time Confirmation" if time is enabled
@@ -82,15 +98,13 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
       );
     }
 
-    console.log(this.date)
-
     // Handle timezone-specific options
     const formattedOptions: Partial<Options> = {
       ...this.options, // Keep user-provided options
       allowInput: true,
       dateFormat: this.options?.enableTime ? 'Y-m-d H:i' : 'Y-m-d',
-      minDate: this.getResolvedDate(this.options?.minDate), // Convert minDate to string
-      maxDate: this.getResolvedDate(this.options?.maxDate), // Convert maxDate to string
+      minDate: this.getResolvedDate(this.minDate), // Convert minDate to string
+      maxDate: this.getResolvedDate(this.maxDate), // Convert maxDate to string
       defaultDate: this.date,
       time_24hr: true,
       plugins: plugins,
@@ -101,7 +115,6 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
             const offset = selectedDate.getTimezoneOffset() * 60 * 1000; // offset in milliseconds
             selectedDate = new Date(selectedDate.getTime() - offset);
           }
-          // Emitting value as ISO string for utc or localized string for local
           this.onChange(selectedDate.toISOString());
         } else {
           this.onChange(null);
