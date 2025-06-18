@@ -60,7 +60,7 @@
         >
           <td
             *ngFor="let column of columns"
-            [ngClass]="column.cellClass || config.globalCellClass || 'p-2'"
+            [ngClass]="(column.cellClass || config.globalCellClass) ? column.cellClass || '' + ' ' + config.globalCellClass || '' : 'p-2'"
           >
             @if (column.template) {
               <ng-container

@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, Input, ViewChild,} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
-import flatpickr from 'flatpickr'; // Flatpickr package
+import flatpickr from 'flatpickr';
 import {CommonModule} from '@angular/common';
 import {Instance} from 'flatpickr/dist/types/instance';
 import {DateOption, Options} from 'flatpickr/dist/types/options';
@@ -54,18 +54,18 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   /** Flatpickr instance for the date picker. */
   private datePicker?: Instance;
 
-  /** Input ID and error message ID for accessibility. */
-  readonly myDatepickerId = `date-picker-${Math.random().toString(36).substr(2, 9)}`;
-  readonly errorId = `${this.myDatepickerId}-error`;
-
   /** Callback for when the value changes. */
   private onChange: (value: string | null) => void = () => {};
 
   /** Callback for when the input field is touched. */
   protected onTouch: () => void = () => {};
 
+  /** Placeholder text for the input field. */
+  @Input() placeholder: string = '';
+
   /** Whether the input element is disabled. */
   private disabled = false;
+  private date?: Date;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -82,6 +82,8 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
       );
     }
 
+    console.log(this.date)
+
     // Handle timezone-specific options
     const formattedOptions: Partial<Options> = {
       ...this.options, // Keep user-provided options
@@ -89,7 +91,7 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
       dateFormat: this.options?.enableTime ? 'Y-m-d H:i' : 'Y-m-d',
       minDate: this.getResolvedDate(this.options?.minDate), // Convert minDate to string
       maxDate: this.getResolvedDate(this.options?.maxDate), // Convert maxDate to string
-      defaultDate: this.getResolvedDate(this.options?.defaultDate), // Convert defaultDate to string
+      defaultDate: this.date,
       time_24hr: true,
       plugins: plugins,
       onChange: (value: Date[]) => {
@@ -136,7 +138,9 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
       return;
     }
     let date = this.handleTimeZone(dateString);
-    if (date) this.datePicker?.setDate(date);
+    if (date) {
+      this.datePicker ? this.datePicker.setDate(date) : this.date = date;
+    }
   }
 
   registerOnChange(fn: (value: string | null) => void): void {
@@ -153,13 +157,6 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
       this.datePicker._input.disabled = isDisabled;
       this.cdr.detectChanges();
     }
-  }
-
-  /**
-   * Utility to extract keys from an object.
-   */
-  objectKeys(obj: Record<string, any> | null): string[] {
-    return obj ? Object.keys(obj) : [];
   }
 
   private handleTimeZone(dateString: string) {

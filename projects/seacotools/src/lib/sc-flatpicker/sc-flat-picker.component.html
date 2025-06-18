@@ -13,6 +13,7 @@
 
   <input #myDatepicker
          type="text"
+         [placeholder]="placeholder"
          (blur)='onTouch(); touched = true;'
          placeholder="Select Date..."
          class="outline-none bg-gray-50 dark:bg-gray-600 disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300

@@ -34,7 +34,7 @@ export class TablesComponent implements OnInit {
   customStylingConfig: TableConfig = {
     containerClass: 'shadow-md sm:rounded-lg',
     headerClass: 'bg-green-100 dark:bg-green-800 text-blue-600 dark:text-yellow-500',
-    globalCellClass: 'px-6 py-4 whitespace-nowrap',
+    globalCellClass: 'h-32',
     onRowClick: (row) => {
       console.log('Row clicked:', row);
     }
