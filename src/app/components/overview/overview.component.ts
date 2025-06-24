@@ -61,10 +61,16 @@ export class OverviewComponent {
     });
   }
 
+  deleteConfirmationDialog() {
+    this.helper.dialogDeleteConfirmation('Test');
+  }
+
   sampleForm() {
     this.helper.dialogCommon(SampleDialogComponent, {
       data: {},
       width: '50rem'
     })
   }
+
+
 }
