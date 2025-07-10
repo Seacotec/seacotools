@@ -12,6 +12,19 @@ Install the **SeacoTools** library in your Angular project.
 - **npm**: `npm install seacotools`
 - **yarn**: `yarn add seacotools`
 - **pnpm**: `pnpm add seacotools`
+-
+### Import CSS Styles
+
+Add the SeacoTools CSS to your main `styles.css`:
+
+--style import
+@import "tailwindcss";
+
+--angular-json import
+"node_modules/seacotools/styles/seacotools.css"
+
+```
+
 
 ## Components & Services
 
@@ -157,7 +170,7 @@ Planned features for future releases:
 
 - cd dist/seacotools/
 - npm publish --tag beta
-- npm dist-tag add seacotools@1.0.22-beta.0 latest
+- npm dist-tag add seacotools@1.0.26-beta.0 latest
 
 ---
 

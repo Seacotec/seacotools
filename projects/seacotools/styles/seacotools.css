@@ -42,7 +42,7 @@
   background-color: #374151; /* dark:bg-gray-700 */
 }
 
-.dark .ng-select.ng-select-disabled > .ng-select-container {
+.dark .ng-select .ng-select-disabled > .ng-select-container {
   background-color: #4b5563; /* Disabled background: dark:bg-gray-600 */
   color: #6b7280; /* Disabled text color: dark:gray-500 */
   cursor: not-allowed;
@@ -76,7 +76,7 @@
 }
 
 .dark .ng-select .ng-dropdown-panel .ng-option-selected {
-  color: black;
+  color: #000000;
   font-weight: bolder;
   background-color: white;
 }

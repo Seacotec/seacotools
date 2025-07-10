@@ -13,7 +13,7 @@
 >
   <!-- Render icon only if the 'iconName' is available -->
   @if (iconName) {
-    <sc-icon [name]="iconName" class="me-2 w-3.5 h-3.5"></sc-icon>
+    <sc-icon [name]="iconName" [class]="iconSizeClasses[size]"></sc-icon>
   }
 
   <!-- Render content inside the sc-button -->

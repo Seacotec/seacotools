@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: seacollect-web
-    image: dtuncbilek/seacotools:1.0.12
+    image: dtuncbilek/seacotools:1.0.19
     restart: unless-stopped
     ports:
       - "4200:80"
@@ -13,4 +13,4 @@ services:
 
 # build app
 # docker compose build
-# docker push dtuncbilek/seacotools:1.0.12
+# docker push dtuncbilek/seacotools:1.0.19

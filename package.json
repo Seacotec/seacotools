@@ -1,12 +1,12 @@
 {
   "name": "seacotools-lib",
-  "version": "1.0.22-beta.0",
+  "version": "1.0.26-beta.0",
   "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build seacotools",
-    "build-app": "ng build",
+    "build:lib": "ng build seacotools",
+    "build:app": "ng build",
     "watch": "ng build --watch",
     "test": "ng test"
   },

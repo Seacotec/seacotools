@@ -1,18 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef, inject,
-  Input, ViewEncapsulation
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule
-} from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { NgSelectModule } from '@ng-select/ng-select';
-import {createId} from '@paralleldrive/cuid2';
+import {ChangeDetectionStrategy, Component, forwardRef, inject, Input, ViewEncapsulation} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {NgSelectModule} from '@ng-select/ng-select';
 import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
 
 @Component({
@@ -20,7 +9,6 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
   standalone: true,
   imports: [CommonModule, NgSelectModule, ReactiveFormsModule],
   templateUrl: './sc-multi-select.component.html',
-  styleUrls: ['../sc-searchable-select/sc-searchable-select.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -9,7 +9,6 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
   standalone: true,
   imports: [CommonModule, NgSelectModule, ReactiveFormsModule],
   templateUrl: './sc-searchable-select.component.html',
-  styleUrl: './sc-searchable-select.component.css',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

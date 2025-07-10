@@ -49,6 +49,15 @@ export class ScButtonComponent implements OnInit {
     xl: 'px-6 py-3 text-base' // Extra large
   };
 
+  iconSizeClasses: Record<string, string> = {
+    xs: 'me-2 w-3 h-3', // Extra small
+    sm: 'me-2 w-3.5 h-3.5', // Small
+    base: 'me-2 w-4 h-4', // Default (Base)
+    lg: 'me-2 w-5 h-5', // Large
+    xl: 'me-2 w-6 h-6' // Extra large
+  };
+
+
   ngOnInit(): void {}
 
 }
