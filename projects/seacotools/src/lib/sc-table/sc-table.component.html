@@ -23,7 +23,7 @@
         [ngClass]="column.headerClass || 'p-2'"
       >
         <div class="">
-          <span [tp]="column.heaterTooltip">{{ column.label }}</span>
+          <span [tp]="column.headerTooltip">{{ column.label }}</span>
           @if (column.sortable) {
             @if (currentSortField !== column.field || currentSortDirection === 'asc') {
               <sc-icon name="arrow-down-circle"

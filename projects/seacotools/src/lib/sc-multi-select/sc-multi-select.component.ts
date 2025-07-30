@@ -1,8 +1,9 @@
-import {ChangeDetectionStrategy, Component, forwardRef, inject, Input, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
+import {createId} from '@paralleldrive/cuid2';
 
 @Component({
   selector: 'sc-multi-select',
@@ -19,9 +20,10 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class ScMultiSelectComponent implements ControlValueAccessor {
+export class ScMultiSelectComponent implements ControlValueAccessor, OnChanges {
   errorMessageService = inject(ScErrorMessageService);
   control = new FormControl<any[]>([]);
+  id = createId();
 
   @Input() options: any[] = [];
   @Input() label: string = '';
@@ -44,9 +46,15 @@ export class ScMultiSelectComponent implements ControlValueAccessor {
     }
     return option[this.displayKey] || ''; // For objects, use the provided key.
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['showAllErrors']) {
+      this.onElTouch();
+    }
+  }
+
   onSelectionChanged(selected: any): void {
     this.onChange(selected); // Propagate the selected value.
-    console.log(selected)
   }
 
   // ControlValueAccessor implementation
@@ -73,5 +81,16 @@ export class ScMultiSelectComponent implements ControlValueAccessor {
 
   getErrorMessage(errorKey: string, errorValue: any): string {
     return this.errorMessageService.getErrorMessage(errorKey, errorValue);
+  }
+
+  onElTouch() {
+    const parent  = document.getElementById(this.id);
+    if (parent) {
+      const elements = parent.getElementsByClassName('ng-select-container');
+      if (elements.length) {
+        const element = elements[0] as HTMLElement;
+        element.style.borderColor = (this.errors) ? '#fb2c36' : '#f9fafb';
+      }
+    }
   }
 }

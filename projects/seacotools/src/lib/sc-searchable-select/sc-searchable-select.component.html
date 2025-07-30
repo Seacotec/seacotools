@@ -1,4 +1,4 @@
-<div class="searchable-select-container md-height">
+<div [id]="id" class="searchable-select-container md-height">
 
   @if (label) {
     <div class="flex items-center mb-1">
@@ -19,6 +19,7 @@
     [placeholder]="placeholder"
     [clearable]="true"
     [addTag]="addTag"
+    (blur)='onElTouch()'
     (change)="onSelectionChanged($event)"
   >
     @for (option of options; track option) {

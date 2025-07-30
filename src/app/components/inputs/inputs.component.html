@@ -13,6 +13,7 @@
       placeholder="Enter your first name"
       [variant]="'default'"
       [required]="true"
+      [errors]="enabledFormArray.at(0).errors"
     ></sc-input>
   </div>
 
@@ -25,7 +26,6 @@
       placeholder="Disabled input"
       [variant]="'default'"
       [required]="true"
-      [errors]="null"
     ></sc-input>
   </div>
 
@@ -38,7 +38,7 @@
       placeholder=" "
       [variant]="'floatingLabel'"
       [required]="true"
-      [errors]="[]"
+      [errors]="enabledFormArray.at(1).errors"
     ></sc-input>
   </div>
 
@@ -78,6 +78,7 @@
           [formControl]="enabledFormArray.at(4)"
           [minDate]="minDate"
           [maxDate]="maxDate"
+          [errors]="enabledFormArray.at(4).errors"
           [options]="{
             enableTime: true,
             defaultDate: '2025-05-02T09:00:00Z',
@@ -89,6 +90,7 @@
         <sc-flatpicker
           label="Locale Date/Time Picker"
           [formControl]="enabledFormArray.at(5)"
+          [errors]="enabledFormArray.at(5).errors"
           [options]="{ enableTime: true, defaultDate: '2025-05-02T07:00:00Z' }">
         </sc-flatpicker>
       </div>
@@ -114,6 +116,7 @@
                    label="Select in string array"
                    [options]="selectOptions"
                    key="label"
+                   [errors]="enabledFormArray.at(6).errors"
                    questionMark="Select if you have, if not train"
         ></sc-select>
       </div>
@@ -152,22 +155,16 @@
     <sc-multi-select label="Multi Select in string[]"
                      [formControl]="enabledFormArray.at(8)"
                      [options]="selectOptions"
+                     [errors]="enabledFormArray.at(8).errors"
     ></sc-multi-select>
   </div>
-
-  <!--  <div class="w-64 mx-5">-->
-  <!--    <sc-multi-select label="Multi Select in object[] with key"-->
-  <!--                     [formControl]="enabledControl"-->
-  <!--                     [options]="selectOptions"-->
-  <!--                     customHeight="lg"-->
-  <!--    ></sc-multi-select>-->
-  <!--  </div>-->
 
   <div class="w-64 mx-2">
     <sc-multi-select label="Multi Select searchable"
                      [formControl]="enabledFormArray.at(9)"
                      [options]="selectOptions"
                      [searchable]="true"
+                     [errors]="enabledFormArray.at(9).errors"
                      customHeight="lg"
     ></sc-multi-select>
   </div>
@@ -185,6 +182,7 @@
       [formControl]="enabledFormArray.at(10)"
       label="Search in string[]"
       [options]="options"
+      [errors]="enabledFormArray.at(10).errors"
     ></sc-searchable-select>
   </div>
 
@@ -212,12 +210,20 @@
 
 <div class="p-3 grid grid-cols-4 gap-8">
   <div>
-    <sc-textarea [formControl]="enabledFormArray.at(11)" placeholder="Placeholder ..." [rows]="2" label="2 Line text area"
+    <sc-textarea [formControl]="enabledFormArray.at(11)"
+                 placeholder="Placeholder ..."
+                 [rows]="2"
+                 label="2 Line text area"
+                 [errors]="enabledFormArray.at(11).errors"
                  [required]="true"></sc-textarea>
   </div>
 
   <div>
-    <sc-textarea [formControl]="enabledFormArray.at(12)" [rows]="3" label="3 Line text area"></sc-textarea>
+    <sc-textarea [formControl]="enabledFormArray.at(12)"
+                 [rows]="3"
+                 [errors]="enabledFormArray.at(12).errors"
+                 label="3 Line text area">
+    </sc-textarea>
   </div>
 
   <div>

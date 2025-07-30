@@ -1,7 +1,7 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {ScSelectComponent} from '../../../../projects/seacotools/src/lib/sc-select/sc-select.component';
 import {ScInputComponent} from '../../../../projects/seacotools/src/lib/sc-input/sc-input.component';
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ScFlatPickerComponent} from '../../../../projects/seacotools/src/lib/sc-flatpicker/sc-flat-picker.component';
 import {ScCheckboxComponent} from '../../../../projects/seacotools/src/lib/sc-checkbox/sc-checkbox.component';
 import {ScTextareaComponent} from '../../../../projects/seacotools/src/lib/sc-textarea/sc-textarea.component';
@@ -32,8 +32,8 @@ export class InputsComponent implements OnInit {
   // In ngOnInit:
   ngOnInit(): void {
     for (let i = 0; i < 20; i++) {
-      this.disabledFormArray.push(this.fb.control({value: null, disabled: true}));
-      this.enabledFormArray.push(this.fb.control(null));
+      this.disabledFormArray.push(this.fb.control({value: null, disabled: true}, Validators.required));
+      this.enabledFormArray.push(this.fb.control(null, Validators.required));
     }
     this.enabledFormArray.at(6).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
       console.log(value);

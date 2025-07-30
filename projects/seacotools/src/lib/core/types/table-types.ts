@@ -4,13 +4,12 @@ export interface TableColumn {
   label: string; // Column header name
   field: string; // Field in data object
   headerClass?: string; // Optional CSS classes for header (th)
-  heaterTooltip?: string;
+  headerTooltip?: string;
   cellClass?: string; // Optional CSS classes for cell (td)
   template?: TemplateRef<any>; // Custom template for column
   sortable?: boolean; // Enable/disable sorting for the column
   sortType?: 'text' | 'number' | 'boolean'; // Type of data for sorting
 }
-
 
 export interface TableConfig {
   containerClass?: string; // Optional tailwind CSS class for container div

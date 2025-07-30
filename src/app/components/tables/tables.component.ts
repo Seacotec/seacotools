@@ -42,10 +42,10 @@ export class TablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.columns = [
-      { label: 'Product Name', field: 'product', heaterTooltip: 'Example tooltip' },
-      { label: 'Color', field: 'color', sortable: true, sortType: 'text', heaterTooltip: 'Example tooltip' },
-      { label: 'Category', field: 'category', sortable: true, sortType: 'text', heaterTooltip: 'Example tooltip'  },
-      { label: 'Price', field: 'price', sortable: true, sortType: 'number', heaterTooltip: 'Example tooltip' },
+      { label: 'Product Name', field: 'product', headerTooltip: 'Example tooltip' },
+      { label: 'Color', field: 'color', sortable: true, sortType: 'text', headerTooltip: 'Example tooltip' },
+      { label: 'Category', field: 'category', sortable: true, sortType: 'text', headerTooltip: 'Example tooltip'  },
+      { label: 'Price', field: 'price', sortable: true, sortType: 'number', headerTooltip: 'Example tooltip' },
       {
         label: 'Actions (Centered style)',
         field: '',

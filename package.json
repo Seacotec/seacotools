@@ -1,6 +1,6 @@
 {
   "name": "seacotools-lib",
-  "version": "1.0.26-beta.0",
+  "version": "1.0.28-beta",
   "private": true,
   "scripts": {
     "ng": "ng",

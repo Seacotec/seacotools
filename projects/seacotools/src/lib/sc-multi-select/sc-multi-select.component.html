@@ -1,4 +1,4 @@
-<div class="ng-select-custom-container"
+<div [id]="id" class="ng-select-custom-container"
      [ngClass]="{
       'md-height': customHeight === 'md',
       'lg-height': customHeight === 'lg',
@@ -27,6 +27,7 @@
     [addTag]="addTag"
     [clearable]="!disableClear"
     [placeholder]="placeholder"
+    (blur)='onElTouch()'
     (change)="onSelectionChanged($event)"
   >
     @for (option of options; track option) {

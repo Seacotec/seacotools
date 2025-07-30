@@ -58,7 +58,11 @@ export class ScInputComponent implements ControlValueAccessor, OnInit {
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouch = fn;
+    this.onTouch = () => {
+      this.control.markAsTouched();
+      this.cdr.detectChanges(); // Trigger change detection
+      fn();
+    };
   }
 
   setDisabledState(isDisabled: boolean): void {

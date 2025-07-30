@@ -1,4 +1,19 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, Input, OnChanges, SimpleChanges, ViewChild,} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  Input,
+  OnChanges,
+  OnDestroy, signal,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import flatpickr from 'flatpickr';
 import {CommonModule} from '@angular/common';
@@ -22,7 +37,7 @@ import {ScErrorMessageService} from '../sc-services/sc-error-message.service';
     },
   ],
 })
-export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges {
+export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnDestroy{
 
   errorMessageService = inject(ScErrorMessageService);
 
@@ -33,12 +48,14 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   @Input() label: string = '';
 
   /** Errors object for validation feedback. */
-  @Input() errors: Record<string, boolean> | null = null;
+  errors = input<Record<string, boolean> | null>(null);
 
   /** Flatpickr options passed from the user. */
   @Input() options: Partial<Options> = {};
   @Input() minDate = '';
   @Input() maxDate = '';
+  borderColorClass = input('border-gray-400 dark:border-gray-700');
+  bgColorClass = input('bg-gray-50 dark:bg-gray-600');
 
   /**
    * Timezone handling: 'local' or 'utc'.
@@ -48,7 +65,7 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   @Input() showAllErrors = false;
 
   /** Tracks whether the input field has been touched. */
-  touched = false;
+  touched = signal(false);
 
   /** Input element reference for Flatpickr. */
   @ViewChild('myDatepicker') myDatepicker!: ElementRef<HTMLInputElement>;
@@ -68,6 +85,19 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   /** Whether the input element is disabled. */
   private disabled = false;
   private date?: Date;
+
+  computedClasses = computed(() => {
+    const borderColorClass = this.borderColorClass();
+    const bgColorClass = this.bgColorClass();
+    const defaultClasses = 'outline-none disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300 ' +
+      'dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 bg-input-field w-full px-3 border rounded-lg ' +
+      'focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70';
+    if (this.errors() && this.touched()) {
+      return defaultClasses + ' border-red-500 ' + bgColorClass;
+    } else {
+      return `${defaultClasses} ${borderColorClass} ${bgColorClass}`;
+    }
+  });
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -161,7 +191,11 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   }
 
   registerOnTouched(fn: () => void): void {
-    this.onTouch = fn;
+    this.onTouch = () => {
+      this.touched.set(true);
+      this.cdr.detectChanges(); // Trigger change detection
+      fn();
+    };
   }
 
   setDisabledState?(isDisabled: boolean): void {
@@ -214,6 +248,12 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
 
   getErrorMessage(errorKey: string, errorValue: any): string {
     return this.errorMessageService.getErrorMessage(errorKey, errorValue);
+  }
+
+  ngOnDestroy(): void {
+    if (this.datePicker) {
+      this.datePicker.destroy();
+    }
   }
 
 }

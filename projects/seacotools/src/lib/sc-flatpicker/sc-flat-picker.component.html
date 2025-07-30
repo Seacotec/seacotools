@@ -14,23 +14,17 @@
   <input #myDatepicker
          type="text"
          [placeholder]="placeholder"
-         (blur)='onTouch(); touched = true;'
+         (blur)='onTouch(); touched.set(true)'
          placeholder="Select Date..."
-         class="outline-none bg-gray-50 dark:bg-gray-600 disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300
-         dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 bg-input-field w-full px-3 border rounded-lg dark:border-gray-700
-         focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70"
-         [ngClass]="{
-            'border-gray-400': !errors || !touched,
-            'border-red-500':  errors && touched,
-         }"
+         [class]="computedClasses()"
   >
 
   <!-- Error Message -->
-  @if (errors && (touched || showAllErrors)) {
+  @if (errors() && (touched() || showAllErrors)) {
     <div class="text-red-700 mt-1 text-sm">
-      @for (errorKey of errorKeys(errors); track errorKey) {
-        @if (errors[errorKey]) {
-          <div>{{ getErrorMessage(errorKey, errors[errorKey]) }}</div>
+      @for (errorKey of errorKeys(errors()); track errorKey) {
+        @if (errors()![errorKey]) {
+          <div>{{ getErrorMessage(errorKey, errors()![errorKey]) }}</div>
         }
       }
     </div>
