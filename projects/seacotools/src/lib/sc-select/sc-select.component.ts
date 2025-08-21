@@ -52,7 +52,7 @@ export class ScSelectComponent implements ControlValueAccessor, OnInit {
 
   get selectClasses(): string {
     return [
-      'w-full rounded-lg border bg-gray-50 px-3 py-2 outline-none placeholder-gray-500 focus:border-indigo-500',
+      'w-full h-9 rounded-lg border bg-gray-50 px-3 py-2 outline-none placeholder-gray-500 focus:border-indigo-500',
       'focus:ring focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:disabled:bg-gray-600',
       this.errors && !this.control.untouched ? 'border-red-500' : 'border-gray-400',
       this.control.disabled ? 'cursor-not-allowed bg-gray-300 text-gray-600' : '',
