@@ -22,8 +22,11 @@
         scope="col"
         [ngClass]="column.headerClass || 'p-2'"
       >
-        <div class="">
-          <span [tp]="column.headerTooltip">{{ column.label }}</span>
+        <div class="flex items-center">
+          <span>{{ column.label }}</span>
+          @if (column.headerTooltip){
+            <sc-icon [tp]="column.headerTooltip" name="question-mark-circle" class="ml-0.5 w-4 h-4"></sc-icon>
+          }
           @if (column.sortable) {
             @if (currentSortField !== column.field || currentSortDirection === 'asc') {
               <sc-icon name="arrow-down-circle"
