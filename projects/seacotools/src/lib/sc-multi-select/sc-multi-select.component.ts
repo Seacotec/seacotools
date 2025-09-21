@@ -89,7 +89,7 @@ export class ScMultiSelectComponent implements ControlValueAccessor, OnChanges {
       const elements = parent.getElementsByClassName('ng-select-container');
       if (elements.length) {
         const element = elements[0] as HTMLElement;
-        element.style.borderColor = (this.errors) ? '#fb2c36' : '#f9fafb';
+        element.style.borderColor = (this.errors) ? '#fb2c36' : '#99a1af';
       }
     }
   }

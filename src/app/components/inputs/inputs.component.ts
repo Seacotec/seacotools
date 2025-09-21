@@ -35,7 +35,7 @@ export class InputsComponent implements OnInit {
       this.disabledFormArray.push(this.fb.control({value: null, disabled: true}, Validators.required));
       this.enabledFormArray.push(this.fb.control(null, Validators.required));
     }
-    this.enabledFormArray.at(6).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
+    this.enabledFormArray.at(10).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
       console.log(value);
     });
     this.enabledFormArray.at(3).setValue(new Date().toISOString());

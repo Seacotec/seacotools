@@ -55,6 +55,12 @@ export class ScSearchableSelectComponent implements ControlValueAccessor, OnChan
     this.onChange(selected); // Propagate the selected value.
   }
 
+  search(value: any) {
+    if (this.searchable) {
+      this.onChange(value.term);
+    }
+  }
+
   // ControlValueAccessor implementation
   writeValue(value: any): void {
     this.control.setValue(value);
@@ -87,7 +93,7 @@ export class ScSearchableSelectComponent implements ControlValueAccessor, OnChan
       const elements = parent.getElementsByClassName('ng-select-container');
       if (elements.length) {
         const element = elements[0] as HTMLElement;
-        element.style.borderColor = (this.errors) ? '#fb2c36' : '#f9fafb';
+        element.style.borderColor = (this.errors) ? '#fb2c36' : '#99a1af';
       }
     }
   }

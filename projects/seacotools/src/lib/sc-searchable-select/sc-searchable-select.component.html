@@ -20,6 +20,7 @@
     [clearable]="true"
     [addTag]="addTag"
     (blur)='onElTouch()'
+    (search)='search($event)'
     (change)="onSelectionChanged($event)"
   >
     @for (option of options; track option) {
