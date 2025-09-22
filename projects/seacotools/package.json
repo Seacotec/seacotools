@@ -1,6 +1,6 @@
 {
   "name": "seacotools",
-  "version": "1.0.33-beta",
+  "version": "1.0.1",
   "main": "dist/seacotools",
   "author": "Dagistan Tuncbilek",
   "license": "MIT",
