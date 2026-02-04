@@ -19,7 +19,7 @@
       @for (column of columns; track column){
         <th
           scope="col"
-          [ngClass]="column.headerClass || 'p-2'"
+          [ngClass]="[column.headerClass || 'p-2']"
         >
           <div class="">
             <span class="inline-block">{{ column.label }}</span>
@@ -55,9 +55,14 @@
     <tbody>
       @if (paginatedData.length) {
         <tr
+          [id]="componentId + i"
           *ngFor="let row of paginatedData; let i = index"
           [class]="rowClass + ' ' + rowBorderClass"
-          [ngClass]="{ 'border-b': true, 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700': config.onRowClick }"
+          [ngClass]="{
+            'border-b': true,
+            'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700': config.onRowClick,
+            'bg-orange-100': i === highlight
+          }"
           (click)="config.onRowClick && onRowClick(row)"
         >
           <td

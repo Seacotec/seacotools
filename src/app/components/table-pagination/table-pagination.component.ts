@@ -1,8 +1,8 @@
 import {Component, TemplateRef, ViewChild} from '@angular/core';
 import {TableColumn} from '../../../../projects/seacotools/src/lib/core/types/table-types';
 import {ScTableComponent} from '../../../../projects/seacotools/src/lib/sc-table/sc-table.component';
-import {ScIconComponent} from 'seacotools';
 import {NgClass} from '@angular/common';
+import {ScIconComponent} from '../../../../projects/seacotools/src/lib/sc-icon/sc-icon.component';
 
 
 @Component({

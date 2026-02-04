@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TableColumn, TableConfig} from '../core/types/table-types';
 import {ScIconComponent} from '../sc-icon/sc-icon.component';
@@ -13,15 +13,17 @@ type SortDirection = 'asc' | 'desc';
   templateUrl: './sc-table.component.html',
   imports: [CommonModule, ScIconComponent, TippyDirective, NumberToArrayPipe],
 })
-export class ScTableComponent {
+export class ScTableComponent implements OnChanges {
+
   @Input() columns: TableColumn[] = []; // Column definitions
   @Input() data: any[] = []; // Table data
   @Input() config: TableConfig = {}; // Configuration for styling
+  @Input() highlight?: number;
+  componentId = createId();
 
   // Sorting state
   currentSortField: string | null = null;
   currentSortDirection: SortDirection = 'asc';
-
   // Pagination
   @Input() pageSize: number = 0; // Number of rows per page
   currentPage: number = 1; // Current page index
@@ -71,6 +73,16 @@ export class ScTableComponent {
 
   get rowBorderClass(): string {
     return this.config.rowBorderClass || 'dark:border-gray-700 border-gray-200';
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['highlight']?.currentValue !== undefined) {
+      const value = changes['highlight'].currentValue;
+      const el = document.getElementById(this.componentId + value);
+      if (el){
+        el.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      }
+    }
   }
 
   // Sort data by a column

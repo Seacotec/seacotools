@@ -1,10 +1,11 @@
-<div>
+<div class="max-h-60 overflow-y-scroll">
   <!-- Table without row highlighting -->
   <div class="my-5 text-center font-bold">Default Table (No Row Highlighting)</div>
   <sc-table
     [columns]="columns"
     [data]="data"
     [config]="{highlightRows: false, stickyHeader: true, headerClass: 'h-20'}"
+    [highlight]="highlight"
   ></sc-table>
 </div>
 

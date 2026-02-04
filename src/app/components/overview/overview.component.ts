@@ -2,8 +2,8 @@ import {Component, inject} from '@angular/core';
 import {ScButtonComponent} from '../../../../projects/seacotools/src/lib/sc-button/sc-button.component';
 import {ScHelperService} from '../../../../projects/seacotools/src/lib/sc-services/sc-helper.service';
 import {ScDropdownComponent} from '../../../../projects/seacotools/src/lib/sc-dropdown/sc-dropdown.component';
-import {ScIconComponent} from 'seacotools';
 import {SampleDialogComponent} from '../sample-dialog/sample-dialog.component';
+import {ScIconComponent} from '../../../../projects/seacotools/src/lib/sc-icon/sc-icon.component';
 
 @Component({
   selector: 'app-overview',

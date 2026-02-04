@@ -1,7 +1,7 @@
 import { Component, TemplateRef, ViewChild, OnInit } from '@angular/core';
 import {TableColumn, TableConfig} from '../../../../projects/seacotools/src/lib/core/types/table-types';
 import { ScTableComponent } from '../../../../projects/seacotools/src/lib/sc-table/sc-table.component';
-import {ScIconComponent} from 'seacotools';
+import {ScIconComponent} from '../../../../projects/seacotools/src/lib/sc-icon/sc-icon.component';
 
 @Component({
   selector: 'app-tables',
@@ -15,6 +15,13 @@ export class TablesComponent implements OnInit {
   customColumns: TableColumn[] = [];
   data = [
     { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
+    { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
+    { product: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: 99 },
+    { product: 'HP Monitor', color: 'Black', category: 'Accessories', price: 299 },
+    { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
+    { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
+    { product: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: 99 },
+    { product: 'HP Monitor', color: 'Black', category: 'Accessories', price: 299 }, { product: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: 2999 },
     { product: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: 1999 },
     { product: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: 99 },
     { product: 'HP Monitor', color: 'Black', category: 'Accessories', price: 299 },
@@ -39,6 +46,8 @@ export class TablesComponent implements OnInit {
       console.log('Row clicked:', row);
     }
   };
+
+  highlight?: number = undefined
 
   ngOnInit(): void {
     this.columns = [
@@ -67,6 +76,10 @@ export class TablesComponent implements OnInit {
         template: this.actionCell,
       },
     ]
+
+    setInterval(() => {
+      this.highlight = Math.floor(Math.random() * 10)
+    }, 2000)
   }
 
   onEdit(row: any): void {
