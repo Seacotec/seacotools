@@ -8,11 +8,14 @@ import {ScTextareaComponent} from '../../../../projects/seacotools/src/lib/sc-te
 import {ScMultiSelectComponent} from '../../../../projects/seacotools/src/lib/sc-multi-select/sc-multi-select.component';
 import {ScSearchableSelectComponent} from '../../../../projects/seacotools/src/lib/sc-searchable-select/sc-searchable-select.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {
+  ScFlatPickerSplittedComponent
+} from '../../../../projects/seacotools/src/lib/sc-flatpicker-splitted/sc-flat-picker-splitted.component';
 
 
 @Component({
   selector: 'app-inputs',
-  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScFlatPickerComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent, ScFlatPickerComponent],
+  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScFlatPickerComponent, ScFlatPickerSplittedComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent, ScFlatPickerComponent],
   templateUrl: './inputs.component.html',
 
 })

@@ -1,0 +1,50 @@
+<div class="w-full overflow-hidden">
+
+  @if (label) {
+    <div class="flex items-center mb-1">
+      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+        @if (required) {
+          <span class="text-red-700 mr-1">*</span>
+        }
+        {{ label }}
+      </label>
+    </div>
+  }
+
+  @if (splitDateTime) {
+    <div class="grid grid-cols-2 gap-2">
+      <input #myDatepicker
+             type="text"
+             [placeholder]="placeholder || 'Select Date...'"
+             (blur)='onTouch(); touched.set(true)'
+             [class]="computedClasses()"
+      >
+      <input #myTimepicker
+             type="text"
+             placeholder="Select Time..."
+             (blur)='onTouch(); touched.set(true)'
+             [class]="computedClasses()"
+      >
+    </div>
+  } @else {
+    <input #myDatepicker
+           type="text"
+           [placeholder]="placeholder"
+           (blur)='onTouch(); touched.set(true)'
+           placeholder="Select Date..."
+           [class]="computedClasses()"
+    >
+  }
+
+  <!-- Error Message -->
+  @if (errors() && (touched() || showAllErrors)) {
+    <div class="text-red-700 mt-1 text-sm">
+      @for (errorKey of errorKeys(errors()); track errorKey) {
+        @if (errors()![errorKey]) {
+          <div>{{ getErrorMessage(errorKey, errors()![errorKey]) }}</div>
+        }
+      }
+    </div>
+  }
+
+</div>
