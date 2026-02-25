@@ -356,4 +356,36 @@ export class ScFlatPickerSplittedComponent implements AfterViewInit, ControlValu
     }
   }
 
+  onDateKeydown(event: KeyboardEvent): void {
+    this.handlePickerKeydown(event, this.datePicker);
+  }
+
+  onTimeKeydown(event: KeyboardEvent): void {
+    this.handlePickerKeydown(event, this.timePicker);
+  }
+
+  private handlePickerKeydown(event: KeyboardEvent, picker?: Instance): void {
+    if (!picker || this.disabled) return;
+
+    const openKeys = ['Enter', ' ', 'ArrowDown'];
+    if (event.altKey && event.key === 'ArrowDown') {
+      event.preventDefault();
+      picker.open();
+      return;
+    }
+
+    if (openKeys.includes(event.key)) {
+      if (!picker.isOpen) {
+        event.preventDefault();
+        picker.open();
+      }
+      return;
+    }
+
+    if (event.key === 'Escape' && picker.isOpen) {
+      event.preventDefault();
+      picker.close();
+    }
+  }
+
 }

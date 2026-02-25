@@ -17,12 +17,14 @@
              type="text"
              [placeholder]="placeholder || 'Select Date...'"
              (blur)='onTouch(); touched.set(true)'
+             (keydown)="onDateKeydown($event)"
              [class]="computedClasses()"
       >
       <input #myTimepicker
              type="text"
              placeholder="Select Time..."
              (blur)='onTouch(); touched.set(true)'
+             (keydown)="onTimeKeydown($event)"
              [class]="computedClasses()"
       >
     </div>
@@ -31,6 +33,7 @@
            type="text"
            [placeholder]="placeholder"
            (blur)='onTouch(); touched.set(true)'
+           (keydown)="onDateKeydown($event)"
            placeholder="Select Date..."
            [class]="computedClasses()"
     >
