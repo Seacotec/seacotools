@@ -5,6 +5,7 @@
 **SeacoTools** is an Angular library that provides a collection of reusable UI components and services. The library is built for modern Angular applications, improving development efficiency and maintainability.
 
 ---
+
 ## Installation
 
 Install the **SeacoTools** library in your Angular project.
@@ -13,6 +14,7 @@ Install the **SeacoTools** library in your Angular project.
 - **yarn**: `yarn add seacotools`
 - **pnpm**: `pnpm add seacotools`
 -
+
 ### Import CSS Styles
 
 Add the SeacoTools CSS to your main `styles.css`:
@@ -170,7 +172,7 @@ Planned features for future releases:
 
 - cd dist/seacotools/
 - npm publish --tag beta
-- npm dist-tag add seacotools@1.0.3 latest
+- npm dist-tag add seacotools@20.1.1 latest
 
 ---
 
@@ -179,3 +181,4 @@ Planned features for future releases:
 This library is open-source and distributed under the MIT License. See the `LICENSE` file for details.
 
 ---
+```

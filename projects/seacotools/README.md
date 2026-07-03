@@ -5,6 +5,7 @@
 **SeacoTools** is an Angular library that provides a collection of reusable UI components and services. The library is built for modern Angular applications, improving development efficiency and maintainability.
 
 ---
+
 ## Installation
 
 Install the **SeacoTools** library in your Angular project.
@@ -12,7 +13,8 @@ Install the **SeacoTools** library in your Angular project.
 - **npm**: `npm install seacotools`
 - **yarn**: `yarn add seacotools`
 - **pnpm**: `pnpm add seacotools`
-- 
+-
+
 ### Import CSS Styles
 
 Add the SeacoTools CSS to your main `styles.css`:
@@ -22,16 +24,16 @@ Add the SeacoTools CSS to your main `styles.css`:
 @import "seacotools/styles/seacotools.css";
 
 /* Your other imports */
-@import 'ngx-toastr/toastr';
-@import '@ng-select/ng-select/themes/default.theme.css';
+@import "ngx-toastr/toastr";
+@import "@ng-select/ng-select/themes/default.theme.css";
 ```
-
 
 ## Components & Services
 
 The library includes the following reusable components and services:
 
 ### **Components**
+
 - **`<sc-icon>`**: A customizable SVG icon component for rendering icons dynamically with support for custom styles and sizes.
 - **`<sc-button>`**: A reusable button component with flexible styling, multiple appearances, and size options.
 - **`<sc-select>`**: A dynamic select dropdown component for choosing values from customizable options.
@@ -42,6 +44,7 @@ The library includes the following reusable components and services:
 - **`<sc-table>`**: Reusable table element.
 
 ### **Services**
+
 - **`ScHelperService`**: A general-purpose helper service that provides reusable dialog, toast, spinner, and navigation utilities.
 
 ---
@@ -93,13 +96,12 @@ Make sure you specify the paths for the library in your `styles.css`:
 
 The `<sc-icon>` component is used to render customizable SVG icons. Customize the `name`, `appearance`, and additional `class` properties to get the desired icon style.
 
-
 **Inputs**:
-| **Input**     | **Type**                       | **Required** | **Description**                                                                 |
+| **Input** | **Type** | **Required** | **Description** |
 |---------------|--------------------------------|--------------|---------------------------------------------------------------------------------|
-| `name`        | `string`                      | Yes          | The name of the icon (e.g., `'home'`, `'user'`).                                |
-| `appearance`  | `'outline' | 'solid'`         | No           | Icon style (outline or solid). Defaults to `'outline'`.                        |
-| `class`       | `string`                      | No           | Tailwind or CSS classes for size, color, etc. Default sizes are `w-5 h-5`.     |
+| `name` | `string` | Yes | The name of the icon (e.g., `'home'`, `'user'`). |
+| `appearance` | `'outline' | 'solid'` | No | Icon style (outline or solid). Defaults to `'outline'`. |
+| `class` | `string` | No | Tailwind or CSS classes for size, color, etc. Default sizes are `w-5 h-5`. |
 
 #### `<sc-button>` Component
 
@@ -110,20 +112,20 @@ The `<sc-button>` component provides customizable buttons styled to work seamles
 The `<sc-dropdown>` component is designed as a wrapper around the more feature-rich `sc-dropdown`. It provides a highly customizable and simplified interface for developers who require quick integration with minimal configuration.
 
 **Inputs**:
-| **Input**             | **Type**                     | **Required** | **Default**         | **Description**                                                                 |
+| **Input** | **Type** | **Required** | **Default** | **Description** |
 |-----------------------|------------------------------|--------------|---------------------|---------------------------------------------------------------------------------|
-| `options`            | `{ label: string, value: any }[]` | Yes          | `[]`                | The list of options to display in the dropdown. Each option has a `label` and `value`. |
-| `placeholder`         | `string`                     | No           | `'Select option'`   | The placeholder text displayed on the button when no option is selected.        |
-| `changePlaceholderOnSelect` | `boolean`              | No           | `false`             | Whether to replace the placeholder with the selected option's label.            |
-| `buttonClasses`       | `string`                     | No           | `''`                | Custom CSS classes for the dropdown button (e.g., colors, sizes).               |
-| `optionClasses`       | `string`                     | No           | `''`                | Custom CSS classes for the options list (e.g., hover states, padding).          |
-| `buttonType`          | `string`                     | No           | `'button'`          | Defines the button's type attribute.                                            |
-| `optionsWidthClass`   | `string`                     | No           | `'w-44'`            | Defines the width of the dropdown menu (via Tailwind CSS classes).              |
+| `options` | `{ label: string, value: any }[]` | Yes | `[]` | The list of options to display in the dropdown. Each option has a `label` and `value`. |
+| `placeholder` | `string` | No | `'Select option'` | The placeholder text displayed on the button when no option is selected. |
+| `changePlaceholderOnSelect` | `boolean` | No | `false` | Whether to replace the placeholder with the selected option's label. |
+| `buttonClasses` | `string` | No | `''` | Custom CSS classes for the dropdown button (e.g., colors, sizes). |
+| `optionClasses` | `string` | No | `''` | Custom CSS classes for the options list (e.g., hover states, padding). |
+| `buttonType` | `string` | No | `'button'` | Defines the button's type attribute. |
+| `optionsWidthClass` | `string` | No | `'w-44'` | Defines the width of the dropdown menu (via Tailwind CSS classes). |
 
 **Outputs**:
-| **Output**            | **Type**         | **Description**                                                             |
+| **Output** | **Type** | **Description** |
 |-----------------------|------------------|-----------------------------------------------------------------------------|
-| `selectionChange`     | `EventEmitter<any>` | Emits the value of the option selected by the user.                         |
+| `selectionChange` | `EventEmitter<any>` | Emits the value of the option selected by the user. |
 
 ---
 
@@ -136,16 +138,17 @@ The `<sc-icon>` component allows you to extend the default library by adding cus
 2. Import and register the icon set in your module or component:
 
 ---
+
 ## Custom Table
 
 The `<sc-table>` component is a highly customizable reusable table component that supports features like sorting, pagination, and styling.
 **Inputs**: | **Input** | **Type** | **Required** | **Default** | **Description** | |---------------|---------------------|--------------|-------------------------|---------------------------------------------------------------------------------| | `columns` | | Yes | `[]` | Defines the columns of the table with properties like `label`, `field`, `sortable`, etc. | | `data` | | Yes | `[]` | The data array to populate the table rows. Each item in the array represents a row. | | `pageSize` | `number` | No | `10` | Number of rows per page. Set to `0` to disable pagination and show all rows. | | `config` | `TableConfig` | No | `{}` | Provides additional configuration for table styling like `headerClass`, `rowClass`, etc. | `TableColumn[]``any[]`
 **Outputs**: Currently, no event emitters are implemented.
 **Features**:
+
 - **Sorting**: Add sorting functionality to columns using the `sortable` property in `columns`.
 - **Pagination**: Automatically paginates data based on the `pageSize` input.
 - **Custom Templates**: Allows you to define custom templates for columns by providing a `template`.
-
 
 ## Testing & Development
 
@@ -172,7 +175,7 @@ Planned features for future releases:
 - cd dist/seacotools/
 - npm publish --tag beta
 - npm publish
-- npm dist-tag add seacotools@1.0.3 latest
+- npm dist-tag add seacotools@20.1.1 latest
 
 ---
 

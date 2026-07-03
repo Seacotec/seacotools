@@ -1,6 +1,6 @@
 {
   "name": "seacotools-lib",
-  "version": "1.0.3",
+  "version": "20.1.1",
   "private": true,
   "scripts": {
     "ng": "ng",
@@ -11,24 +11,24 @@
     "test": "ng test"
   },
   "dependencies": {
-    "@angular/animations": "^19.2.11",
-    "@angular/common": "^19.2.0",
-    "@angular/compiler": "^19.2.0",
-    "@angular/core": "^19.2.0",
-    "@angular/forms": "^19.2.0",
-    "@angular/platform-browser": "^19.2.0",
-    "@angular/platform-browser-dynamic": "^19.2.0",
-    "@angular/router": "^19.2.0",
-    "@ng-select/ng-select": "^14.8.0",
-    "@ngneat/dialog": "^5.1.2",
-    "@ngneat/helipopper": "^9.2.1",
+    "@angular/animations": "^20.3.25",
+    "@angular/common": "^20.3.25",
+    "@angular/compiler": "^20.3.25",
+    "@angular/core": "^20.3.25",
+    "@angular/forms": "^20.3.25",
+    "@angular/platform-browser": "^20.3.25",
+    "@angular/platform-browser-dynamic": "^20.3.25",
+    "@angular/router": "^20.3.25",
+    "@ng-select/ng-select": "^20.7.0",
+    "@ngneat/dialog": "^5.2.1",
+    "@ngneat/helipopper": "^12.2.0",
     "@paralleldrive/cuid2": "^2.2.2",
     "@tailwindcss/postcss": "^4.1.7",
     "air-datepicker": "^3.6.0",
     "flatpickr": "^4.6.13",
     "lodash": "^4.17.21",
-    "ngx-spinner": "^19.0.0",
-    "ngx-toastr": "^19.0.0",
+    "ngx-spinner": "^21.1.0",
+    "ngx-toastr": "^19.1.0",
     "postcss": "^8.5.3",
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.1.7",
@@ -36,9 +36,9 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.12",
-    "@angular/cli": "^19.2.12",
-    "@angular/compiler-cli": "^19.2.0",
+    "@angular/build": "^20.3.31",
+    "@angular/cli": "^20.3.31",
+    "@angular/compiler-cli": "^20.3.25",
     "@types/jasmine": "~5.1.0",
     "@types/lodash": "^4.17.17",
     "jasmine-core": "~5.6.0",
@@ -47,7 +47,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "ng-packagr": "^19.2.0",
-    "typescript": "~5.7.2"
+    "ng-packagr": "^20.3.2",
+    "postcss": "^8.5.3",
+    "typescript": "~5.9.3"
   }
 }

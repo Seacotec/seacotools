@@ -6,7 +6,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {ToastrModule} from 'ngx-toastr';
 import {provideDialogConfig} from '@ngneat/dialog';
-import {popperVariation, provideTippyConfig, tooltipVariation} from '@ngneat/helipopper';
+import {popperVariation, provideTippyConfig, tooltipVariation} from '@ngneat/helipopper/config';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
