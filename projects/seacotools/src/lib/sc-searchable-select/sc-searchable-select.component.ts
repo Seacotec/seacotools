@@ -29,6 +29,7 @@ export class ScSearchableSelectComponent implements ControlValueAccessor, OnChan
   @Input() label: string = '';
   @Input() placeholder: string = 'Search...';
   @Input() searchable: boolean = true; // Auto filter toggle
+  @Input() groupBy: string = ''; // Property to group options by (empty = no grouping)
   @Input() displayKey: string = '';
   @Input() addTag = false;
   @Input() errors: Record<string, any> | null = null;

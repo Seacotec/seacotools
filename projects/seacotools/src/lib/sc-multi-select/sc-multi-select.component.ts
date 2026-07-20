@@ -33,6 +33,7 @@ export class ScMultiSelectComponent implements ControlValueAccessor, OnChanges {
   @Input() disableClear: boolean = false; // Whether to show the clear option
   @Input() displayKey: string = '';
   @Input() addTag = false;
+  @Input() maxSelectedItems?: number; // Max number of selectable items (undefined = unlimited)
   @Input() customHeight: 'md' | 'lg' | 'xl' = 'md'; // Default
   @Input() errors: Record<string, any> | null = null;
   @Input() showAllErrors = false;

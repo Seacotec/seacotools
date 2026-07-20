@@ -172,7 +172,8 @@ Planned features for future releases:
 
 - cd dist/seacotools/
 - npm publish --tag beta
-- npm dist-tag add seacotools@21.1.1 latest
+- npm publish
+- npm dist-tag add seacotools@21.1.2 latest
 
 ---
 
