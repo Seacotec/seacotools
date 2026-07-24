@@ -1,5 +1,6 @@
 <button
   [ngClass]="[
+       baseClasses,
        appearance === 'outline' ? (outlineClasses[color] || '') : (colorClasses[color] || ''),
        sizeClasses[size],
        appearance === 'pills' ? 'rounded-full' : 'rounded-lg',

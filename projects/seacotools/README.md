@@ -26,7 +26,21 @@ Add the SeacoTools CSS to your main `styles.css`:
 /* Your other imports */
 @import "ngx-toastr/toastr";
 @import "@ng-select/ng-select/themes/default.theme.css";
+
+/* REQUIRED: let Tailwind scan the compiled library so the utility classes
+   used inside SeacoTools components (button colors, borders, dark variants…)
+   are generated. Without this, components render unstyled. */
+@source "../node_modules/seacotools/**/*.{mjs,js}";
+
+/* REQUIRED for dark mode: SeacoTools uses the `.dark` class strategy.
+   Toggle dark mode by adding/removing `dark` on <html> or <body>. */
+@custom-variant dark (&:where(.dark, .dark *));
 ```
+
+> **Why `@source`?** SeacoTools' component classes (e.g. `bg-blue-700`,
+> `dark:border-gray-600`) live inside the compiled JavaScript, not your own
+> templates. Tailwind v4 only generates classes it can find, so it must be
+> pointed at the installed package or the buttons/inputs will appear unstyled.
 
 ## Components & Services
 
@@ -86,9 +100,9 @@ Since **SeacoTools** uses TailwindCSS as a peer dependency, you need to ensure t
 
 ### Step 3: Update Your `styles.css` file
 
-Make sure you specify the paths for the library in your `styles.css`:
-
-- `@source "../node_modules/seacotools";`
+Make sure your `styles.css` includes the `@source` and `@custom-variant dark`
+directives shown in [Import CSS Styles](#import-css-styles) above — they are
+required for the library's utility classes and dark mode to work.
 
 ### Step 4: Use the Components in Templates
 
@@ -167,15 +181,6 @@ Planned features for future releases:
 - New Material Design icon support.
 - Enhanced button variants with animations and states.
 - Advanced utility services for state management and API handling.
-
----
-
-## Deployment
-
-- cd dist/seacotools/
-- npm publish --tag beta
-- npm publish
-- npm dist-tag add seacotools@21.1.2 latest
 
 ---
 

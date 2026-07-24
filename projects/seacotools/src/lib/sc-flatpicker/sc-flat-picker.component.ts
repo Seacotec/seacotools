@@ -52,8 +52,8 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
 
   /** Flatpickr options passed from the user. */
   @Input() options: Partial<Options> = {};
-  @Input() minDate = '';
-  @Input() maxDate = '';
+  @Input() minDate: string | number = '';
+  @Input() maxDate: string | number = '';
   borderColorClass = input('border-gray-400 dark:border-gray-700');
   bgColorClass = input('bg-gray-50 dark:bg-gray-600');
 
@@ -132,7 +132,7 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
     const formattedOptions: Partial<Options> = {
       ...this.options, // Keep user-provided options
       allowInput: true,
-      dateFormat: this.options?.enableTime ? 'Y-m-d H:i' : 'Y-m-d',
+      dateFormat: this.options?.dateFormat ?? (this.options?.enableTime ? 'Y-m-d H:i' : 'Y-m-d'),
       minDate: this.getResolvedDate(this.minDate), // Convert minDate to string
       maxDate: this.getResolvedDate(this.maxDate), // Convert maxDate to string
       defaultDate: this.date,
@@ -231,6 +231,11 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
     if (typeof defaultDate === 'string') {
       // Ensure it's already a string
       return defaultDate;
+    }
+
+    if (typeof defaultDate === 'number' && !isNaN(defaultDate)) {
+      // Accept epoch milliseconds
+      return new Date(defaultDate).toISOString();
     }
 
     if (defaultDate instanceof Date && !isNaN(defaultDate.getTime())) {

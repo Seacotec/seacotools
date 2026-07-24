@@ -170,10 +170,11 @@ Planned features for future releases:
 
 ## Deployment
 
+- npm run build:lib
 - cd dist/seacotools/
 - npm publish --tag beta
 - npm publish
-- npm dist-tag add seacotools@21.1.2 latest
+- npm dist-tag add seacotools@21.1.6 latest
 
 ---
 

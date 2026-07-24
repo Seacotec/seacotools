@@ -13,6 +13,7 @@ export * from './lib/sc-checkbox/sc-checkbox.component';
 export * from './lib/sc-dropdown/sc-dropdown.component';
 export * from './lib/sc-table/sc-table.component';
 export * from './lib/sc-flatpicker/sc-flat-picker.component';
+export * from './lib/sc-time-picker/sc-time-picker.component';
 export * from './lib/sc-services/sc-helper.service';
 export * from './lib/core/types/table-types';
 export * from './lib/core/pipes/number-to-array.pipe';

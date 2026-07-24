@@ -1,3 +1,11 @@
+/* Dialogs (@ngneat/dialog): the modal container reads its corner radius from
+   this variable (library default is only 4px). Setting it here rounds every
+   SeacoTools dialog — confirmation, info, success, error, alert — at once.
+   Consumers can override it in their own :root to taste. */
+:root {
+  --dialog-content-border-radius: 1rem; /* rounded-2xl — clearly rounded corners */
+}
+
 .ng-select .ng-select-container {
   outline: none;
   background-color: #f9fafb; /* bg-gray-50 */

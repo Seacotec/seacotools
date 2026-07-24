@@ -115,6 +115,48 @@
   </div>
 </div>
 
+<div>
+  <div class="text-center text-2xl font-semibold mt-3">TIME PICKER</div>
+  <div class="text-center text-sm text-gray-500 mt-1">
+    Tip: Type HH:mm, or press Enter/Space/ArrowDown to open, Escape to close.
+  </div>
+
+  <div class="p-5 flex justify-between">
+    <div class="w-60 mx-5">
+      <sc-time-picker
+        label="Time (plain HH:mm)"
+        [formControl]="enabledFormArray.at(14)"
+      ></sc-time-picker>
+    </div>
+
+    <div class="w-60 mx-5">
+      <sc-time-picker
+        label="Required time"
+        [required]="true"
+        [submitted]="true"
+        [formControl]="enabledFormArray.at(15)"
+        [errors]="enabledFormArray.at(15).errors"
+      ></sc-time-picker>
+    </div>
+
+    <div class="w-60 mx-5">
+      <sc-time-picker
+        label="ISO round-trip (UTC)"
+        [min]="'08:00'"
+        [max]="'18:00'"
+        [formControl]="enabledFormArray.at(16)"
+      ></sc-time-picker>
+    </div>
+
+    <div class="w-60 mx-5">
+      <sc-time-picker
+        label="Disabled time"
+        [formControl]="disabledFormArray.at(8)"
+      ></sc-time-picker>
+    </div>
+  </div>
+</div>
+
 <div class="grid grid-cols-2 gap-x-5 mt-3">
 
   <div>

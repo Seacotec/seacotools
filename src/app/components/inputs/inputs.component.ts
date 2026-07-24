@@ -11,11 +11,14 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {
   ScFlatPickerSplittedComponent
 } from '../../../../projects/seacotools/src/lib/sc-flatpicker-splitted/sc-flat-picker-splitted.component';
+import {
+  ScTimePickerComponent
+} from '../../../../projects/seacotools/src/lib/sc-time-picker/sc-time-picker.component';
 
 
 @Component({
   selector: 'app-inputs',
-  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScFlatPickerComponent, ScFlatPickerSplittedComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent, ScFlatPickerComponent],
+  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScFlatPickerComponent, ScFlatPickerSplittedComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent, ScFlatPickerComponent, ScTimePickerComponent],
   templateUrl: './inputs.component.html',
 
 })
@@ -42,6 +45,12 @@ export class InputsComponent implements OnInit {
       console.log(value);
     });
     this.enabledFormArray.at(3).setValue(new Date().toISOString());
+    // sc-time-picker demos: plain "HH:mm" value and an ISO datetime round-trip
+    this.enabledFormArray.at(14).setValue('09:30');
+    this.enabledFormArray.at(16).setValue('2025-06-02T13:45:00Z');
+    this.enabledFormArray.at(16).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
+      console.log('sc-time-picker (ISO):', value);
+    });
     this.enabledFormArray.at(3).valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
       console.log(value);
     })

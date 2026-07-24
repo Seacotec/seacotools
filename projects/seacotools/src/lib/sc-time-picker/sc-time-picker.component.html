@@ -1,0 +1,55 @@
+<div class="w-full relative">
+  @if (label) {
+    <div class="flex items-center mb-1">
+      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+        @if (required) {
+          <span class="text-red-700 mr-1">*</span>
+        }
+        {{ label }}
+      </label>
+    </div>
+  }
+
+  <div class="relative w-full">
+    <input
+      #myTimepicker
+      type="text"
+      placeholder="HH:mm"
+      maxlength="5"
+      (blur)="onTimeBlur()"
+      (input)="onTimeInput($event)"
+      (keydown)="onTimeKeydown($event)"
+      [disabled]="disabled"
+      [class]="computedClasses + ' pr-10'"
+    />
+    <div
+      class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer z-10"
+      [class.pointer-events-none]="disabled"
+      [class.opacity-50]="disabled"
+      (click)="openTimePicker($event)"
+    >
+      <div class="h-5 border-l border-gray-300 dark:border-gray-600 mr-2"></div>
+      <sc-icon name="clock" class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"></sc-icon>
+    </div>
+  </div>
+
+  @if (timeError()) {
+    <div class="text-red-700 text-xs font-medium mt-1">
+      {{ timeError() }}
+    </div>
+  }
+
+  @if (errors && submitted) {
+    <div class="text-red-700 mt-1 text-xs font-medium">
+      @for (errorKey of errorKeys(errors); track errorKey) {
+        @if (errors[errorKey]) {
+          <div>{{ getErrorMessage(errorKey, errors[errorKey]) }}</div>
+        }
+      }
+    </div>
+  }
+
+  @if (submitted && required && !value) {
+    <div class="text-red-700 text-xs font-medium mt-1">Required!</div>
+  }
+</div>
