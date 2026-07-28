@@ -6,6 +6,18 @@
   --dialog-content-border-radius: 1rem; /* rounded-2xl — clearly rounded corners */
 }
 
+/* Keep dialog container background in sync with light/dark mode.
+   This prevents visible white gaps when content doesn't fill min-height. */
+.ngneat-dialog-content {
+  background-color: #f9fafb; /* bg-gray-50 */
+  color: #111827; /* text-gray-900 */
+}
+
+.dark .ngneat-dialog-content {
+  background-color: #1f2937; /* dark:bg-gray-800 */
+  color: #f3f4f6; /* dark:text-gray-100 */
+}
+
 .ng-select .ng-select-container {
   outline: none;
   background-color: #f9fafb; /* bg-gray-50 */
