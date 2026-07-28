@@ -76,12 +76,12 @@ export class ScTimePickerComponent implements ControlValueAccessor, AfterViewIni
 
   get computedClasses(): string {
     const defaultClasses =
-      'outline-none disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300 ' +
-      'dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 bg-input-field w-full px-3 border rounded ' +
+      'outline-none text-sm disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300 ' +
+      'dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 w-full px-3 border rounded ' +
       'focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70';
 
     const borderColorClass = this.hasError ? 'border-red-500' : 'border-gray-400 dark:border-gray-700';
-    const bgColorClass = 'bg-gray-50 dark:bg-gray-600';
+    const bgColorClass = 'bg-gray-50 dark:bg-gray-700';
 
     return `${defaultClasses} ${borderColorClass} ${bgColorClass}`;
   }
