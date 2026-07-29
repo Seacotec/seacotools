@@ -1,20 +1,26 @@
 <div [class]="cssClass">
   <!-- Label and Optional Question Mark -->
-  @if (label && variant === 'default') {
+  @if (label && variant === "default") {
     <div class="flex items-center mb-1">
-      <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+      <label
+        class="flex items-center text-sm font-medium text-gray-900 dark:text-white"
+      >
         @if (required) {
           <span class="text-red-700 mr-1">*</span>
         }
         {{ label }}
       </label>
       @if (questionMark) {
-        <sc-icon name="question-mark-circle" [tp]="questionMark" class="text-green-700 ml-1"></sc-icon>
+        <sc-icon
+          name="question-mark-circle"
+          [tp]="questionMark"
+          class="text-green-700 ml-1"
+        ></sc-icon>
       }
     </div>
   }
 
-  @if (variant === 'default') {
+  @if (variant === "default") {
     <div>
       <input
         [placeholder]="placeholder"
@@ -22,11 +28,10 @@
         [type]="inputType"
         [formControl]="control"
         (blur)="onTouch()"
-        class="outline-none bg-gray-50 dark:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed w-full
-      px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-lg focus:ring focus:ring-indigo-500
-      focus:border-indigo-500 h-9 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-300
-      placeholder-opacity-70 dark:disabled:bg-gray-600"
-       [ngClass]="{'border-red-500': errors && (control.touched || showAllErrors)}"
+        class="outline-none text-sm bg-gray-50 dark:bg-gray-700 disabled:bg-gray-300 disabled:text-gray-600 disabled:cursor-not-allowed w-full px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-lg focus:ring focus:ring-indigo-500 focus:border-indigo-500 h-9 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-300 placeholder-opacity-70 dark:disabled:bg-gray-600"
+        [ngClass]="{
+          'border-red-500': errors && (control.touched || showAllErrors),
+        }"
       />
     </div>
   } @else {
@@ -37,16 +42,17 @@
         [type]="inputType"
         [formControl]="control"
         (blur)="onTouch()"
-        class="peer border border-gray-400 dark:border-gray-600 disabled:bg-gray-300 disabled:cursor-not-allowed focus:ring
-          focus:ring-indigo-500 focus:border-indigo-500 block rounded-lg px-2.5 pb-[6px] pt-[22px] dark:disabled:bg-gray-600
-          text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-300
-          appearance-none w-full outline-none"
-        [ngClass]="{'border-red-700 dark:border-red-200': errors && (control.touched || showAllErrors)}"
+        class="peer border border-gray-400 dark:border-gray-600 disabled:bg-gray-300 disabled:cursor-not-allowed focus:ring focus:ring-indigo-500 focus:border-indigo-500 block rounded-lg px-2.5 pb-[6px] pt-[22px] dark:disabled:bg-gray-600 text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-300 appearance-none w-full outline-none"
+        [ngClass]="{
+          'border-red-700 dark:border-red-200':
+            errors && (control.touched || showAllErrors),
+        }"
       />
 
       <!-- Label -->
       <label
-        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform scale-75 -translate-y-[14px] top-[14px] origin-[0] left-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[14px]">
+        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform scale-75 -translate-y-[14px] top-[14px] origin-[0] left-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[14px]"
+      >
         {{ label }}
       </label>
     </div>

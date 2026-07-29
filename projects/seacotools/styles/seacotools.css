@@ -25,7 +25,13 @@
   padding: 4px; /* p-1 */
   border: 1px solid #9ca3af; /* border-gray-400 */
   border-radius: 0.5rem; /* rounded-lg */
+  font-size: 14px; /* text-sm — match the other input fields */
   transition: border-color 0.3s, background-color 0.3s; /* Smooth transition for border and background color */
+}
+
+/* Dropdown option text matches the field text size in both modes */
+.ng-select .ng-dropdown-panel .ng-option {
+  font-size: 14px; /* text-sm */
 }
 
 .md-height .ng-select .ng-select-container {
@@ -46,9 +52,9 @@
 }
 
 .ng-select.ng-select-disabled > .ng-select-container {
-  background-color: #d1d5db; /* bg-gray-300 */
+  background-color: #d1d5db; /* disabled:bg-gray-300 */
   cursor: not-allowed;
-  color: #9ca3af; /* Disabled text color */
+  color: #4b5563; /* disabled:text-gray-600 */
 }
 
 .dark .ng-select .ng-select-container {
@@ -63,8 +69,8 @@
 }
 
 .dark .ng-select .ng-select-disabled > .ng-select-container {
-  background-color: #4b5563; /* Disabled background: dark:bg-gray-600 */
-  color: #6b7280; /* Disabled text color: dark:gray-500 */
+  background-color: #6b7280; /* dark:disabled:bg-gray-500 */
+  color: #d1d5db; /* dark:disabled:text-gray-300 */
   cursor: not-allowed;
 }
 

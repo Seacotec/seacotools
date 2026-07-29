@@ -55,7 +55,7 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   @Input() minDate: string | number = '';
   @Input() maxDate: string | number = '';
   borderColorClass = input('border-gray-400 dark:border-gray-700');
-  bgColorClass = input('bg-gray-50 dark:bg-gray-600');
+  bgColorClass = input('bg-gray-50 dark:bg-gray-700');
 
   /**
    * Timezone handling: 'local' or 'utc'.
@@ -89,8 +89,8 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   computedClasses = computed(() => {
     const borderColorClass = this.borderColorClass();
     const bgColorClass = this.bgColorClass();
-    const defaultClasses = 'outline-none disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300 ' +
-      'dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 bg-input-field w-full px-3 border rounded-lg ' +
+    const defaultClasses = 'outline-none text-sm disabled:text-gray-600 disabled:bg-gray-300 dark:placeholder:text-gray-300 ' +
+      'dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 w-full px-3 border rounded-lg ' +
       'focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70';
     if (this.errors() && this.touched()) {
       return defaultClasses + ' border-red-500 ' + bgColorClass;
