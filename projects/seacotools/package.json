@@ -1,6 +1,6 @@
 {
   "name": "seacotools",
-  "version": "21.1.9-beta",
+  "version": "21.1.10-beta",
   "main": "dist/seacotools",
   "author": "Dagistan Tuncbilek",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "seacotools",
     "icon",
     "icons",
-    "form intuts",
+    "form inputs",
     "typescript",
     "web development"
   ],

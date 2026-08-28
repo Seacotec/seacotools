@@ -106,3 +106,22 @@
   font-weight: bolder;
   background-color: white;
 }
+
+/* Browser autofill (e.g. saved password) forces its own white input
+   background natively, ignoring our Tailwind classes. Override it via the
+   -webkit-box-shadow inset trick so autofilled fields match sc-input's
+   bg-gray-50 / dark:bg-gray-700. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #f9fafb inset; /* bg-gray-50 */
+  -webkit-text-fill-color: #111827; /* text-gray-900 */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #374151 inset; /* dark:bg-gray-700 */
+  -webkit-text-fill-color: #ffffff; /* dark:text-white */
+}
