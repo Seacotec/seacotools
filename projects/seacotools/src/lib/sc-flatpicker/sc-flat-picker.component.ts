@@ -93,7 +93,7 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
       'dark:disabled:bg-gray-500 dark:text-gray-100 dark:disabled:text-gray-300 w-full px-3 border rounded-lg ' +
       'focus:border-indigo-500 h-9 placeholder-gray-500 placeholder-opacity-70';
     if (this.errors() && this.touched()) {
-      return defaultClasses + ' border-red-500 ' + bgColorClass;
+      return defaultClasses + ' border-red-500 dark:border-red-400 ' + bgColorClass;
     } else {
       return `${defaultClasses} ${borderColorClass} ${bgColorClass}`;
     }

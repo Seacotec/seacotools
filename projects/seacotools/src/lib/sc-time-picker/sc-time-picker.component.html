@@ -3,7 +3,7 @@
     <div class="flex items-center mb-1">
       <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
         @if (required) {
-          <span class="text-red-700 mr-1">*</span>
+          <span class="text-red-700 dark:text-red-400 mr-1">*</span>
         }
         {{ label }}
       </label>
@@ -34,13 +34,13 @@
   </div>
 
   @if (timeError()) {
-    <div class="text-red-700 text-xs font-medium mt-1">
+    <div class="text-red-700 dark:text-red-400 text-xs font-medium mt-1">
       {{ timeError() }}
     </div>
   }
 
   @if (errors && submitted) {
-    <div class="text-red-700 mt-1 text-xs font-medium">
+    <div class="text-red-700 dark:text-red-400 mt-1 text-xs font-medium">
       @for (errorKey of errorKeys(errors); track errorKey) {
         @if (errors[errorKey]) {
           <div>{{ getErrorMessage(errorKey, errors[errorKey]) }}</div>
@@ -50,6 +50,6 @@
   }
 
   @if (submitted && required && !value) {
-    <div class="text-red-700 text-xs font-medium mt-1">Required!</div>
+    <div class="text-red-700 dark:text-red-400 text-xs font-medium mt-1">Required!</div>
   }
 </div>

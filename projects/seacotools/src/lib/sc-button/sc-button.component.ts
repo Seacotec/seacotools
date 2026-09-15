@@ -67,7 +67,7 @@ export class ScButtonComponent implements OnInit {
       'text-gray-700 border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:ring-gray-200 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700',
     green:
       'text-green-700 border-green-700 hover:bg-green-700 hover:text-white focus:ring-green-300 dark:text-green-500 dark:border-green-500 dark:hover:bg-green-600 dark:hover:text-white dark:focus:ring-green-800',
-    red: 'text-red-700 border-red-700 hover:bg-red-700 hover:text-white focus:ring-red-300 dark:text-red-500 dark:border-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900',
+    red: 'text-red-700 border-red-700 hover:bg-red-700 hover:text-white focus:ring-red-300 dark:text-red-400 dark:border-red-400 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900',
     yellow:
       'text-yellow-600 border-yellow-500 hover:bg-yellow-500 hover:text-white focus:ring-yellow-300 dark:text-yellow-300 dark:border-yellow-400 dark:hover:bg-yellow-400 dark:hover:text-gray-900 dark:focus:ring-yellow-800',
     purple:

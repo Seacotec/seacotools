@@ -1,12 +1,12 @@
 <file-upload [formControl]="control"
-             [ngClass]='{"border border-red-700": control.invalid}'
+             [ngClass]='{"border border-red-700 dark:border-red-400": control.invalid}'
              [multiple]='multiple'
              [discard]='discardInvalid'
              [animation]='animation'
              (blur)='onTouch(); touched = true;'
 ></file-upload>
 
-<div *ngIf='control.errors' class='text-red-700 text-sm pl-3'>
+<div *ngIf='control.errors' class='text-red-700 dark:text-red-400 text-sm pl-3'>
   <div *ngIf='control.errors.filesLimit'>
     File limit: {{ filesLimit }}
   </div>
@@ -18,6 +18,6 @@
   </div>
 </div>
 
-<div *ngIf='required && (!control.value?.length && (touched || submitted))' class='text-red-700 text-sm pl-3'>
+<div *ngIf='required && (!control.value?.length && (touched || submitted))' class='text-red-700 dark:text-red-400 text-sm pl-3'>
   Required!
 </div>

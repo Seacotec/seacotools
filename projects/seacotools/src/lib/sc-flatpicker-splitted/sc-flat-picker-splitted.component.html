@@ -4,7 +4,7 @@
     <div class="flex items-center mb-1">
       <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
         @if (required) {
-          <span class="text-red-700 mr-1">*</span>
+          <span class="text-red-700 dark:text-red-400 mr-1">*</span>
         }
         {{ label }}
       </label>
@@ -41,7 +41,7 @@
 
   <!-- Error Message -->
   @if (errors() && (touched() || showAllErrors)) {
-    <div class="text-red-700 mt-1 text-sm">
+    <div class="text-red-700 dark:text-red-400 mt-1 text-sm">
       @for (errorKey of errorKeys(errors()); track errorKey) {
         @if (errors()![errorKey]) {
           <div>{{ getErrorMessage(errorKey, errors()![errorKey]) }}</div>
