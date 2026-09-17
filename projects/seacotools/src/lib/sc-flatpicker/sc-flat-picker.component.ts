@@ -85,6 +85,8 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
   /** Whether the input element is disabled. */
   private disabled = false;
   private date?: Date;
+  /** Value flatpickr refused for falling outside the current minDate/maxDate; replayed when the range moves. */
+  private rejectedDate?: Date;
 
   computedClasses = computed(() => {
     const borderColorClass = this.borderColorClass();
@@ -103,14 +105,22 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.datePicker) {
-      if (changes['minDate'] && changes['minDate'].currentValue !== undefined) {
+      const minDateChanged = !!changes['minDate'] && changes['minDate'].currentValue !== undefined;
+      const maxDateChanged = !!changes['maxDate'] && changes['maxDate'].currentValue !== undefined;
+
+      if (minDateChanged) {
         const resolvedMinDate = this.getResolvedDate(this.minDate);
         this.datePicker.set('minDate', resolvedMinDate);
       }
 
-      if (changes['maxDate'] && changes['maxDate'].currentValue !== undefined) {
+      if (maxDateChanged) {
         const resolvedMaxDate = this.getResolvedDate(this.maxDate);
         this.datePicker.set('maxDate', resolvedMaxDate);
+      }
+
+      // Replay a value the old range rejected, so range and value can arrive in any order.
+      if ((minDateChanged || maxDateChanged) && this.rejectedDate) {
+        this.setPickerDate(this.rejectedDate);
       }
     }
   }
@@ -154,6 +164,11 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
     // Initialize Flatpickr
     this.datePicker = flatpickr(this.myDatepicker.nativeElement, formattedOptions);
 
+    // `defaultDate` goes through the same range check, so it can be rejected just as well.
+    if (this.date && this.datePicker.selectedDates.length === 0) {
+      this.rejectedDate = this.date;
+    }
+
     // Handle disabled state
     if (this.disabled && this.datePicker) {
       this.datePicker._input.disabled = true;
@@ -177,13 +192,26 @@ export class ScFlatPickerComponent implements AfterViewInit, ControlValueAccesso
    */
   writeValue(dateString: string | null): void {
     if (!dateString) {
+      this.date = undefined;
+      this.rejectedDate = undefined;
       this.datePicker?.clear();
       return;
     }
-    let date = this.handleTimeZone(dateString);
-    if (date) {
-      this.datePicker ? this.datePicker.setDate(date) : this.date = date;
+    const date = this.handleTimeZone(dateString);
+    if (!date) return;
+
+    this.date = date;
+    if (this.datePicker) {
+      this.setPickerDate(date);
     }
+    // Before ngAfterViewInit the value reaches flatpickr as `defaultDate`.
+  }
+
+  // Writes a date into flatpickr and records whether it was accepted.
+  private setPickerDate(date: Date): void {
+    if (!this.datePicker) return;
+    this.datePicker.setDate(date);
+    this.rejectedDate = this.datePicker.selectedDates.length === 0 ? date : undefined;
   }
 
   registerOnChange(fn: (value: string | null) => void): void {
