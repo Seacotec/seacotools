@@ -16,9 +16,10 @@ import {
 } from '../../../../projects/seacotools/src/lib/sc-time-picker/sc-time-picker.component';
 
 
+
 @Component({
   selector: 'app-inputs',
-  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScFlatPickerComponent, ScFlatPickerSplittedComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent, ScFlatPickerComponent, ScTimePickerComponent],
+  imports: [ScSelectComponent, ScInputComponent, ReactiveFormsModule, ScFlatPickerComponent, ScFlatPickerSplittedComponent, ScCheckboxComponent, ScTextareaComponent, ScMultiSelectComponent, ScSearchableSelectComponent, ScFlatPickerComponent, ScTimePickerComponent, ScSelectComponent],
   templateUrl: './inputs.component.html',
 
 })

@@ -23,7 +23,7 @@
   >
     <!-- Placeholder Option -->
     @if (firstEmpty) {
-      <option value="" disabled></option>
+      <option [ngValue]="null"></option>
     }
 
     <!-- Rendered Options -->
